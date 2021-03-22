@@ -1,0 +1,861 @@
+"Species","code","Impact_year","Type_of_cost_merged","Management_type","Geographic_region","Genus","Cost.USD","eventDate","First_invacost","First_manage","First_manage_invacost"
+"Acacia cyclops","ESP",2015,"Management_costs","Post-invasion_management","Europe","Acacia",5786.78113149179,NA,2008,1999,1995
+"Acacia cyclops","ESP",2018,"Management_costs","Post-invasion_management","Europe","Acacia",6305.15126251765,NA,2008,1999,1995
+"Acacia cyclops","ESP",2010,"Management_costs","Post-invasion_management","Europe","Acacia",2681.98886794912,NA,2008,1999,1995
+"Acacia cyclops","ESP",2014,"Management_costs","Post-invasion_management","Europe","Acacia",10986.7634267419,NA,2008,1999,1995
+"Acacia cyclops","ESP",2017,"Management_costs","Post-invasion_management","Europe","Acacia",5782.52163162354,NA,2008,1999,1995
+"Acacia cyclops","ESP",2011,"Management_costs","Post-invasion_management","Europe","Acacia",3308.39809579217,NA,2008,1999,1995
+"Acacia cyclops","ESP",2013,"Management_costs","Post-invasion_management","Europe","Acacia",9909.65418875285,NA,2008,1999,1995
+"Acacia cyclops","ESP",2012,"Management_costs","Post-invasion_management","Europe","Acacia",15678.7256284028,NA,2008,1999,1995
+"Acacia cyclops","ESP",2016,"Management_costs","Post-invasion_management","Europe","Acacia",3095.16754372856,NA,2008,1999,1995
+"Acacia cyclops","ESP",2009,"Management_costs","Post-invasion_management","Europe","Acacia",2651.76841689245,NA,2008,1999,1995
+"Acacia cyclops","ESP",2008,"Management_costs","Post-invasion_management","Europe","Acacia",5572.5339949904,NA,2008,1999,1995
+"Acacia cyclops","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",1995,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",1996,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Acacia",485095.490609348,1835,1995,1995,1995
+"Acacia cyclops","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia cyclops","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Acacia",1056027.6832908,1835,1995,1995,1995
+"Acacia dealbata","ESP",2018,"Management_costs","Post-invasion_management","Europe","Acacia",18612.7178999575,NA,2018,1999,1995
+"Acacia dealbata","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",1996,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",1995,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia dealbata","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Acacia",780602.118614475,1858,1995,1995,1995
+"Acacia longifolia","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Acacia",114493.153541753,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia longifolia","ZAF",2014,"Management_costs","Post-invasion_management","Africa","Acacia",108278.668726964,1827,2001,1995,1995
+"Acacia mangium","FRA",2013,"Management_costs","Post-invasion_management","South America","Acacia",39999.4404113088,1980,2012,2012,1995
+"Acacia mangium","FRA",2012,"Management_costs","Post-invasion_management","South America","Acacia",22880.8110133842,1980,2012,2012,1995
+"Acacia mearnsii","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Acacia",3609.74776563212,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",1996,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Acacia",1866882.6456784,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",1995,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia mearnsii","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Acacia",7398034.35374238,1858,1995,1995,1995
+"Acacia melanoxylon","ESP",2015,"Management_costs","Post-invasion_management","Europe","Acacia",234.996188080885,NA,2012,1999,1995
+"Acacia melanoxylon","ESP",2017,"Management_costs","Post-invasion_management","Europe","Acacia",144.599190588236,NA,2012,1999,1995
+"Acacia melanoxylon","ESP",2012,"Management_costs","Post-invasion_management","Europe","Acacia",670.691286679717,NA,2012,1999,1995
+"Acacia melanoxylon","ESP",2014,"Management_costs","Post-invasion_management","Europe","Acacia",1690.27129642183,NA,2012,1999,1995
+"Acacia melanoxylon","ESP",2016,"Management_costs","Post-invasion_management","Europe","Acacia",289.403229895144,NA,2012,1999,1995
+"Acacia melanoxylon","ESP",2013,"Management_costs","Post-invasion_management","Europe","Acacia",447.186560864298,NA,2012,1999,1995
+"Acacia melanoxylon","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",1995,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Acacia",90955.4044892528,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",1996,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia melanoxylon","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Acacia",366577.842335473,1848,1995,1995,1995
+"Acacia saligna","ESP",2014,"Management_costs","Post-invasion_management","Europe","Acacia",2641.04890065911,NA,2014,1999,1995
+"Acacia saligna","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Acacia",1555.79169864712,1833,1995,1995,1995
+"Acacia saligna","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Acacia",860860.747539696,1833,1995,1995,1995
+"Acacia saligna","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",1996,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",1995,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Acacia saligna","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Acacia",1731040.15845419,1833,1995,1995,1995
+"Aedes aegypti","ARG",2007,"Management_costs","Post-invasion_management","South America","Aedes",491024.725941941,1980,2007,1995,1977
+"Aedes aegypti","ARG",2016,"Management_costs","Post-invasion_management","South America","Aedes",13204875,1980,2007,1995,1977
+"Aedes aegypti","BLZ",1995,"Management_costs","Post-invasion_management","Central America","Aedes",144771.49185169,NA,1995,1995,1977
+"Aedes aegypti","BOL",1995,"Management_costs","Post-invasion_management","South America","Aedes",402143.032921362,NA,1995,1995,1977
+"Aedes aegypti","BRA",2017,"Management_costs","Post-invasion_management","South America","Aedes",479050968.696259,1996,2000,1984,1977
+"Aedes aegypti","BRA",2013,"Management_costs","Post-invasion_management","South America","Aedes",397314189.129973,1996,2000,1984,1977
+"Aedes aegypti","BRA",2016,"Management_costs","Post-invasion_management","South America","Aedes",48747441.0757196,1996,2000,1984,1977
+"Aedes aegypti","BRA",2015,"Management_costs","Post-invasion_management","South America","Aedes",48747441.0757196,1996,2000,1984,1977
+"Aedes aegypti","COL",2018,"Management_costs","Post-invasion_management","South America","Aedes",249796.972154651,NA,2007,1995,1977
+"Aedes aegypti","COL",2010,"Management_costs","Post-invasion_management","South America","Aedes",265749.741435762,NA,2007,1995,1977
+"Aedes aegypti","COL",2008,"Management_costs","Post-invasion_management","South America","Aedes",265749.741435762,NA,2007,1995,1977
+"Aedes aegypti","COL",2016,"Management_costs","Post-invasion_management","South America","Aedes",249796.972154651,NA,2007,1995,1977
+"Aedes aegypti","COL",2007,"Management_costs","Post-invasion_management","South America","Aedes",265749.741435762,NA,2007,1995,1977
+"Aedes aegypti","COL",2013,"Management_costs","Post-invasion_management","South America","Aedes",122163528.945074,NA,2007,1995,1977
+"Aedes aegypti","COL",2011,"Management_costs","Post-invasion_management","South America","Aedes",265749.741435762,NA,2007,1995,1977
+"Aedes aegypti","COL",2009,"Management_costs","Post-invasion_management","South America","Aedes",265749.741435762,NA,2007,1995,1977
+"Aedes aegypti","CUB",2002,"Management_costs","Post-invasion_management","Central America","Aedes",15654780.3818986,NA,1981,1981,1977
+"Aedes aegypti","CUB",1981,"Management_costs","Post-invasion_management","Central America","Aedes",115921276.693246,NA,1981,1981,1977
+"Aedes aegypti","ECU",2016,"Management_costs","Post-invasion_management","South America","Aedes",95000,NA,1995,1995,1977
+"Aedes aegypti","ECU",2017,"Management_costs","Post-invasion_management","South America","Aedes",95000,NA,1995,1995,1977
+"Aedes aegypti","ECU",2015,"Management_costs","Post-invasion_management","South America","Aedes",95000,NA,1995,1995,1977
+"Aedes aegypti","ECU",2014,"Management_costs","Post-invasion_management","South America","Aedes",95000,NA,1995,1995,1977
+"Aedes aegypti","ECU",1995,"Management_costs","Post-invasion_management","South America","Aedes",1664040.52450236,NA,1995,1995,1977
+"Aedes aegypti","ECU",2013,"Management_costs","Post-invasion_management","South America","Aedes",95000,NA,1995,1995,1977
+"Aedes aegypti","FRA",2013,"Management_costs","Post-invasion_management","Oceania/Pacific Islands","Aedes",3742077.98137494,NA,2000,2008,1977
+"Aedes aegypti","IND",2008,"Management_costs","Post-invasion_management","Asia","Aedes",9931303.76900318,NA,2003,2003,1977
+"Aedes aegypti","IND",2007,"Management_costs","Post-invasion_management","Asia","Aedes",9931303.76900318,NA,2003,2003,1977
+"Aedes aegypti","IND",2004,"Management_costs","Post-invasion_management","Asia","Aedes",9931303.76900318,NA,2003,2003,1977
+"Aedes aegypti","IND",2006,"Management_costs","Post-invasion_management","Asia","Aedes",9931303.76900318,NA,2003,2003,1977
+"Aedes aegypti","IND",2005,"Management_costs","Post-invasion_management","Asia","Aedes",9931303.76900318,NA,2003,2003,1977
+"Aedes aegypti","IND",2003,"Management_costs","Post-invasion_management","Asia","Aedes",9931303.76900318,NA,2003,2003,1977
+"Aedes aegypti","MEX",2012,"Management_costs","Post-invasion_management","North America","Aedes",6085447.05924632,NA,2008,1995,1977
+"Aedes aegypti","MEX",2008,"Management_costs","Post-invasion_management","North America","Aedes",148123.144829175,NA,2008,1995,1977
+"Aedes aegypti","MEX",2013,"Management_costs","Post-invasion_management","North America","Aedes",290725398.45501,NA,2008,1995,1977
+"Aedes aegypti","MYS",2002,"Management_costs","Post-invasion_management","Asia","Aedes",17442839.0085708,NA,2001,2002,1977
+"Aedes aegypti","MYS",2013,"Management_costs","Post-invasion_management","Asia","Aedes",88911676.3280793,NA,2001,2002,1977
+"Aedes aegypti","NIC",1995,"Management_costs","Post-invasion_management","Central America","Aedes",804286.065842724,NA,1995,1995,1977
+"Aedes aegypti","PER",1995,"Management_costs","Post-invasion_management","South America","Aedes",1930286.55802254,NA,1995,1995,1977
+"Aedes aegypti","PRY",1995,"Management_costs","Post-invasion_management","South America","Aedes",297585.844361808,NA,1995,1995,1977
+"Aedes aegypti","THA",1987,"Management_costs","Post-invasion_management","Asia","Aedes",34516288.9622297,NA,1981,1981,1977
+"Aedes aegypti","THA",2007,"Management_costs","Post-invasion_management","Asia","Aedes",94575.7601455567,NA,1981,1981,1977
+"Aedes aegypti","THA",1981,"Management_costs","Post-invasion_management","Asia","Aedes",892335.423197497,NA,1981,1981,1977
+"Aedes aegypti","THA",2002,"Management_costs","Post-invasion_management","Asia","Aedes",49730872.9505411,NA,1981,1981,1977
+"Aedes aegypti","THA",2003,"Management_costs","Post-invasion_management","Asia","Aedes",49730872.9505411,NA,1981,1981,1977
+"Aedes aegypti","THA",2013,"Management_costs","Post-invasion_management","Asia","Aedes",61028132.8642438,NA,1981,1981,1977
+"Aedes aegypti","THA",2004,"Management_costs","Post-invasion_management","Asia","Aedes",49730872.9505411,NA,1981,1981,1977
+"Aedes aegypti","THA",2005,"Management_costs","Post-invasion_management","Asia","Aedes",49730872.9505411,NA,1981,1981,1977
+"Aedes aegypti","THA",1994,"Management_costs","Post-invasion_management","Asia","Aedes",8057484.62022829,NA,1981,1981,1977
+"Aedes aegypti","THA",2001,"Management_costs","Post-invasion_management","Asia","Aedes",49730872.9505411,NA,1981,1981,1977
+"Aedes aegypti","USA",2003,"Management_costs","Post-invasion_management","Central America","Aedes",9106903.28229997,NA,1977,1977,1977
+"Aedes aegypti","USA",2017,"Management_costs","Post-invasion_management","Central America","Aedes",195499848.456182,NA,1977,1977,1977
+"Aedes aegypti","USA",1977,"Management_costs","Post-invasion_management","Central America","Aedes",4912637.28103949,NA,1977,1977,1977
+"Aedes aegypti","USA",2007,"Management_costs","Post-invasion_management","Central America","Aedes",9106903.28229997,NA,1977,1977,1977
+"Aedes aegypti","USA",2002,"Management_costs","Post-invasion_management","Central America","Aedes",9106903.28229997,NA,1977,1977,1977
+"Aedes aegypti","USA",2005,"Management_costs","Post-invasion_management","Central America","Aedes",9106903.28229997,NA,1977,1977,1977
+"Aedes aegypti","USA",2004,"Management_costs","Post-invasion_management","Central America","Aedes",9106903.28229997,NA,1977,1977,1977
+"Aedes aegypti","USA",2006,"Management_costs","Post-invasion_management","Central America","Aedes",9106903.28229997,NA,1977,1977,1977
+"Aedes aegypti","VNM",2000,"Management_costs","Post-invasion_management","Asia","Aedes",12692.0670115337,NA,1998,1998,1977
+"Aedes aegypti","VNM",1999,"Management_costs","Post-invasion_management","Asia","Aedes",12692.0670115337,NA,1998,1998,1977
+"Aedes aegypti","VNM",1998,"Management_costs","Post-invasion_management","Asia","Aedes",12692.0670115337,NA,1998,1998,1977
+"Aedes albopictus","ESP",2018,"Management_costs","Post-invasion_management","Europe","Aedes",24496.9255222655,2004,2015,2015,1977
+"Aedes albopictus","ESP",2015,"Management_costs","Post-invasion_management","Europe","Aedes",575018.88773598,2004,2015,2015,1977
+"Aedes albopictus","ESP",2016,"Management_costs","Post-invasion_management","Europe","Aedes",24022.7290440305,2004,2015,2015,1977
+"Aedes albopictus","ESP",2017,"Management_costs","Post-invasion_management","Europe","Aedes",24005.725,2004,2015,2015,1977
+"Aedes albopictus","FRA",2012,"Management_costs","Post-invasion_management","Africa","Aedes",29946805.2652384,1998,2006,2008,1977
+"Aedes albopictus","ITA",2009,"Management_costs","Post-invasion_management","Europe","Aedes",16350285.0676558,1990,2007,2008,1977
+"Aedes albopictus","ITA",2008,"Management_costs","Post-invasion_management","Europe","Aedes",20285490.3142666,1990,2007,2008,1977
+"Aedes albopictus","ITA",2011,"Management_costs","Post-invasion_management","Europe","Aedes",14928380.6848657,1990,2007,2008,1977
+"Aedes albopictus","ITA",2018,"Management_costs","Post-invasion_management","Europe","Aedes",1152796.49516544,1990,2007,2008,1977
+"Aedes albopictus","ITA",2010,"Management_costs","Post-invasion_management","Europe","Aedes",15221084.3514616,1990,2007,2008,1977
+"Aedes albopictus","USA",2009,"Management_costs","Post-invasion_management","North America","Aedes",305524.339903352,NA,2001,1977,1977
+"Aedes albopictus","USA",2008,"Management_costs","Post-invasion_management","North America","Aedes",2971456.96171667,NA,2001,1977,1977
+"Aedes albopictus","USA",2010,"Management_costs","Post-invasion_management","North America","Aedes",305524.339903352,NA,2001,1977,1977
+"Aedes albopictus","USA",2011,"Management_costs","Post-invasion_management","North America","Aedes",305524.339903352,NA,2001,1977,1977
+"Aedes albopictus","USA",2001,"Management_costs","Post-invasion_management","North America","Aedes",1622785.33978915,NA,2001,1977,1977
+"Agave americana","ESP",2013,"Management_costs","Post-invasion_management","Europe","Agave",18441.9737700437,NA,2009,1999,1997
+"Agave americana","ESP",2015,"Management_costs","Post-invasion_management","Europe","Agave",17618.5867640529,NA,2009,1999,1997
+"Agave americana","ESP",2009,"Management_costs","Post-invasion_management","Europe","Agave",4691.59027604049,NA,2009,1999,1997
+"Agave americana","ESP",2012,"Management_costs","Post-invasion_management","Europe","Agave",7625.16297918851,NA,2009,1999,1997
+"Agave americana","ESP",2018,"Management_costs","Post-invasion_management","Europe","Agave",6712.5034320493,NA,2009,1999,1997
+"Agave americana","ESP",2011,"Management_costs","Post-invasion_management","Europe","Agave",13957.7898536678,NA,2009,1999,1997
+"Agave americana","ESP",2017,"Management_costs","Post-invasion_management","Europe","Agave",5646.5983924706,NA,2009,1999,1997
+"Agave americana","ESP",2014,"Management_costs","Post-invasion_management","Europe","Agave",8986.60905930941,NA,2009,1999,1997
+"Agave americana","ESP",2016,"Management_costs","Post-invasion_management","Europe","Agave",2558.32455227307,NA,2009,1999,1997
+"Agave americana","ESP",2010,"Management_costs","Post-invasion_management","Europe","Agave",5668.34818308325,NA,2009,1999,1997
+"Agave americana","FRA",2011,"Management_costs","Post-invasion_management","Europe","Agave",11376.2588571199,1599,2011,2011,1997
+"Agave americana","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2014,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2016,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2015,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave americana","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Agave",2846.66572266036,1858,1997,1997,1997
+"Agave sisalana","ESP",2017,"Management_costs","Post-invasion_management","Europe","Agave",173.519028705883,1940,2013,1999,1997
+"Agave sisalana","ESP",2015,"Management_costs","Post-invasion_management","Europe","Agave",176.247141060664,1940,2013,1999,1997
+"Agave sisalana","ESP",2013,"Management_costs","Post-invasion_management","Europe","Agave",71.5498497382877,1940,2013,1999,1997
+"Agave sisalana","ESP",2016,"Management_costs","Post-invasion_management","Europe","Agave",1041.85162762252,1940,2013,1999,1997
+"Agave sisalana","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2014,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2015,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2016,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Agave sisalana","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Agave",28188.933741466,1929,1997,1997,1997
+"Anoplophora chinensis","ITA",2005,"Management_costs","Post-invasion_management","Europe","Anoplophora",724301.100944472,1994,2000,2000,1996
+"Anoplophora chinensis","ITA",2006,"Management_costs","Post-invasion_management","Europe","Anoplophora",248134.359431316,1994,2000,2000,1996
+"Anoplophora chinensis","ITA",2001,"Management_costs","Post-invasion_management","Europe","Anoplophora",248134.359431316,1994,2000,2000,1996
+"Anoplophora chinensis","ITA",2002,"Management_costs","Post-invasion_management","Europe","Anoplophora",248134.359431316,1994,2000,2000,1996
+"Anoplophora chinensis","ITA",2003,"Management_costs","Post-invasion_management","Europe","Anoplophora",248134.359431316,1994,2000,2000,1996
+"Anoplophora chinensis","ITA",2007,"Management_costs","Post-invasion_management","Europe","Anoplophora",248134.359431316,1994,2000,2000,1996
+"Anoplophora chinensis","ITA",2008,"Management_costs","Post-invasion_management","Europe","Anoplophora",248134.359431316,1994,2000,2000,1996
+"Anoplophora chinensis","ITA",2000,"Management_costs","Post-invasion_management","Europe","Anoplophora",248134.359431316,1994,2000,2000,1996
+"Anoplophora chinensis","ITA",2004,"Management_costs","Post-invasion_management","Europe","Anoplophora",248134.359431316,1994,2000,2000,1996
+"Anoplophora chinensis","NLD",2008,"Management_costs","Post-invasion_management","Europe","Anoplophora",930503.847867436,2003,2008,2008,1996
+"Anoplophora glabripennis","AUT",2007,"Management_costs","Post-invasion_management","Europe","Anoplophora",86350.7570820981,2001,2001,2001,1996
+"Anoplophora glabripennis","AUT",2001,"Management_costs","Post-invasion_management","Europe","Anoplophora",86350.7570820981,2001,2001,2001,1996
+"Anoplophora glabripennis","AUT",2002,"Management_costs","Post-invasion_management","Europe","Anoplophora",86350.7570820981,2001,2001,2001,1996
+"Anoplophora glabripennis","AUT",2006,"Management_costs","Post-invasion_management","Europe","Anoplophora",86350.7570820981,2001,2001,2001,1996
+"Anoplophora glabripennis","AUT",2004,"Management_costs","Post-invasion_management","Europe","Anoplophora",86350.7570820981,2001,2001,2001,1996
+"Anoplophora glabripennis","AUT",2003,"Management_costs","Post-invasion_management","Europe","Anoplophora",86350.7570820981,2001,2001,2001,1996
+"Anoplophora glabripennis","AUT",2008,"Management_costs","Post-invasion_management","Europe","Anoplophora",86350.7570820981,2001,2001,2001,1996
+"Anoplophora glabripennis","AUT",2005,"Management_costs","Post-invasion_management","Europe","Anoplophora",86350.7570820981,2001,2001,2001,1996
+"Anoplophora glabripennis","CAN",2006,"Management_costs","Post-invasion_management","North America","Anoplophora",42738740.5873507,2003,2002,2003,1996
+"Anoplophora glabripennis","CAN",2005,"Management_costs","Post-invasion_management","North America","Anoplophora",42738740.5873507,2003,2002,2003,1996
+"Anoplophora glabripennis","CAN",2007,"Management_costs","Post-invasion_management","North America","Anoplophora",42738740.5873507,2003,2002,2003,1996
+"Anoplophora glabripennis","CAN",2003,"Management_costs","Post-invasion_management","North America","Anoplophora",42738740.5873507,2003,2002,2003,1996
+"Anoplophora glabripennis","CAN",2004,"Management_costs","Post-invasion_management","North America","Anoplophora",42738740.5873507,2003,2002,2003,1996
+"Anoplophora glabripennis","CAN",2008,"Management_costs","Post-invasion_management","North America","Anoplophora",42738740.5873507,2003,2002,2003,1996
+"Anoplophora glabripennis","DEU",2007,"Management_costs","Post-invasion_management","Europe","Anoplophora",193544.800356427,1999,2004,2004,1996
+"Anoplophora glabripennis","DEU",2004,"Management_costs","Post-invasion_management","Europe","Anoplophora",193544.800356427,1999,2004,2004,1996
+"Anoplophora glabripennis","DEU",2006,"Management_costs","Post-invasion_management","Europe","Anoplophora",193544.800356427,1999,2004,2004,1996
+"Anoplophora glabripennis","DEU",2008,"Management_costs","Post-invasion_management","Europe","Anoplophora",193544.800356427,1999,2004,2004,1996
+"Anoplophora glabripennis","DEU",2005,"Management_costs","Post-invasion_management","Europe","Anoplophora",193544.800356427,1999,2004,2004,1996
+"Anoplophora glabripennis","FRA",2003,"Management_costs","Post-invasion_management","Europe","Anoplophora",136473.897687224,2003,2003,2003,1996
+"Anoplophora glabripennis","FRA",2004,"Management_costs","Post-invasion_management","Europe","Anoplophora",136473.897687224,2003,2003,2003,1996
+"Anoplophora glabripennis","FRA",2006,"Management_costs","Post-invasion_management","Europe","Anoplophora",136473.897687224,2003,2003,2003,1996
+"Anoplophora glabripennis","FRA",2005,"Management_costs","Post-invasion_management","Europe","Anoplophora",136473.897687224,2003,2003,2003,1996
+"Anoplophora glabripennis","FRA",2007,"Management_costs","Post-invasion_management","Europe","Anoplophora",136473.897687224,2003,2003,2003,1996
+"Anoplophora glabripennis","FRA",2008,"Management_costs","Post-invasion_management","Europe","Anoplophora",136473.897687224,2003,2003,2003,1996
+"Anoplophora glabripennis","USA",2005,"Management_costs","Post-invasion_management","North America","Anoplophora",122876311.443944,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",1998,"Management_costs","Post-invasion_management","North America","Anoplophora",126846608.536023,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",2003,"Management_costs","Post-invasion_management","North America","Anoplophora",127873086.642132,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",2000,"Management_costs","Post-invasion_management","North America","Anoplophora",126846608.536023,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",1996,"Management_costs","Post-invasion_management","North America","Anoplophora",41966688.1637711,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",2006,"Management_costs","Post-invasion_management","North America","Anoplophora",122876311.443944,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",1999,"Management_costs","Post-invasion_management","North America","Anoplophora",126846608.536023,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",2004,"Management_costs","Post-invasion_management","North America","Anoplophora",122876311.443944,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",2008,"Management_costs","Post-invasion_management","North America","Anoplophora",38699576.4587805,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",2001,"Management_costs","Post-invasion_management","North America","Anoplophora",126846608.536023,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",2002,"Management_costs","Post-invasion_management","North America","Anoplophora",127873086.642132,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",2007,"Management_costs","Post-invasion_management","North America","Anoplophora",38699576.4587805,1996,1996,1996,1996
+"Anoplophora glabripennis","USA",1997,"Management_costs","Post-invasion_management","North America","Anoplophora",126143423.148935,1996,1996,1996,1996
+"Arundo donax","ESP",2014,"Management_costs","Post-invasion_management","Europe","Arundo",42722.9356327262,NA,2009,2009,1995
+"Arundo donax","ESP",2011,"Management_costs","Post-invasion_management","Europe","Arundo",6974.0410563882,NA,2009,2009,1995
+"Arundo donax","ESP",2018,"Management_costs","Post-invasion_management","Europe","Arundo",158330.419621759,NA,2009,2009,1995
+"Arundo donax","ESP",2010,"Management_costs","Post-invasion_management","Europe","Arundo",2635.25435353606,NA,2009,2009,1995
+"Arundo donax","ESP",2015,"Management_costs","Post-invasion_management","Europe","Arundo",138086.748676345,NA,2009,2009,1995
+"Arundo donax","ESP",2013,"Management_costs","Post-invasion_management","Europe","Arundo",33073.9180415235,NA,2009,2009,1995
+"Arundo donax","ESP",2016,"Management_costs","Post-invasion_management","Europe","Arundo",149086.758312455,NA,2009,2009,1995
+"Arundo donax","ESP",2017,"Management_costs","Post-invasion_management","Europe","Arundo",145731.474954875,NA,2009,2009,1995
+"Arundo donax","ESP",2012,"Management_costs","Post-invasion_management","Europe","Arundo",9793.49737460592,NA,2009,2009,1995
+"Arundo donax","ESP",2009,"Management_costs","Post-invasion_management","Europe","Arundo",9791.14492391059,NA,2009,2009,1995
+"Arundo donax","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Arundo",4513.00663348593,1750,1995,1995,1995
+"Arundo donax","ZAF",2016,"Management_costs","Post-invasion_management","Africa","Arundo",4513.00663348593,1750,1995,1995,1995
+"Arundo donax","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Arundo",56881.2698242678,1750,1995,1995,1995
+"Arundo donax","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Arundo",4513.00663348593,1750,1995,1995,1995
+"Arundo donax","ZAF",2015,"Management_costs","Post-invasion_management","Africa","Arundo",4513.00663348593,1750,1995,1995,1995
+"Arundo donax","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",2014,"Management_costs","Post-invasion_management","Africa","Arundo",4513.00663348593,1750,1995,1995,1995
+"Arundo donax","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Arundo",4513.00663348593,1750,1995,1995,1995
+"Arundo donax","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Arundo",4513.00663348593,1750,1995,1995,1995
+"Arundo donax","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",1996,"Management_costs","Post-invasion_management","Africa","Arundo",133086.262845747,1750,1995,1995,1995
+"Arundo donax","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Arundo donax","ZAF",1995,"Management_costs","Post-invasion_management","Africa","Arundo",133086.262845747,1750,1995,1995,1995
+"Arundo donax","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Arundo",137599.269479232,1750,1995,1995,1995
+"Bactrocera cucurbitae","JPN",1993,"Management_costs","Post-invasion_management","Asia","Bactrocera",15929348.9518827,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1990,"Management_costs","Post-invasion_management","Asia","Bactrocera",15929348.9518827,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1986,"Management_costs","Post-invasion_management","Asia","Bactrocera",19996018.0372457,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1979,"Management_costs","Post-invasion_management","Asia","Bactrocera",4066669.085363,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1983,"Management_costs","Post-invasion_management","Asia","Bactrocera",19996018.0372457,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1988,"Management_costs","Post-invasion_management","Asia","Bactrocera",19996018.0372457,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1992,"Management_costs","Post-invasion_management","Asia","Bactrocera",15929348.9518827,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1985,"Management_costs","Post-invasion_management","Asia","Bactrocera",19996018.0372457,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1984,"Management_costs","Post-invasion_management","Asia","Bactrocera",19996018.0372457,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1980,"Management_costs","Post-invasion_management","Asia","Bactrocera",19996018.0372457,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1987,"Management_costs","Post-invasion_management","Asia","Bactrocera",19996018.0372457,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1981,"Management_costs","Post-invasion_management","Asia","Bactrocera",19996018.0372457,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1991,"Management_costs","Post-invasion_management","Asia","Bactrocera",15929348.9518827,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1982,"Management_costs","Post-invasion_management","Asia","Bactrocera",19996018.0372457,1919,1979,1968,1968
+"Bactrocera cucurbitae","JPN",1989,"Management_costs","Post-invasion_management","Asia","Bactrocera",19996018.0372457,1919,1979,1968,1968
+"Bactrocera dorsalis","JPN",1982,"Management_costs","Post-invasion_management","Asia","Bactrocera",5089895.50038982,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1974,"Management_costs","Post-invasion_management","Asia","Bactrocera",958644.077194753,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1971,"Management_costs","Post-invasion_management","Asia","Bactrocera",958644.077194753,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1968,"Management_costs","Post-invasion_management","Asia","Bactrocera",958644.077194753,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1979,"Management_costs","Post-invasion_management","Asia","Bactrocera",6048539.57758458,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1978,"Management_costs","Post-invasion_management","Asia","Bactrocera",6048539.57758458,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1975,"Management_costs","Post-invasion_management","Asia","Bactrocera",2664021.43557279,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1973,"Management_costs","Post-invasion_management","Asia","Bactrocera",958644.077194753,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1970,"Management_costs","Post-invasion_management","Asia","Bactrocera",958644.077194753,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1983,"Management_costs","Post-invasion_management","Asia","Bactrocera",5089895.50038982,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1969,"Management_costs","Post-invasion_management","Asia","Bactrocera",958644.077194753,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1972,"Management_costs","Post-invasion_management","Asia","Bactrocera",958644.077194753,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1985,"Management_costs","Post-invasion_management","Asia","Bactrocera",5089895.50038982,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1977,"Management_costs","Post-invasion_management","Asia","Bactrocera",6048539.57758458,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1984,"Management_costs","Post-invasion_management","Asia","Bactrocera",5089895.50038982,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1980,"Management_costs","Post-invasion_management","Asia","Bactrocera",6048539.57758458,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1986,"Management_costs","Post-invasion_management","Asia","Bactrocera",3384518.14201179,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1981,"Management_costs","Post-invasion_management","Asia","Bactrocera",5089895.50038982,1919,1968,1968,1968
+"Bactrocera dorsalis","JPN",1976,"Management_costs","Post-invasion_management","Asia","Bactrocera",2664021.43557279,1919,1968,1968,1968
+"Cenchrus longisetus","ESP",2013,"Management_costs","Post-invasion_management","Europe","Cenchrus",715.498497382877,NA,2011,1997,1997
+"Cenchrus longisetus","ESP",2016,"Management_costs","Post-invasion_management","Europe","Cenchrus",57.8806459790288,NA,2011,1997,1997
+"Cenchrus longisetus","ESP",2012,"Management_costs","Post-invasion_management","Europe","Cenchrus",3564.14479570635,NA,2011,1997,1997
+"Cenchrus longisetus","ESP",2015,"Management_costs","Post-invasion_management","Europe","Cenchrus",293.745235101106,NA,2011,1997,1997
+"Cenchrus longisetus","ESP",2014,"Management_costs","Post-invasion_management","Europe","Cenchrus",281.711882736972,NA,2011,1997,1997
+"Cenchrus longisetus","ESP",2011,"Management_costs","Post-invasion_management","Europe","Cenchrus",741.671404103645,NA,2011,1997,1997
+"Cenchrus setaceus","ESP",1997,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2013,"Management_costs","Post-invasion_management","Europe","Cenchrus",11161.7765591729,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2007,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",1999,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2005,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2006,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2011,"Management_costs","Post-invasion_management","Europe","Cenchrus",1300.8372794488,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2014,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2019,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2015,"Management_costs","Post-invasion_management","Europe","Cenchrus",11177.0061955971,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2014,"Management_costs","Post-invasion_management","Europe","Cenchrus",16606.9154873445,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2017,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2011,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2001,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2013,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2002,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",1998,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2018,"Management_costs","Post-invasion_management","Europe","Cenchrus",4697.31140681556,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2015,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2012,"Management_costs","Post-invasion_management","Europe","Cenchrus",2184.13602259049,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2005,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2004,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2008,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2010,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2016,"Management_costs","Post-invasion_management","Europe","Cenchrus",4440.89256274098,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2007,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2008,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2018,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2017,"Management_costs","Post-invasion_management","Europe","Cenchrus",2834.14413552942,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2012,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2002,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2006,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2001,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2000,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2000,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2010,"Management_costs","Post-invasion_management","Europe","Cenchrus",9968.75805398442,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2009,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2003,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2009,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2016,"Management_costs","Post-invasion_management","Africa","Cenchrus",28392.610818704,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",1999,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2004,"Management_costs","Post-invasion_management","Africa","Cenchrus",6867.60122087359,1989,1997,1997,1997
+"Cenchrus setaceus","ESP",2003,"Management_costs","Post-invasion_management","Europe","Cenchrus",898695.095088994,1989,1997,1997,1997
+"Cylindropuntia imbricata","ESP",2018,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",1268.99838187811,1970,2013,2009,1997
+"Cylindropuntia imbricata","ESP",2016,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",803.093962959024,1970,2013,2009,1997
+"Cylindropuntia imbricata","ESP",2017,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",1879.78947764706,1970,2013,2009,1997
+"Cylindropuntia imbricata","ESP",2015,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",1644.97331656619,1970,2013,2009,1997
+"Cylindropuntia imbricata","ESP",2014,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",2553.01393730381,1970,2013,2009,1997
+"Cylindropuntia imbricata","ESP",2013,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",15830.4042545962,1970,2013,2009,1997
+"Cylindropuntia imbricata","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2016,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2015,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2014,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia imbricata","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Cylindropuntia",69.4308712843989,1913,1997,1997,1997
+"Cylindropuntia pallida","ESP",2017,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",31864.6345244118,NA,2010,2009,1997
+"Cylindropuntia pallida","ESP",2011,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",4876.62987960821,NA,2010,2009,1997
+"Cylindropuntia pallida","ESP",2015,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",21891.3636459099,NA,2010,2009,1997
+"Cylindropuntia pallida","ESP",2014,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",31171.419824846,NA,2010,2009,1997
+"Cylindropuntia pallida","ESP",2013,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",4876.62987960821,NA,2010,2009,1997
+"Cylindropuntia pallida","ESP",2012,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",4876.62987960821,NA,2010,2009,1997
+"Cylindropuntia pallida","ESP",2018,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",39343.3765767629,NA,2010,2009,1997
+"Cylindropuntia pallida","ESP",2010,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",4876.62987960821,NA,2010,2009,1997
+"Cylindropuntia pallida","ESP",2016,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",16186.3226480354,NA,2010,2009,1997
+"Cylindropuntia rosea","ESP",2010,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",58280.8007698787,NA,2009,2009,1997
+"Cylindropuntia rosea","ESP",2014,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",105543.920841391,NA,2009,2009,1997
+"Cylindropuntia rosea","ESP",2013,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",1337224.20888532,NA,2009,2009,1997
+"Cylindropuntia rosea","ESP",2012,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",19641.4225761414,NA,2009,2009,1997
+"Cylindropuntia rosea","ESP",2011,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",40702.6160094995,NA,2009,2009,1997
+"Cylindropuntia rosea","ESP",2009,"Management_costs","Post-invasion_management","Europe","Cylindropuntia",27333.6129125837,NA,2009,2009,1997
+"Eichhornia crassipes","BEN",1999,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2007,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2004,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2005,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2001,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2006,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2018,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2013,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2016,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2011,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2009,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2014,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2000,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2002,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2015,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2012,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2010,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2003,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2008,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2017,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","BEN",2019,"Management_costs","Post-invasion_management","Africa","Eichhornia",146451.956909634,NA,1999,1999,1977
+"Eichhornia crassipes","CHN",2006,"Management_costs","Post-invasion_management","Asia","Eichhornia",1.51990151295937,1901,1999,2006,1977
+"Eichhornia crassipes","COL",2010,"Management_costs","Post-invasion_management","South America","Eichhornia",5920.85510956784,NA,2010,2010,1977
+"Eichhornia crassipes","ESP",2001,"Management_costs","Post-invasion_management","Europe","Eichhornia",970653.867634366,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2014,"Management_costs","Post-invasion_management","Europe","Eichhornia",1197.27550163213,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2006,"Management_costs","Post-invasion_management","Europe","Eichhornia",970653.867634366,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2000,"Management_costs","Post-invasion_management","Europe","Eichhornia",970653.867634366,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",1999,"Management_costs","Post-invasion_management","Europe","Eichhornia",970653.867634366,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2008,"Management_costs","Post-invasion_management","Europe","Eichhornia",1102133.18579369,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2013,"Management_costs","Post-invasion_management","Europe","Eichhornia",1160.72861704339,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2005,"Management_costs","Post-invasion_management","Europe","Eichhornia",970653.867634366,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2009,"Management_costs","Post-invasion_management","Europe","Eichhornia",978648.662561347,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2012,"Management_costs","Post-invasion_management","Europe","Eichhornia",20147.1020790605,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2011,"Management_costs","Post-invasion_management","Europe","Eichhornia",11917.8294520994,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2003,"Management_costs","Post-invasion_management","Europe","Eichhornia",970653.867634366,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2019,"Management_costs","Post-invasion_management","Europe","Eichhornia",42063.4771857587,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2004,"Management_costs","Post-invasion_management","Europe","Eichhornia",970653.867634366,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2007,"Management_costs","Post-invasion_management","Europe","Eichhornia",1174426.44037554,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2020,"Management_costs","Post-invasion_management","Europe","Eichhornia",19838.9467823963,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2002,"Management_costs","Post-invasion_management","Europe","Eichhornia",970653.867634366,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2017,"Management_costs","Post-invasion_management","Europe","Eichhornia",115.679352470588,1988,1999,1999,1977
+"Eichhornia crassipes","ESP",2010,"Management_costs","Post-invasion_management","Europe","Eichhornia",41274.6087213911,1988,1999,1999,1977
+"Eichhornia crassipes","FRA",2011,"Management_costs","Post-invasion_management","Central America","Eichhornia",303366.90285653,1911,2011,2011,1977
+"Eichhornia crassipes","GHA",2012,"Management_costs","Post-invasion_management","Africa","Eichhornia",349150.923590821,NA,2012,2012,1977
+"Eichhornia crassipes","MDG",2007,"Management_costs","Post-invasion_management","Africa","Eichhornia",1187.65519982111,NA,2007,2007,1977
+"Eichhornia crassipes",NA,2007,"Management_costs","Post-invasion_management","Europe","Eichhornia",24481677.7638216,1900,2005,NA,1977
+"Eichhornia crassipes",NA,2006,"Management_costs","Post-invasion_management","Europe","Eichhornia",24481677.7638216,1900,2005,NA,1977
+"Eichhornia crassipes",NA,2008,"Management_costs","Post-invasion_management","Europe","Eichhornia",24481677.7638216,1900,2005,NA,1977
+"Eichhornia crassipes",NA,2005,"Management_costs","Post-invasion_management","Europe","Eichhornia",24481677.7638216,1900,2005,NA,1977
+"Eichhornia crassipes","PRT",1999,"Management_costs","Post-invasion_management","Europe","Eichhornia",196982.614926124,1936,1999,1999,1977
+"Eichhornia crassipes","PRT",2000,"Management_costs","Post-invasion_management","Europe","Eichhornia",207450.679440722,1936,1999,1999,1977
+"Eichhornia crassipes","PRT",2002,"Management_costs","Post-invasion_management","Europe","Eichhornia",32304.325586622,1936,1999,1999,1977
+"Eichhornia crassipes","PRT",2001,"Management_costs","Post-invasion_management","Europe","Eichhornia",122157.58905191,1936,1999,1999,1977
+"Eichhornia crassipes","UGA",2006,"Management_costs","Post-invasion_management","Africa","Eichhornia",1215921.2103675,NA,2006,2006,1977
+"Eichhornia crassipes","ZAF",1987,"Management_costs","Post-invasion_management","Africa","Eichhornia",9186.43018725295,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Eichhornia",135380.726381712,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1978,"Management_costs","Post-invasion_management","Africa","Eichhornia",144223.938214986,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Eichhornia",2358.94596750759,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Eichhornia",2358.94596750759,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1983,"Management_costs","Post-invasion_management","Africa","Eichhornia",3774.53448506855,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Eichhornia",29666.6408109344,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1979,"Management_costs","Post-invasion_management","Africa","Eichhornia",65702.001514973,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Eichhornia",37115.6631080029,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Eichhornia",11932.0985224,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1992,"Management_costs","Post-invasion_management","Africa","Eichhornia",33022.951907981,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Eichhornia",2358.94596750759,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1988,"Management_costs","Post-invasion_management","Africa","Eichhornia",8102.85806153058,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1984,"Management_costs","Post-invasion_management","Africa","Eichhornia",3411.31703197594,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Eichhornia",134894.357897565,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1980,"Management_costs","Post-invasion_management","Africa","Eichhornia",28428.972399994,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1995,"Management_costs","Post-invasion_management","Africa","Eichhornia",47946.2665027008,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1982,"Management_costs","Post-invasion_management","Africa","Eichhornia",5166.64631078,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1977,"Management_costs","Post-invasion_management","Africa","Eichhornia",1387786.92143482,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1991,"Management_costs","Post-invasion_management","Africa","Eichhornia",34645.5405080487,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Eichhornia",134894.357897565,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1989,"Management_costs","Post-invasion_management","Africa","Eichhornia",7065.35556832012,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1996,"Management_costs","Post-invasion_management","Africa","Eichhornia",46761.4547186243,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1981,"Management_costs","Post-invasion_management","Africa","Eichhornia",11760.8835635687,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Eichhornia",2358.94596750759,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Eichhornia",17786.2813232349,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Eichhornia",134894.357897565,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Eichhornia",134894.357897565,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Eichhornia",132535.411930057,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1990,"Management_costs","Post-invasion_management","Africa","Eichhornia",8624.71756161675,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Eichhornia",30293.3040072023,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Eichhornia",134894.357897565,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1994,"Management_costs","Post-invasion_management","Africa","Eichhornia",49140.7419110787,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1993,"Management_costs","Post-invasion_management","Africa","Eichhornia",47650.9826875382,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1986,"Management_costs","Post-invasion_management","Africa","Eichhornia",10595.2615465195,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",1985,"Management_costs","Post-invasion_management","Africa","Eichhornia",8194.66027494959,1884,1977,1977,1977
+"Eichhornia crassipes","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Eichhornia",134894.357897565,1884,1977,1977,1977
+"Lantana camara","AUS",2001,"Management_costs","Post-invasion_management","Oceania","Lantana",77186.9036743585,1875,1998,1998,1995
+"Lantana camara","AUS",2000,"Management_costs","Post-invasion_management","Oceania","Lantana",69678.8062825466,1875,1998,1998,1995
+"Lantana camara","AUS",2005,"Management_costs","Post-invasion_management","Oceania","Lantana",581831.766783762,1875,1998,1998,1995
+"Lantana camara","AUS",2002,"Management_costs","Post-invasion_management","Oceania","Lantana",212259.40699632,1875,1998,1998,1995
+"Lantana camara","AUS",1999,"Management_costs","Post-invasion_management","Oceania","Lantana",79301.9896469299,1875,1998,1998,1995
+"Lantana camara","AUS",1998,"Management_costs","Post-invasion_management","Oceania","Lantana",85042.9372867665,1875,1998,1998,1995
+"Lantana camara","AUS",2003,"Management_costs","Post-invasion_management","Oceania","Lantana",885470.212768231,1875,1998,1998,1995
+"Lantana camara","AUS",2004,"Management_costs","Post-invasion_management","Oceania","Lantana",249735.800441059,1875,1998,1998,1995
+"Lantana camara","ESP",2017,"Management_costs","Post-invasion_management","Europe","Lantana",2407.57652329412,NA,2011,2011,1995
+"Lantana camara","ESP",2012,"Management_costs","Post-invasion_management","Europe","Lantana",869.089494519529,NA,2011,2011,1995
+"Lantana camara","ESP",2015,"Management_costs","Post-invasion_management","Europe","Lantana",873.892074425791,NA,2011,2011,1995
+"Lantana camara","ESP",2013,"Management_costs","Post-invasion_management","Europe","Lantana",1109.02267094346,NA,2011,2011,1995
+"Lantana camara","ESP",2018,"Management_costs","Post-invasion_management","Europe","Lantana",3314.15158802121,NA,2011,2011,1995
+"Lantana camara","ESP",2011,"Management_costs","Post-invasion_management","Europe","Lantana",58.2464453484538,NA,2011,2011,1995
+"Lantana camara","ESP",2016,"Management_costs","Post-invasion_management","Europe","Lantana",1753.78357316457,NA,2011,2011,1995
+"Lantana camara","ESP",2014,"Management_costs","Post-invasion_management","Europe","Lantana",4225.67824105458,NA,2011,2011,1995
+"Lantana camara","IND",1996,"Management_costs","Post-invasion_management","Asia","Lantana",109.393502284561,1814,1996,1996,1995
+"Lantana camara","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Lantana",1867483.34072411,1858,1995,1995,1995
+"Lantana camara","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Lantana",3645248.06483223,1858,1995,1995,1995
+"Lantana camara","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Lantana",121770423.51452,1858,1995,1995,1995
+"Lantana camara","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Lantana",3645248.06483223,1858,1995,1995,1995
+"Lantana camara","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Lantana",3645248.06483223,1858,1995,1995,1995
+"Lantana camara","ZAF",2015,"Management_costs","Post-invasion_management","Africa","Lantana",231204.801377048,1858,1995,1995,1995
+"Lantana camara","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Lantana",3645248.06483223,1858,1995,1995,1995
+"Lantana camara","ZAF",2016,"Management_costs","Post-invasion_management","Africa","Lantana",231204.801377048,1858,1995,1995,1995
+"Lantana camara","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Lantana",3645248.06483223,1858,1995,1995,1995
+"Lantana camara","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Lantana",3645248.06483223,1858,1995,1995,1995
+"Lantana camara","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Lantana",121770423.51452,1858,1995,1995,1995
+"Lantana camara","ZAF",1996,"Management_costs","Post-invasion_management","Africa","Lantana",3414043.26345519,1858,1995,1995,1995
+"Lantana camara","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Lantana",3645248.06483223,1858,1995,1995,1995
+"Lantana camara","ZAF",1995,"Management_costs","Post-invasion_management","Africa","Lantana",3414043.26345519,1858,1995,1995,1995
+"Lantana camara","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Lantana",3645248.06483223,1858,1995,1995,1995
+"Lantana camara","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Lantana",231204.801377048,1858,1995,1995,1995
+"Lantana camara","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Lantana",231204.801377048,1858,1995,1995,1995
+"Lantana camara","ZAF",2014,"Management_costs","Post-invasion_management","Africa","Lantana",231204.801377048,1858,1995,1995,1995
+"Lantana camara","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Lantana",3645248.06483223,1858,1995,1995,1995
+"Lantana camara","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Lantana",3645248.06483223,1858,1995,1995,1995
+"Lantana camara","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Lantana",231204.801377048,1858,1995,1995,1995
+"Lantana camara","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Lantana",231204.801377048,1858,1995,1995,1995
+"Lymantria dispar","CAN",1999,"Management_costs","Post-invasion_management","North America","Lymantria",2971317.51199058,1912,1999,1999,1890
+"Lymantria dispar","USA",1895,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",1992,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1988,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1896,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",1900,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",2003,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1991,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",2009,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1994,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",2008,"Management_costs","Post-invasion_management","North America","Lymantria",8546549.98259841,1869,1890,1890,1890
+"Lymantria dispar","USA",1989,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1987,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",2004,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1894,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",1990,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1993,"Management_costs","Post-invasion_management","North America","Lymantria",18312135.2376127,1869,1890,1890,1890
+"Lymantria dispar","USA",1982,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1983,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",2010,"Management_costs","Post-invasion_management","North America","Lymantria",2779254.36609866,1869,1890,1890,1890
+"Lymantria dispar","USA",1892,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",1893,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",1985,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1898,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",1998,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1997,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1899,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",2007,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1984,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1986,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1890,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",1897,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",2005,"Management_costs","Post-invasion_management","North America","Lymantria",14132465.9793085,1869,1890,1890,1890
+"Lymantria dispar","USA",2000,"Management_costs","Post-invasion_management","North America","Lymantria",15983903.7341144,1869,1890,1890,1890
+"Lymantria dispar","USA",1996,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",2001,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1891,"Management_costs","Post-invasion_management","North America","Lymantria",2989342.41506837,1869,1890,1890,1890
+"Lymantria dispar","USA",1999,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",2012,"Management_costs","Post-invasion_management","North America","Lymantria",21678304.1630773,1869,1890,1890,1890
+"Lymantria dispar","USA",2006,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",1981,"Management_costs","Post-invasion_management","North America","Lymantria",55843737.5044386,1869,1890,1890,1890
+"Lymantria dispar","USA",1995,"Management_costs","Post-invasion_management","North America","Lymantria",20433009.9872285,1869,1890,1890,1890
+"Lymantria dispar","USA",2002,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Lymantria dispar","USA",2011,"Management_costs","Post-invasion_management","North America","Lymantria",325858.34116041,1869,1890,1890,1890
+"Opuntia aurantiaca","ZAF",1970,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1968,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1986,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1983,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1967,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1985,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1972,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1981,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1992,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1971,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1993,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1987,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1984,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1990,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1963,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1991,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1965,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1995,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1966,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1962,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1977,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1989,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1988,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1994,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1975,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1982,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1969,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1964,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1979,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1973,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1961,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1974,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1980,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1976,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1996,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia aurantiaca","ZAF",1978,"Management_costs","Post-invasion_management","Africa","Opuntia",415300.498870483,1843,1961,1961,1961
+"Opuntia ficus-indica","ESP",2012,"Management_costs","Post-invasion_management","Europe","Opuntia",6839.47096141581,1986,2008,1999,1961
+"Opuntia ficus-indica","ESP",2017,"Management_costs","Post-invasion_management","Europe","Opuntia",919.650852141178,1986,2008,1999,1961
+"Opuntia ficus-indica","ESP",2011,"Management_costs","Post-invasion_management","Europe","Opuntia",3844.26539299795,1986,2008,1999,1961
+"Opuntia ficus-indica","ESP",2015,"Management_costs","Post-invasion_management","Europe","Opuntia",7075.58835049789,1986,2008,1999,1961
+"Opuntia ficus-indica","ESP",2010,"Management_costs","Post-invasion_management","Europe","Opuntia",256177.744389854,1986,2008,1999,1961
+"Opuntia ficus-indica","ESP",2018,"Management_costs","Post-invasion_management","Europe","Opuntia",10199.3900469061,1986,2008,1999,1961
+"Opuntia ficus-indica","ESP",2016,"Management_costs","Post-invasion_management","Europe","Opuntia",7285.72631261025,1986,2008,1999,1961
+"Opuntia ficus-indica","ESP",2014,"Management_costs","Post-invasion_management","Europe","Opuntia",2183.26709121153,1986,2008,1999,1961
+"Opuntia ficus-indica","ESP",2009,"Management_costs","Post-invasion_management","Europe","Opuntia",20398.2185914804,1986,2008,1999,1961
+"Opuntia ficus-indica","ESP",2008,"Management_costs","Post-invasion_management","Europe","Opuntia",8573.12922306215,1986,2008,1999,1961
+"Opuntia ficus-indica","ESP",2013,"Management_costs","Post-invasion_management","Europe","Opuntia",6725.68587539905,1986,2008,1999,1961
+"Opuntia ficus-indica","FRA",2011,"Management_costs","Post-invasion_management","Europe","Opuntia",11376.2588571199,1883,2011,2009,1961
+"Opuntia humifusa","ESP",2012,"Management_costs","Post-invasion_management","Europe","Opuntia",140.458908205176,NA,2012,1999,1961
+"Opuntia stricta","ESP",2015,"Management_costs","Post-invasion_management","Europe","Opuntia",4880.24432293074,1874,2012,1999,1961
+"Opuntia stricta","ESP",2014,"Management_costs","Post-invasion_management","Europe","Opuntia",352.139853421215,1874,2012,1999,1961
+"Opuntia stricta","ESP",2013,"Management_costs","Post-invasion_management","Europe","Opuntia",1448.88445720033,1874,2012,1999,1961
+"Opuntia stricta","ESP",2012,"Management_costs","Post-invasion_management","Europe","Opuntia",807.638722179764,1874,2012,1999,1961
+"Opuntia stricta","ESP",2018,"Management_costs","Post-invasion_management","Europe","Opuntia",3458.38948549631,1874,2012,1999,1961
+"Opuntia stricta","ESP",2017,"Management_costs","Post-invasion_management","Europe","Opuntia",1129.68117647059,1874,2012,1999,1961
+"Opuntia stricta","ESP",2016,"Management_costs","Post-invasion_management","Europe","Opuntia",28.9403229895144,1874,2012,1999,1961
+"Opuntia stricta","FRA",2012,"Management_costs","Post-invasion_management","Europe","Opuntia",23764.1658657684,1883,2012,2009,1961
+"Opuntia stricta","KEN",2014,"Management_costs","Post-invasion_management","Africa","Opuntia",12079.812360267,NA,2014,2014,1961
+"Opuntia stricta","KEN",2015,"Management_costs","Post-invasion_management","Africa","Opuntia",12079.812360267,NA,2014,2014,1961
+"Opuntia stricta","KEN",2016,"Management_costs","Post-invasion_management","Africa","Opuntia",12079.812360267,NA,2014,2014,1961
+"Opuntia stricta","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2016,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2015,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2014,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Opuntia",57144.916895206,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Opuntia stricta","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Opuntia",5207.31534632992,1937,1997,1961,1961
+"Parthenium hysterophorus","AUS",1984,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1986,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1982,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1980,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1985,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",2001,"Management_costs","Post-invasion_management","Oceania","Parthenium",44078.0254197345,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1983,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1998,"Management_costs","Post-invasion_management","Oceania","Parthenium",13404.7007092836,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1978,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",2006,"Management_costs","Post-invasion_management","Oceania","Parthenium",6744106.99330332,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1999,"Management_costs","Post-invasion_management","Oceania","Parthenium",28585.7073868739,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",2000,"Management_costs","Post-invasion_management","Oceania","Parthenium",59240.7196646619,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1979,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1990,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1975,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1981,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1987,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",2005,"Management_costs","Post-invasion_management","Oceania","Parthenium",102485.529398232,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1977,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1976,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1988,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",1989,"Management_costs","Post-invasion_management","Oceania","Parthenium",326666.127699934,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",2002,"Management_costs","Post-invasion_management","Oceania","Parthenium",453370.051653127,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",2003,"Management_costs","Post-invasion_management","Oceania","Parthenium",829067.920166327,1950,1975,1975,1975
+"Parthenium hysterophorus","AUS",2004,"Management_costs","Post-invasion_management","Oceania","Parthenium",244251.226858504,1950,1975,1975,1975
+"Parthenium hysterophorus","IND",2006,"Management_costs","Post-invasion_management","Asia","Parthenium",119.160278616015,NA,2006,2006,1975
+"Parthenium hysterophorus","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Parthenium",125470.738178336,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2015,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Parthenium",125470.738178336,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2014,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Parthenium",209855.670177841,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Parthenium",125610.569117529,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2016,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Parthenium",125470.738178336,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Parthenium",125470.738178336,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Parthenium",125470.738178336,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Parthenium",40964.2140577954,1894,1997,1997,1975
+"Parthenium hysterophorus","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Parthenium",125470.738178336,1894,1997,1997,1975
+"Pectinophora gossypiella","USA",2001,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1997,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1979,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1990,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",2000,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1980,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1986,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1999,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1984,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1998,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1989,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1996,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1995,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1983,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1985,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1987,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",2004,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1988,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",2009,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",2006,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1994,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1982,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1991,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",2008,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",2002,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1993,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",2005,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",2007,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1992,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",2003,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Pectinophora gossypiella","USA",1981,"Management_costs","Post-invasion_management","North America","Pectinophora",45702.0622705332,NA,1979,1979,1979
+"Salvinia molesta","LKA",1992,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1986,"Management_costs","Post-invasion_management","Asia","Salvinia",76028.8282324527,NA,1984,1984,1984
+"Salvinia molesta","LKA",1991,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1985,"Management_costs","Post-invasion_management","Asia","Salvinia",76028.8282324527,NA,1984,1984,1984
+"Salvinia molesta","LKA",2009,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",2002,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",2011,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1998,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1999,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1987,"Management_costs","Post-invasion_management","Asia","Salvinia",103869.508246817,NA,1984,1984,1984
+"Salvinia molesta","LKA",2010,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1997,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",2001,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1984,"Management_costs","Post-invasion_management","Asia","Salvinia",76028.8282324527,NA,1984,1984,1984
+"Salvinia molesta","LKA",2004,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1993,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",2005,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1988,"Management_costs","Post-invasion_management","Asia","Salvinia",103869.508246817,NA,1984,1984,1984
+"Salvinia molesta","LKA",2008,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1996,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1990,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",2003,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1989,"Management_costs","Post-invasion_management","Asia","Salvinia",103869.508246817,NA,1984,1984,1984
+"Salvinia molesta","LKA",1994,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",2006,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",2007,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",1995,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","LKA",2000,"Management_costs","Post-invasion_management","Asia","Salvinia",27840.6800143644,NA,1984,1984,1984
+"Salvinia molesta","SEN",2000,"Management_costs","Post-invasion_management","Africa","Salvinia",1423.45867208672,1999,2000,2000,1984
+"Salvinia molesta","USA",2007,"Management_costs","Post-invasion_management","North America","Salvinia",2045.20081314766,NA,2007,2007,1984
+"Salvinia natans","ESP",2012,"Management_costs","Post-invasion_management","Europe","Salvinia",279.162080057788,NA,2012,2012,1984
+"Salvinia natans","ESP",2013,"Management_costs","Post-invasion_management","Europe","Salvinia",53.6623873037158,NA,2012,2012,1984
+"Solanum mauritianum","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2016,"Management_costs","Post-invasion_management","Africa","Solanum",13539.0199004578,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",1995,"Management_costs","Post-invasion_management","Africa","Solanum",2020115.59624291,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Solanum",3504217.52417192,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2015,"Management_costs","Post-invasion_management","Africa","Solanum",13539.0199004578,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Solanum",13539.0199004578,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Solanum",13539.0199004578,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Solanum",837650.109060657,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2014,"Management_costs","Post-invasion_management","Africa","Solanum",13539.0199004578,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Solanum",2033654.61614336,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",1996,"Management_costs","Post-invasion_management","Africa","Solanum",2020115.59624291,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Solanum",13539.0199004578,1862,1995,1995,1993
+"Solanum mauritianum","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Solanum",13539.0199004578,1862,1995,1995,1993
+"Solanum quitoense","ECU",2008,"Management_costs","Post-invasion_management","South America","Solanum",75.89928382,NA,2006,2006,1993
+"Solanum quitoense","ECU",2006,"Management_costs","Post-invasion_management","South America","Solanum",75.89928382,NA,2006,2006,1993
+"Solanum quitoense","ECU",2007,"Management_costs","Post-invasion_management","South America","Solanum",75.89928382,NA,2006,2006,1993
+"Solanum seaforthianum","ZAF",1999,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2000,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2008,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2009,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2001,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2016,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2012,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2013,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2004,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2002,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2015,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2007,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2006,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",1998,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",1997,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2011,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2003,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2014,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2010,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum seaforthianum","ZAF",2005,"Management_costs","Post-invasion_management","Africa","Solanum",24647.9593059616,1902,1997,1995,1993
+"Solanum tampicense","USA",2006,"Management_costs","Post-invasion_management","North America","Solanum",2019.64513042041,NA,2006,1993,1993
+"Solanum viarum","USA",1993,"Management_costs","Post-invasion_management","North America","Solanum",9863917.63486424,1987,1993,1993,1993

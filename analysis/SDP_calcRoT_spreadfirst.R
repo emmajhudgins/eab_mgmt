@@ -1,5 +1,3 @@
-  ## rewrite to get a suite of site vs. spread-focussed heuristic solutions
-
   rm(list=ls()) 
   obj<-array(dim=c(10,9,9))
   n_spp=66
