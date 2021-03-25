@@ -1,5 +1,5 @@
 import sys
-import commands
+import subprocess
 from gurobipy import *
 import numpy
 import pandas
