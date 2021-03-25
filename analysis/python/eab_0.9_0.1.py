@@ -176,7 +176,7 @@ mgmt=pandas.io.parsers.read_csv("../../management_test_0_1_0.3_0.1_.csv")
 
 
 tij = numpy.stack([Tij,Tij2,Tij3,Tij4,Tij5,Tij6])
-full_out = [list([] for x in xrange(L)),list([] for x in xrange(L)),list([] for x in xrange(L)),list([] for x in xrange(L)),list([] for x in xrange(L)),list([] for x in xrange(L))]
+full_out = [list([] for x in range(L)),list([] for x in range(L)),list([] for x in xange(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L))]
 for i in range(0,6):
     for j in range(L):
         full_out[i][j].append(numpy.array(range(1,L+1))[tij[i,range(L),j]!=0]) # which sites are sources in influx to j
