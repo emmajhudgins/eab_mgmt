@@ -16,7 +16,7 @@ spp = 1
 
 B = 963.943 # APHIS 2020 budget related to EAB biocontrol + tribal response (no survey)
 HostVol = pandas.io.parsers.read_csv('../../data/streettrees_grid.csv')
-prez=pandas.io.parsers.read_csv('../../prez_clean_gdk.csv')
+prez=pandas.io.parsers.read_csv('../../data/prez_clean_gdk.csv')
 prez=prez.iloc[:,0]
 HostVol = HostVol/1e+06
 
@@ -159,20 +159,20 @@ for ii in sites:
         m.addConstr((M[4*L+ii,year]==1)>>(dprime[ii,year] == (1-eff_vec[4*L+ii-1])*d[ii,year]), name = "Effect of Mgmt" )
 
 
-Tij = pandas.io.parsers.read_csv("../../transmatM_17.csv")
+Tij = pandas.io.parsers.read_csv("../../data/transmatM_17.csv")
 Tij= numpy.around(Tij, 6)
-Tij2=pandas.io.parsers.read_csv("../../transmatM__1_8_0_1_0.3_0.3_0.1_.csv")
+Tij2=pandas.io.parsers.read_csv("../../data/transmatM__1_8_0_1_0.3_0.3_0.1_.csv")
 Tij2= numpy.around(Tij2, 6)
-Tij3 = pandas.io.parsers.read_csv("../../transmatM__1_9_0_1_0.3_0.3_0.1_.csv")
+Tij3 = pandas.io.parsers.read_csv("../../data/transmatM__1_9_0_1_0.3_0.3_0.1_.csv")
 Tij3= numpy.around(Tij3, 6)
-Tij4=pandas.io.parsers.read_csv("../../transmatM__1_10_0_1_0.3_0.3_0.1_.csv")
+Tij4=pandas.io.parsers.read_csv("../../data/transmatM__1_10_0_1_0.3_0.3_0.1_.csv")
 Tij4= numpy.around(Tij4, 6)
-Tij5 = pandas.io.parsers.read_csv("../../transmatM__11_10_0_1_0.3_0.3_0.1_.csv")
+Tij5 = pandas.io.parsers.read_csv("../../data/transmatM__11_10_0_1_0.3_0.3_0.1_.csv")
 Tij5= numpy.around(Tij5, 6)
-Tij6=pandas.io.parsers.read_csv("../../transmatM__1_12_0_1_0.3_0.3_0.1_.csv")
+Tij6=pandas.io.parsers.read_csv("../../data/transmatM__1_12_0_1_0.3_0.3_0.1_.csv")
 Tij6= numpy.around(Tij6, 6)
-vecptime = pandas.io.parsers.read_csv("../../vecptime_0_1_0.3_0.1_.csv")
-mgmt=pandas.io.parsers.read_csv("../../management_test_0_1_0.3_0.1_.csv")
+vecptime = pandas.io.parsers.read_csv("../../data/vecptime_0_1_0.3_0.1_.csv")
+mgmt=pandas.io.parsers.read_csv("../../data/management_test_0_1_0.3_0.1_.csv")
 
 
 tij = numpy.stack([Tij,Tij2,Tij3,Tij4,Tij5,Tij6])
@@ -215,5 +215,5 @@ m.optimize()
 M2 = dict(m.getAttr('X', M))
 M3 = pandas.Series(M2)
 M4 = M3.unstack()
-M4.to_csv('M3_{0}_{1}_{2}.csv'.format(eff_quar_in,eff_quar_out,eff_bio), index=False,header=False)
-m.write('model_{0}_{1}_{2}.sol'.format(eff_quar_in,eff_quar_out,eff_bio))
+M4.to_csv('../../output/M3_{0}_{1}_{2}.csv'.format(eff_quar_in,eff_quar_out,eff_bio), index=False,header=False)
+m.write('../../output/model_{0}_{1}_{2}.sol'.format(eff_quar_in,eff_quar_out,eff_bio))
