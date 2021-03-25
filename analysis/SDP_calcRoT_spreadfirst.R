@@ -1,9 +1,5 @@
   rm(list=ls()) 
-  obj<-array(dim=c(10,9,9))
-  n_spp=66
-  library(pdist)
-  correction=FALSE
-  setwd("~/Desktop/OneDrive - McGill University/Grad/scripts/")
+  ## reference existing github data here instead of local files
   #Read in Data
   data<-read.csv('data_minus5_july.csv', stringsAsFactors = FALSE)
   data2<-read.csv('datanorm.csv', stringsAsFactors = FALSE)
@@ -122,9 +118,7 @@
             
             #Pest Parameters
             Psource=sources[[spp]]
-            Discovery<-2009-YEAR
-            #Pfull<-matrix(0, 3372, total_time)
-            rem<-mfive(Discovery)
+            Discovery<-2009-YEAR            rem<-mfive(Discovery)
             
             T2<-T1[prez[1:L[spp],spp],prez[1:L[spp],spp]]
            
@@ -134,7 +128,7 @@
            bios<-c(0.1,0.3,0.5)
            qerad<-0.99
            B=963943
-           setwd("~/Desktop/OneDrive - McGill University/Grad/scripts/RoT")
+           setwd("./RoT")
            
 
              for (q_out in qz)
@@ -156,8 +150,6 @@
             vecP_time=d2prime=d3prime=d4prime=dprime=d_out=matrix(0,L[spp], total_time+7)
           
 
-            #frac_spread=0.5
-            #frac_site=0.5
             frac_spread=budget_scen$spread_bud[scen]
              frac_site=budget_scen$site_bud[scen]
              c_4=c_5=c_6=c_7=matrix(0,L[spp], ncol(vecP_time))
@@ -214,8 +206,6 @@
               shortpath_out<-apply(pp,1,which.max)
               for (i in 1:1799)
               {
-                # bc_sources[i]<-length(which(pp[i,abs]>par[21]))
-                # bc_destinations[i]<-length(which(pp[abs,i]>par[21]))
                 bc_pp_out[i,time]<-sum(length(which(shortpath_out==i))*(V_i[prez[which(shortpath_out==i),1]]+1)*(1-vecP[which(shortpath_out==i)]))
                 bc_pp_in[i,time]<-sum(length(which(shortpath_in==i))*(V_i[prez[i,1]]+1)*(1-vecP[i]))
                 pp_bio[i,time]<-(vecP[i]*(V_i[prez[i,1]]+1)*(1-qbio))/141519
@@ -327,20 +317,8 @@
   
                 vecP_time[,time]<-vecP
              }
-              
-        
-            # 
-            # write.csv(dprime[,6:11], file=paste("dprime",frac_site,frac_spread,q_in,q_out,qbio, ".csv", sep="_"), row.names=F)
-            # write.csv(d2prime[,6:11], file=paste("d2prime",frac_site,frac_spread,q_in,q_out,qbio, ".csv", sep="_"), row.names=F)
-            # write.csv(d3prime[,6:11], file=paste("d3prime",frac_site,frac_spread,q_in,q_out,qbio, ".csv", sep="_"), row.names=F)
-            # write.csv(d4prime[,6:11], file=paste("d4prime",frac_site,frac_spread,q_in,q_out,qbio, ".csv", sep="_"), row.names=F)
+
              write.csv(vecP_time[,5:11], file=paste("vecptime",frac_site,frac_spread,q_in,q_out,qbio,".csv", sep="_"), row.names=F)
-            # write.csv(c_4[,6:11], file=paste("c_4",frac_site,frac_spread,q_in,q_out,qbio,".csv", sep="_"), row.names=F)
-            # write.csv(c_5[,6:11], file=paste("c_5",frac_site,frac_spread,q_in,q_out,qbio,".csv", sep="_"), row.names=F)
-            # write.csv(c_6[,6:11], file=paste("c_6",frac_site,frac_spread,q_in,q_out,qbio,".csv", sep=")"), row.names=F)
-            # write.csv(c_7[,6:11], file=paste("c_7",frac_site,frac_spread,q_in,q_out,qbio,".csv", sep=")"), row.names=F)
-            # write.csv(d_out[,6:11], file=paste("d_out",frac_site,frac_spread,q_in,q_out,qbio,".csv", sep="_"), row.names=F)
-            # 
             
             M_big<-matrix(0,1799*5,5)
             M_big[1:1799,]<-1
@@ -373,20 +351,14 @@ library(viridis)
 plot(obj$obj~obj$frac_site, col=viridis(9)[as.factor(paste0(obj$q_in,obj$q_out, obj$qbio))], xlab="Site-focused budget proportion", ylab="Exposed ash street trees")
 
 
- mgmt_itme<-read.csv('../M3_0.3_0.3_0.1.csv', header=F)
- d_time<-read.csv('../pestden3_0.3_0.3_0.1.csv', header=F)
-# d_time<-read.csv('../vecptime_0.9_0.1_0.3_0.3_0.1_.csv')
-# 
+mgmt_itme<-read.csv('../M3_0.3_0.3_0.1.csv', header=F)
+d_time<-read.csv('../pestden3_0.3_0.3_0.1.csv', header=F)
+
 mgmt<-list()
-#c_8<-matrix(0, 1799,6)
 for (time in 6:11)
 {
   mgmt[[time]]<-which(mgmt_itme[1800:nrow(mgmt_itme),time-5]==1)
-#  c_8[which(d_time[,time-5]>par[21]),time-5]<-1
-#  write.csv(c_8, file=paste("c_8",frac_site,frac_spread,q_in,q_out,qbio,".csv", sep=")"), row.names=F)
-
 }
- nothing<-unlist(apply(mgmt_itme[1:1799,],2, function(x){length(which(x==1))}))
  qin<-unlist(apply(mgmt_itme[((1799+1):(2*1799)),],2, function(x){length(which(x==1))}))# 
  qout<-unlist(apply(mgmt_itme[((2*1799+1):(3*1799)),],2, function(x){length(which(x==1))}))
  bio<-unlist(apply(mgmt_itme[((3*1799+1):(4*1799)),],2, function(x){length(which(x==1))}))
