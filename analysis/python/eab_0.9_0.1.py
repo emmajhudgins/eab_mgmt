@@ -37,7 +37,7 @@ phi =0.538410692229749
 
 effs_quar=[0.3,0.6,0.9]
 effs_bio=[0.1,0.3,0.5]
-sites2 = range(1,L+1)
+sites2 = list(range(1,L+1))
 sites2.remove(613)
 sites = range(1,L+1)
 eff_nothing = 0
