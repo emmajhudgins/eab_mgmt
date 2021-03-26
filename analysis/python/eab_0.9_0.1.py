@@ -156,8 +156,6 @@ for ii in sites:
     for year in time:
         m.addConstr((M[2*L+ii,year]==1)>>(d_out[ii,year] == (1-eff_vec[2*L+ii-1])*d2prime[ii,year]), name = "quar_out" )
         m.addConstr((M[3*L+ii,year]==1)>>(dprime[ii,year] == (1-eff_vec[3*L+ii-1])*d[ii,year]), name = "Effect of Mgmt" )
-        m.addConstr((M[4*L+ii,year]==1)>>(dprime[ii,year] == (1-eff_vec[4*L+ii-1])*d[ii,year]), name = "Effect of Mgmt" )
-
 
 Tij = pandas.io.parsers.read_csv("../../data/transmatM_17.csv")
 Tij= numpy.around(Tij, 6)
@@ -167,7 +165,7 @@ Tij3 = pandas.io.parsers.read_csv("../../data/transmatM__1_9_0_1_0.3_0.3_0.1_.cs
 Tij3= numpy.around(Tij3, 6)
 Tij4=pandas.io.parsers.read_csv("../../data/transmatM__1_10_0_1_0.3_0.3_0.1_.csv")
 Tij4= numpy.around(Tij4, 6)
-Tij5 = pandas.io.parsers.read_csv("../../data/transmatM__11_10_0_1_0.3_0.3_0.1_.csv")
+Tij5 = pandas.io.parsers.read_csv("../../data/transmatM__1_11_0_1_0.3_0.3_0.1_.csv")
 Tij5= numpy.around(Tij5, 6)
 Tij6=pandas.io.parsers.read_csv("../../data/transmatM__1_12_0_1_0.3_0.3_0.1_.csv")
 Tij6= numpy.around(Tij6, 6)
@@ -176,7 +174,7 @@ mgmt=pandas.io.parsers.read_csv("../../data/management_test_0_1_0.3_0.1_.csv")
 
 
 tij = numpy.stack([Tij,Tij2,Tij3,Tij4,Tij5,Tij6])
-full_out = [list([] for x in range(L)),list([] for x in range(L)),list([] for x in xange(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L))]
+full_out = [list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L))]
 for i in range(0,6):
     for j in range(L):
         full_out[i][j].append(numpy.array(range(1,L+1))[tij[i,range(L),j]!=0]) # which sites are sources in influx to j
@@ -192,7 +190,7 @@ for sites3 in range(1, L*n_actions+1):
     for year in range(1,5+1):
         M[sites3, year].start=mgmt.iloc[sites3-1,year-1]    
 for year in range(1,5+1):
-    B_nonerad[year].start=sum(mgmt.iloc[range(0,4*1799),year-1]*cost_vec)        
+    B_each[year].start=sum(mgmt.iloc[range(0,4*1799),year-1]*cost_vec)        
 #for sites3 in range(1, L+1):
 #    for year in range(1,5+1):
 #        B_each[sites3, year].start=mgmt.iloc[4*1799+sites3-1,year-1]*vecptime.iloc[sites3-1,year-1]*cost_erad

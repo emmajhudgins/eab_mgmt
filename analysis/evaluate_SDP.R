@@ -1,3 +1,5 @@
+require(here)
+setwd(paste0(here(), "/output/"))
 obj<-data.frame(frac_site=0,frac_spread=0,q_in=0,q_out=0,qbio=0, obj=0)
 names(obj)
 for (q_in in qz)
