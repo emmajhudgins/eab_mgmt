@@ -27,7 +27,6 @@ Tr1<-function(x)
 sources<-as.list(read.csv('Psources_notypos.csv')[,1])
 dists<-sapply(1:3372, Tr1)
 T1<-exp(-dists/50000)
-rm(dists)
 YEAR<-28 #assume initial invasion in in 1992
 spp=1  
 par<-rep(0,23)
@@ -54,6 +53,16 @@ for (time in 6:11)
 {
   qq3_list[[time]]<-as.matrix(read.csv(paste("../../eab_mgmt/data/transmatM_", spp,time,0,1,0.3, 0.3,0.1, ".csv", sep="_")))
 }
+adj_list<-matrix(0, L[spp], L[spp])
+for(i in 1:L[spp])
+{
+  if (length(which(dists[prez[i,spp],prez[,spp]]<=70800))>0)
+  {
+  adj_list[i,which(adj_list[i,]==i)]<-0
+  }
+}
+rm(dists)
+write.csv(adj_list, file="adj_list.csv", row.names=F)
 r0<-par[22]
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 qz<-c(0.3,0.6,0.9)
@@ -80,7 +89,7 @@ for (q_out in qz)
       
       frac_spread=budget_scen$spread_bud[scen]
       frac_site=budget_scen$site_bud[scen]
-      c_4=c_5=c_6=c_7=matrix(0,L[spp], ncol(vecP_time))
+      c_4=c_5=c_6=c_7=c_8=matrix(0,L[spp], ncol(vecP_time))
       mgmt<-list()
       for (time in 1:(total_time+6))
       {
@@ -154,23 +163,40 @@ for (q_out in qz)
           }
           ce_site<-rank(pp_bio[,time],ties.method="random")
           cost_site<-c(rep(50000,1799))
+          if (length(mgmt[[time-4]][which(mgmt[[time-4]]>2*L[spp])])>0){
+          for(xx in 1:length(mgmt[[time-4]][which(mgmt[[time-4]]>2*L[spp])]))
+          {
+            c_8[unlist(adj_list[mgmt[[time-4]][which(mgmt[[time-4]]>2*L[spp])][xx]-(2*L[spp]),]),time]<-1
+          }}
+          c_8[mgmt[[time-2]][which(mgmt[[time-2]]>2*L[spp])]-(2*L[spp]),time]<-1
+          
           ce_site[which(pp_bio[,time]==0)]<-NA
           ce_site[which(cost_site>B*frac_site)]<-NA
+          ce_site[which(c_8[,time]==1)]<-NA
           tt=min(ce_site,na.rm=T)
           cost=cost2=0
           while(is.infinite(tt)==F&cost2<=B*frac_site& sum(ce_site[which(ce_site>=tt)], na.rm=T)!=0 & tt<1799)
           {
             if (which(ce_site==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]-(2*1799),mgmt[[time]]-(3*1799),mgmt[[time]]+1799,mgmt[[time]]+(2*1799),mgmt[[time]]+(3*1799))==F)
             {mgmt[[time]]<-c(mgmt[[time]],which(ce_site==tt)+2*1799)
-            cost=cost+cost_site[which(ce_site==tt)]-1}
+            cost=cost+cost_site[which(ce_site==tt)]}
             tt=min(ce_site[which(ce_site>tt)],na.rm=T)
             if (length(tt)>0){
               while ((cost_site[which(ce_site==tt)]>(B-cost2) ))
-              {tt=min(ce_site[which(ce_site>tt)],na.rm=T)+1
+              {
+                tt=ce_site[which(ce_site>tt)][order(ce_site[which(ce_site>tt)])][2]
+              if (is.na(tt))
+              {
+                break
+              }
               if (tt>1799)
               {
                 break
               }}
+            }
+            if (is.na(tt))
+            {
+              break
             }
             if (tt<1799)
             {
@@ -181,7 +207,7 @@ for (q_out in qz)
               break
             }
           }
-          vecP[(subset(mgmt[[time]], mgmt[[time]]>2*1799 & mgmt[[time]]<=(3*1799))-(2*1799))]<-(1-qbio)*vecP[(subset(mgmt[[time]], mgmt[[time]]>(2*1799) & mgmt[[time]]<=(3*1799))-(2*1799))]
+          vecP[which(c_8[,time]==1)]<-(1-qbio)*vecP[which(c_8[,time]==1)]
           
           dprime[,time]<-vecP
           d2prime[,time]<-vecP
@@ -246,7 +272,7 @@ for (q_out in qz)
       #   M_big[mgmt[[i+6]]+1799,i]<-1
       #   M_big[which(1:1799%in%c(mgmt[[i+6]],mgmt[[i+6]]-1799,mgmt[[i+6]]-(2*1799))),i]<-0
       # }
-      # write.csv(M_big, file=paste("management_test",frac_site,frac_spread,q_in,qbio,".csv", sep="_"), row.names=F)
+      # write.csv(M_big, file=paste("../../eab_mgmt/output/management_test",frac_site,frac_spread,q_in,qbio,".csv", sep="_"), row.names=F)
       #   
     }
   }
