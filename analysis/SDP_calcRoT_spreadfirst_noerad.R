@@ -58,11 +58,12 @@ for(i in 1:L[spp])
 {
   if (length(which(dists[prez[i,spp],prez[,spp]]<=70800))>0)
   {
-  adj_list[i,which(adj_list[i,]==i)]<-0
+    adj_list[i,which(dists[prez[i,spp],prez[,spp]]<=70800)]=1
+    adj_list[i,which(adj_list[i,]==i)]<-0
   }
 }
 rm(dists)
-write.csv(adj_list, file="adj_list.csv", row.names=F)
+write.csv(adj_list, file="../../eab_mgmt/output/adj_list.csv", row.names=F)
 r0<-par[22]
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 qz<-c(0.3,0.6,0.9)
@@ -268,7 +269,6 @@ for (q_out in qz)
       # M_big<-matrix(0,1799*5,5)
       # M_big[1:1799,]<-1
       # for (i in 1:5)
-      # {
       #   M_big[mgmt[[i+6]]+1799,i]<-1
       #   M_big[which(1:1799%in%c(mgmt[[i+6]],mgmt[[i+6]]-1799,mgmt[[i+6]]-(2*1799))),i]<-0
       # }

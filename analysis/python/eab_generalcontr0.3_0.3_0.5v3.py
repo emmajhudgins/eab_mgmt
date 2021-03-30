@@ -19,17 +19,14 @@ HostVol = pandas.io.parsers.read_csv('../../data/streettrees_grid.csv')
 prez=pandas.io.parsers.read_csv('../../data/prez_clean_gdk.csv')
 prez=prez.iloc[:,0]
 HostVol = HostVol/1e+06
+L = 1799
 
 adj_mat= pandas.io.parsers.read_csv('../../data/adj_list.csv')
 adj_list= list([] for x in range(L))
 for i in range(L):
-        adj_list[i].append(numpy.array(x for x in adj_mat.iloc[i,:] if x!=0) )
+    adj_list[i].append(numpy.array(adj_mat.iloc[i,][adj_mat.iloc[i,]!=0)])
 
 source = 613
-
-
-L = 1799
-
 time = range(1,5+1) #25 years
 r = 1.299034706404549 # from published model
 phi =0.538410692229749
