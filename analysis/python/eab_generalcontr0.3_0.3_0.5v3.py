@@ -20,6 +20,10 @@ prez=pandas.io.parsers.read_csv('../../data/prez_clean_gdk.csv')
 prez=prez.iloc[:,0]
 HostVol = HostVol/1e+06
 
+adj_mat= pandas.io.parsers.read_csv('../../data/adj_list.csv')
+adj_list= list([] for x in range(L))
+for i in range(L):
+        adj_list[i].append(numpy.array(x for x in adj_mat.iloc[i,:] if x!=0) )
 
 source = 613
 
@@ -75,6 +79,7 @@ c_4 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_4")
 c_5 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_5")
 c_6 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_6")
 c_7 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_7")
+c_8 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_8")
 
 #Set objective
 m.setObjective(quicksum(d[loc, year]*(HostVol.iloc[prez.iloc[loc-1]-1,19]+0.000001) for loc in sites for year in range(1+1,len(time)+2)), GRB.MINIMIZE)
@@ -158,8 +163,15 @@ eff_bio = 0.5
 eff_vec = pandas.Series(list(itertools.repeat(eff_nothing, L))+ list(itertools.repeat(eff_quar_in, L))+list(itertools.repeat(eff_quar_out, L))+list(itertools.repeat(eff_bio, L)))
 for ii in sites:
     for year in time:
-        m.addConstr((M[2*L+ii,year]==1)>>(d_out[ii,year] == (1-eff_vec[2*L+ii-1])*d2prime[ii,year]), name = "quar_out" )
-        m.addConstr((M[3*L+ii,year]==1)>>(dprime[ii,year] == (1-eff_vec[3*L+ii-1])*d[ii,year]), name = "Effect of Mgmt" )
+        m.addConstr((M[2*L+ii,year]==1)>>(d_out[ii,year] == (1-eff_vec[2*L+ii-1])*d2prime[ii,year]), name = "quar_out")
+        m.addConstr((c_8[ii,year]==1)>>(d_out[ii,year] == (1-eff_vec[3*L+ii-1])*d2prime[ii,year]), name = "biocontrol")
+ 
+for ii in sites:
+    for year in range(3,6):
+        m.addConstr((M[3*L+ii,year-2]==1)>>c_8[ii,year]==1, name = "delayedBiocontrol")
+for ii in sites:
+    for year in range(5,6):
+        m.addConstr((M[3*L+ii,year-4]==1)>>(c_8[jj,year]==1 for jj in adj_list[ii-1][0]), name = "parasitoidDisp") 
 
 Tij = pandas.io.parsers.read_csv("../../data/transmatM__1_6_0_1_0.3_0.3_0.1_.csv")
 Tij= numpy.around(Tij, 6)
@@ -175,7 +187,6 @@ Tij6=pandas.io.parsers.read_csv("../../data/transmatM__1_11_0_1_0.3_0.3_0.1_.csv
 Tij6= numpy.around(Tij6, 6)
 vecptime = pandas.io.parsers.read_csv("../../data/vecptime_0_1_0.3_0.1_.csv")
 mgmt=pandas.io.parsers.read_csv("../../data/management_test_0_1_0.3_0.1_.csv")
-
 
 tij = numpy.stack([Tij,Tij2,Tij3,Tij4,Tij5,Tij6])
 full_out = [list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L))]
@@ -210,6 +221,7 @@ for year in range(1,5+1):
 #    for year in range(6,6+1):
 #        d[sites3,year].start = vecptime.iloc[sites3-1,year-1]
 m.update()
+m.setParam('SolutionLimit',1)
 m.setParam('NodeFileStart',4000)
  #%%Solve & Print
 m.optimize()
@@ -217,5 +229,5 @@ M2 = dict(m.getAttr('X', M))
 M3 = pandas.Series(M2)
 M4 = M3.unstack()
 M4.to_csv('../../output/M3_{0}_{1}_{2}.csv'.format(eff_quar_in,eff_quar_out,eff_bio), index=False,header=False)
-m.write('../../output/model_{0}_{1}_{2}.sol'.format(eff_quar_in,eff_quar_out,eff_bio))
+m.write('../../output/model_{0}_{1}_{2}.mps'.format(eff_quar_in,eff_quar_out,eff_bio))
 
