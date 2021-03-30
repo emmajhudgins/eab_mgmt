@@ -58,7 +58,7 @@ for(i in 1:L[spp])
 {
   if (length(which(dists[prez[i,spp],prez[,spp]]<=70800))>0)
   {
-    adj_list[i,which(dists[prez[i,spp],prez[,spp]]<=70800)]=1
+    adj_list[i,1:length(which(dists[prez[i,spp],prez[,spp])]<=70800)]=which(dists[prez[i,spp],prez[,spp])]<=70800
     adj_list[i,which(adj_list[i,]==i)]<-0
   }
 }

@@ -21,10 +21,13 @@ prez=prez.iloc[:,0]
 HostVol = HostVol/1e+06
 L = 1799
 
-adj_mat= pandas.io.parsers.read_csv('../../data/adj_list.csv')
+adj_mat= pandas.io.parsers.read_csv('../../output/adj_list.csv')
+adj_mat.astype(int)
 adj_list= list([] for x in range(L))
 for i in range(L):
-    adj_list[i].append(numpy.array(adj_mat.iloc[i,][adj_mat.iloc[i,]!=0)])
+    adj_row=adj_mat.iloc[i,:]
+    adj_list[i].append(adj_row.where(adj_row!=0).dropna())
+
 
 source = 613
 time = range(1,5+1) #25 years
@@ -168,7 +171,8 @@ for ii in sites:
         m.addConstr((M[3*L+ii,year-2]==1)>>c_8[ii,year]==1, name = "delayedBiocontrol")
 for ii in sites:
     for year in range(5,6):
-        m.addConstr((M[3*L+ii,year-4]==1)>>(c_8[jj,year]==1 for jj in adj_list[ii-1][0]), name = "parasitoidDisp") 
+        for jj in adj_list[ii-1][0].astype(int):
+            m.addConstr((M[3*L+ii,year-4]==1)>>(c_8[jj,year]==1), name = "parasitoidDisp") 
 
 Tij = pandas.io.parsers.read_csv("../../data/transmatM__1_6_0_1_0.3_0.3_0.1_.csv")
 Tij= numpy.around(Tij, 6)
@@ -182,8 +186,8 @@ Tij5 = pandas.io.parsers.read_csv("../../data/transmatM__1_10_0_1_0.3_0.3_0.1_.c
 Tij5= numpy.around(Tij5, 6)
 Tij6=pandas.io.parsers.read_csv("../../data/transmatM__1_11_0_1_0.3_0.3_0.1_.csv")
 Tij6= numpy.around(Tij6, 6)
-vecptime = pandas.io.parsers.read_csv("../../data/vecptime_0_1_0.3_0.1_.csv")
-mgmt=pandas.io.parsers.read_csv("../../data/management_test_0_1_0.3_0.1_.csv")
+vecptime = pandas.io.parsers.read_csv("../../output/vecptime_0_1_0.3_0.1_.csv")
+mgmt=pandas.io.parsers.read_csv("../../output/management_test_0_1_0.3_0.1_.csv")
 
 tij = numpy.stack([Tij,Tij2,Tij3,Tij4,Tij5,Tij6])
 full_out = [list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L))]
