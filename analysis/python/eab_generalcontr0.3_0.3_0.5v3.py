@@ -68,7 +68,6 @@ d = m.addVars(sites,range(1, len(time)+2), vtype=GRB.CONTINUOUS, name="d",lb=0, 
 M = m.addVars(all_comb, time, vtype=GRB.BINARY, name="M")# decision variables
 B_each = m.addVars(time,vtype=GRB.CONTINUOUS, name="B", lb=0,ub=B)
 
-dprime = m.addVars(sites,time, vtype=GRB.CONTINUOUS, name="dprime", lb=0,ub=1000) 
 d2prime = m.addVars(sites,time, vtype=GRB.CONTINUOUS, name="d2prime", lb=0,ub=1000)
 d3prime = m.addVars(sites,time, vtype=GRB.CONTINUOUS, name="d3prime", lb=0,ub=3000/phi)
 d4prime = m.addVars(sites,time, vtype=GRB.CONTINUOUS, name="d4prime",lb=0,ub=3000/phi)
@@ -102,14 +101,11 @@ m.addConstrs((B_each[year] <=B for year in time), name = "Total Budget")
 #Management
 for loc in sites:
     for year in time:
-        m.addConstr((M[loc,year]==1)>>(dprime[loc,year] == d[loc,year]), name = "Effect of 2Mgmt" )
-        m.addConstr((M[L+loc,year]==1)>>(dprime[loc,year] == d[loc,year]), name = "Effect of 2Mgmt" )
-        m.addConstr((M[2*L+loc,year]==1)>>(dprime[loc,year] == d[loc,year]), name = "Effect of 2Mgmt" )
         #Lower threshold
         #m.addConstrs(((d2prime[loc,year]>=0) for loc in sites for year in time), name="LT")
-        m.addConstr(c_4[loc,year]>=(dprime[loc,year]-phi)/(1000/phi), name="LT")
+        m.addConstr(c_4[loc,year]>=(d[loc,year]-phi)/(1000/phi), name="LT")
         m.addConstr((c_4[loc,year]==0)>>(d2prime[loc,year]==0), name="LT")
-        m.addConstr((c_4[loc,year]==1)>>(d2prime[loc,year]==dprime[loc,year]), name="LT")
+        m.addConstr((c_4[loc,year]==1)>>(d2prime[loc,year]==d[loc,year]), name="LT")
 
         #Dispersal 
         #indicators for when quarantining in, out, or both, maxmimum density=no quarantines
@@ -151,7 +147,7 @@ m.setParam('StartNodeLimit', 1e+09)
 #     #m.setParam('OptimalityTol', 1e-05)
 m.setParam('FeasibilityTol', 1e-05)
 #     #m.setParam('IntFeasTol', 1e-05)
-m.setParam('ImproveStartTime', 3600)
+#m.setParam('ImproveStartTime', 3600)
 #     #m.setParam('Threads', 0)
   
 m.update()
@@ -168,7 +164,7 @@ for ii in sites:
  
 for ii in sites:
     for year in range(3,6):
-        m.addConstr((M[3*L+ii,year-2]==1)>>c_8[ii,year]==1, name = "delayedBiocontrol")
+        m.addConstr((M[3*L+ii,year-2]==1)>>(c_8[ii,year]==1), name = "delayedBiocontrol")
 for ii in sites:
     for year in range(5,6):
         for jj in adj_list[ii-1][0].astype(int):
@@ -186,8 +182,8 @@ Tij5 = pandas.io.parsers.read_csv("../../data/transmatM__1_10_0_1_0.3_0.3_0.1_.c
 Tij5= numpy.around(Tij5, 6)
 Tij6=pandas.io.parsers.read_csv("../../data/transmatM__1_11_0_1_0.3_0.3_0.1_.csv")
 Tij6= numpy.around(Tij6, 6)
-vecptime = pandas.io.parsers.read_csv("../../output/vecptime_0_1_0.3_0.1_.csv")
-mgmt=pandas.io.parsers.read_csv("../../output/management_test_0_1_0.3_0.1_.csv")
+vecptime = pandas.io.parsers.read_csv("../../output/vecptime_0_1_0.3_0.3_.csv")
+mgmt=pandas.io.parsers.read_csv("../../output/management_test_0_1_0.3_0.3_.csv")
 
 tij = numpy.stack([Tij,Tij2,Tij3,Tij4,Tij5,Tij6])
 full_out = [list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L))]
@@ -203,9 +199,9 @@ m.addConstrs(((d[loc,1]==vecptime.iloc[loc-1,0]) for loc in sites2), name="initi
 
 
 for sites3 in range(1, L*n_actions+1):
-    for year in range(1,5+1):
+    for year in range(1,1+1):
         M[sites3, year].start=mgmt.iloc[sites3-1,year-1]    
-for year in range(1,5+1):
+for year in range(1,1+1):
     B_each[year].start=sum(mgmt.iloc[range(0,4*1799),year-1]*cost_vec)        
 #for sites3 in range(1, L+1):
 #    for year in range(1,5+1):
@@ -218,7 +214,6 @@ for year in range(1,5+1):
 #        c_6[sites3,year].start = c_6s.iloc[sites3-1,year-1]
 #        c_7[sites3,year].start = c_7s.iloc[sites3-1,year-1]
 #        d[sites3,year].start = vecptime.iloc[sites3-1,year-1]  
-#        dprime[sites3,year].start=dprimes.iloc[sites3-1,year-1]
 #    for year in range(6,6+1):
 #        d[sites3,year].start = vecptime.iloc[sites3-1,year-1]
 m.update()

@@ -1,5 +1,5 @@
 require(here)
-setwd(paste0(here(), "/../output/"))
+setwd(paste0(here(), "/../eab_mgmt/output/"))
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 obj<-data.frame(frac_site=0,frac_spread=0,q_in=0,qbio=0, obj=0)
 V_i<-read.csv('../data/streettrees_grid.csv')[,20]

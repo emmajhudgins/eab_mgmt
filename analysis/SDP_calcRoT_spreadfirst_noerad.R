@@ -58,7 +58,7 @@ for(i in 1:L[spp])
 {
   if (length(which(dists[prez[i,spp],prez[,spp]]<=70800))>0)
   {
-    adj_list[i,1:length(which(dists[prez[i,spp],prez[,spp])]<=70800)]=which(dists[prez[i,spp],prez[,spp])]<=70800
+    adj_list[i,1:length(which(dists[prez[i,spp],prez[,spp]]<=70800))]<-which(dists[prez[i,spp],prez[,spp]]<=70800)
     adj_list[i,which(adj_list[i,]==i)]<-0
   }
 }
@@ -85,18 +85,16 @@ for (q_out in qz)
       Pfull<-matrix(0, 3372, total_time+6)
       Pfull_good<-matrix(0, 3372, total_time+6)
       Pfull_time<-Pfull
-      vecP_time=d2prime=d3prime=d4prime=dprime=d_out=matrix(0,L[spp], total_time+6)
+      vecP_time=d2prime=d3prime=d4prime=d_out=matrix(0,L[spp], total_time+6)
       
       
       frac_spread=budget_scen$spread_bud[scen]
       frac_site=budget_scen$site_bud[scen]
       c_4=c_5=c_6=c_7=c_8=matrix(0,L[spp], ncol(vecP_time))
-      mgmt<-list()
+   #   mgmt<-list()
       for (time in 1:(total_time+6))
       {
-        
         vecP[which(prez[,spp]==Psource)]=1
-        dprime[,time]<-vecP
         d2prime[which(vecP<par[21]),time]<-0
         d2prime[,time]<-vecP
         d_out[,time]<-d2prime[,time]
@@ -148,22 +146,22 @@ for (q_out in qz)
             pp_bio[i,time]<-(vecP[i]*(V_i[prez[i,1]]+1)*(1-qbio))/141519
           }
           
-          mgmt[[time]]<-vector()
+         # mgmt[[time]]<-vector()
           
           ce_spread<-rank(c(bc_pp_in[,time],bc_pp_out[,time]), ties.method="random")
           ce_spread[c(which(bc_pp_in[,time]==0), which(bc_pp_out[,time]==0)+1799)]<-NA
           tt=min(ce_spread,na.rm=T)
           cost3=cost4=0
-          while(is.infinite(tt)==F& cost4<=B*frac_spread & sum(ce_spread[which(ce_spread>=tt)], na.rm=T)!=0)
-          {
-            if(which(ce_spread==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]+1799 )==F)
-            {mgmt[[time]]<-c(mgmt[[time]],which(ce_spread==tt))
-            cost3=cost3+(646863/309)}
-            tt=min(ce_spread[which(ce_spread>tt)],na.rm=T)
-            cost4=cost3+(646863/309)
-          }
-          ce_site<-rank(pp_bio[,time],ties.method="random")
-          cost_site<-c(rep(50000,1799))
+          # while(is.infinite(tt)==F& cost4<=B*frac_spread & sum(ce_spread[which(ce_spread>=tt)], na.rm=T)!=0)
+          # {
+            #if(which(ce_spread==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]+1799 )==F)
+           # {mgmt[[time]]<-c(mgmt[[time]],which(ce_spread==tt))
+          #   cost3=cost3+(646863/309)}
+          #   tt=min(ce_spread[which(ce_spread>tt)],na.rm=T)
+          #   cost4=cost3+(646863/309)
+          # }
+          # ce_site<-rank(pp_bio[,time],ties.method="random")
+          # cost_site<-c(rep(50000,1799))
           if (length(mgmt[[time-4]][which(mgmt[[time-4]]>2*L[spp])])>0){
           for(xx in 1:length(mgmt[[time-4]][which(mgmt[[time-4]]>2*L[spp])]))
           {
@@ -176,41 +174,40 @@ for (q_out in qz)
           ce_site[which(c_8[,time]==1)]<-NA
           tt=min(ce_site,na.rm=T)
           cost=cost2=0
-          while(is.infinite(tt)==F&cost2<=B*frac_site& sum(ce_site[which(ce_site>=tt)], na.rm=T)!=0 & tt<1799)
-          {
-            if (which(ce_site==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]-(2*1799),mgmt[[time]]-(3*1799),mgmt[[time]]+1799,mgmt[[time]]+(2*1799),mgmt[[time]]+(3*1799))==F)
-            {mgmt[[time]]<-c(mgmt[[time]],which(ce_site==tt)+2*1799)
-            cost=cost+cost_site[which(ce_site==tt)]}
-            tt=min(ce_site[which(ce_site>tt)],na.rm=T)
-            if (length(tt)>0){
-              while ((cost_site[which(ce_site==tt)]>(B-cost2) ))
-              {
-                tt=ce_site[which(ce_site>tt)][order(ce_site[which(ce_site>tt)])][2]
-              if (is.na(tt))
-              {
-                break
-              }
-              if (tt>1799)
-              {
-                break
-              }}
-            }
-            if (is.na(tt))
-            {
-              break
-            }
-            if (tt<1799)
-            {
-              cost2=cost+cost_site[which(ce_site==tt)]
-            }
-            if (tt>1799)
-            {
-              break
-            }
-          }
+          # while(is.infinite(tt)==F&cost2<=B*frac_site& sum(ce_site[which(ce_site>=tt)], na.rm=T)!=0 & tt<1799)
+          # {
+           # if (which(ce_site==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]-(2*1799),mgmt[[time]]-(3*1799),mgmt[[time]]+1799,mgmt[[time]]+(2*1799),mgmt[[time]]+(3*1799))==F)
+            #{mgmt[[time]]<-c(mgmt[[time]],which(ce_site==tt)+2*1799)
+            # cost=cost+cost_site[which(ce_site==tt)]}
+            # tt=min(ce_site[which(ce_site>tt)],na.rm=T)
+            # if (length(tt)>0){
+            #   while ((cost_site[which(ce_site==tt)]>(B-cost2) ))
+            #   {
+            #     tt=ce_site[which(ce_site>tt)][order(ce_site[which(ce_site>tt)])][2]
+            #   if (is.na(tt))
+            #   {
+            #     break
+            #   }
+            #   if (tt>1799)
+            #   {
+            #     break
+            #   }}
+            # }
+            # if (is.na(tt))
+            # {
+            #   break
+            # }
+            # if (tt<1799)
+            # {
+            #   cost2=cost+cost_site[which(ce_site==tt)]
+            # }
+            # if (tt>1799)
+            # {
+            #   break
+            # }
+        #  }
           vecP[which(c_8[,time]==1)]<-(1-qbio)*vecP[which(c_8[,time]==1)]
           
-          dprime[,time]<-vecP
           d2prime[,time]<-vecP
           d2prime[which(vecP<par[21]),time]<-0
           c_4[which(vecP>=par[21]),time]<-1
@@ -268,12 +265,24 @@ for (q_out in qz)
       
       # M_big<-matrix(0,1799*5,5)
       # M_big[1:1799,]<-1
-      # for (i in 1:5)
+      # for (i in 1:5){
       #   M_big[mgmt[[i+6]]+1799,i]<-1
       #   M_big[which(1:1799%in%c(mgmt[[i+6]],mgmt[[i+6]]-1799,mgmt[[i+6]]-(2*1799))),i]<-0
       # }
       # write.csv(M_big, file=paste("../../eab_mgmt/output/management_test",frac_site,frac_spread,q_in,qbio,".csv", sep="_"), row.names=F)
-      #   
+
     }
   }
+}
+
+mgmt_itme<-read.csv('M3_0.3_0.3_0.5.csv', header=F)
+
+mgmt<-list()
+for (time in 1:12)
+{
+  mgmt[[time]]<-vector()
+}
+for (time in 6:10)
+{
+  mgmt[[time]]<-which(mgmt_itme[1800:nrow(mgmt_itme),time-5]==1)
 }
