@@ -54,7 +54,7 @@ for (time in 6:11)
 {
   qq3_list[[time]]<-as.matrix(read.csv(paste("../../eab_mgmt/data/transmatM_", spp,time,0,1,0.3, 0.3,0.1, ".csv", sep="_")))
 }
-adj_list<-read.csv("adj_list.csv")
+adj_list<-read.csv("../../eab_mgmt/output/adj_list.csv")
 r0<-par[22]
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 qz<-c(0.3,0.6,0.9)
