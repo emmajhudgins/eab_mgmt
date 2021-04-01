@@ -147,7 +147,7 @@ m.setParam('StartNodeLimit', 1e+09)
 #     #m.setParam('OptimalityTol', 1e-05)
 m.setParam('FeasibilityTol', 1e-05)
 #     #m.setParam('IntFeasTol', 1e-05)
-m.setParam('ImproveStartTime', 3600)
+#m.setParam('ImproveStartTime', 3600)
 #     #m.setParam('Threads', 0)
   
 m.update()
