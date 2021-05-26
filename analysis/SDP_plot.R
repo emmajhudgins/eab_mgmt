@@ -375,3 +375,55 @@ par(oma=c(0,0,0,0))
   axis(1,labels=c("0",expression(10^{2}), expression(10^{4}),expression(10^{6}),expression(10^{8})),at=c(seq(0,50,length.out=5)), cex.axis=1)
   mtext(side=1, "Forest Ash Volume", line=2)
 dat<-read.csv('~/Downloads/postdocdat.csv')
+
+
+obj<-data.frame(frac_site=0,frac_spread=0,q_in=0,q_out=0,qbio=0, obj=0)
+names(obj)
+for (q_in in qz)
+{
+  for (q_out in qz)
+  {
+    for (qbio in bios)
+    {
+      for (scen in 1:11)
+      {
+        frac_site=budget_scen$site_bud[scen]
+        frac_spread=budget_scen$spread_bud[scen]
+        d4prime<-read.csv(paste("../../eab_mgmt/output/vecptime",frac_site,frac_spread,q_in,qbio, ".csv", sep="_"))[,2:6]
+        obj<-rbind(obj, setNames(c(frac_site,frac_spread,q_in,q_out,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
+      }
+    }
+  }
+}
+obj<-obj[2:nrow(obj),]
+library(viridis)
+library(ggplot2)
+#plot(y=obj_site$obj,x=(obj_site$frac_site), col=alpha(viridis(27)[as.factor(paste0(obj_site$q_in,obj_site$q_out, obj_site$qbio))],0.75), xlab="Site-focused budget proportion", ylab="Exposed ash street trees", pch=19,)
+par(mar=c(4,4,2,2))
+plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75), xlab="Site-focused budget proportion", ylab="Exposed ash street trees", pch=19, xlim=c(-0.05,1.05), ylim=c(300000,1000000))
+
+library(readxl)
+dat<-read.csv('~/Downloads/postdocdat.csv')
+
+abline(h=dat$Exposed.Ash.Street.Trees..thousands.*1000, lty=2,col=viridis(9))
+# points(y=rep(978764.3,5),x=c(0.5403754, 0.3209943, 0.0000000, 0.3491804, 0.0000000 ), col=viridis(27)[1], pch=c("1","2","3","4","5"))
+
+# abline(h=946951, lty=2,col=viridis(27)[4])
+# abline(h=946951, lty=2,col=viridis(27)[7])
+# abline(h=887046.1, lty=2,col=viridis(27)[16])
+# points(y=rep(887046.1,5),x=c(0.3692045, 0.2444020, 0.2881563, 0.2918899, 0.0000000 ), col=viridis(27)[16], pch=c("1","2","3","4","5")) 
+# # abline(h=946951, lty=2,col=viridis(27)[13])
+# # abline(h=946951, lty=2,col=viridis(27)[16])
+# abline(h=, lty=2,col=viridis(27)[27])
+# points(y=rep(797804,5),x=c(5.403754e-01, 3.209943e-01, 2.425140e-07, 3.491806e-01, 1.734203e-07), col=viridis(27)[27], pch=c("1","2","3","4","5"))
+
+# abline(h=946951, lty=2,col=viridis(27)[22])
+# abline(h=946951, lty=2,col=viridis(27)[25])
+
+#points(y=rep(946951,5),x=cost_each[,6], col=viridis(27)[1], pch=8)
+#legend('bottomright', legend=c("Site first", "Spread First", "Optimality"), pch=c(19,23,8), col=viridis(1))
+legend('bottomright', legend=c("Rule of Thumb", "Optimality"), pch=c(19,NA), lty=c(NA,2), col=viridis(27)[13], cex=0.5)
+mgmt_itme<-read.csv('M3_0.9_0.9_0.1.csv', header=F)
+mgmt_itme<-round(mgmt_itme)
+d_time<-read.csv('pestden3_0.6_0.6_0.3_new.csv')
+# d_time<-read.csv('../vecptime_0.9_0.1_0.3_0.3_0.1_

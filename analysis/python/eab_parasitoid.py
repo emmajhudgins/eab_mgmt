@@ -114,13 +114,13 @@ for rr in range(0,3): #iterate over efficiency scenarios
                 #Dispersal 
                 #indicators for when quarantining in, out, or both, maxmimum density=no quarantines
                 m.addConstr((M[2*L+loc,year]==0)>>(d_out[loc,year] == d2prime[loc,year]), name="noquar_2out") #if quarantine out action not chosen, dispersal out is equivalent to total possible dispersal out
+                m.addConstr((d[ii,1]>=phi)>>(M[3*L+ii,year]==0),name = "biocontrol3") # can only do biocontrol at places initially invaded
 
         for loc in sites2:
             for year in time:
                 #Growth
                 m.addConstr((c_5[loc,year]==1)>>(d4prime[loc, year] == d3prime[loc, year]*r), name="growth") #allow populations to grow if theyre over phi
                 m.addConstr((d4prime[loc, year] >= d3prime[loc, year]), name="growth")
-                m.addConstr((M[loc, year]==1)>>(d4prime[loc, year] >= c_4[loc,year]*phi*r) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
                 m.addConstr((c_5[loc,year]>=(d3prime[loc,year]-phi)/(3000/phi)), name="growth")#allow populations to grow if theyre over phi
                 ## Cap d4 prime after growth by 1 - convert to starting density at next timestep
                 m.addConstr(((c_6[loc,year]+c_7[loc,year] == 1)), name="max_d1") #density is either above or below maximum density (1000)
@@ -150,6 +150,10 @@ for rr in range(0,3): #iterate over efficiency scenarios
                 m.addConstr((M[3*L+ii,year-2]==1)>>(c_8[ii,year-2]==1), name = "biocontrol2")
                 m.addConstr(c_8[ii,year-2]<=M[3*L+ii,year-2], name="orstatement")
                 m.addConstr((c_8[ii,year-2]==0)>>(dprime[ii,year] == d[ii,year]), name = "nobiocontrol)" )
+                m.addConstr((M[L+loc, year]+M[2*L+loc,year]+c_8[loc,year])==0)>>(d4prime[loc, year] >= c_4[loc,year]*phi*r) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
+
+m.addConstrs((M[3*L+ii,year]==0),name = "biocontrol4" for ii in sites for year in range(4,6)) # biocontrol only makes a difference in first 3 timesteps
+
         #in timestep 5, dispersal to neighbouring cells impacts density (via adj_list)
         for ii in sites:
             for year in range(5,6):
@@ -159,6 +163,11 @@ for rr in range(0,3): #iterate over efficiency scenarios
                 m.addConstr((M[3*L+ii,year-2]==1)>>(c_8[ii,year-2]==1), name = "biocontrol2")
                 for jj in adj_list[ii-1][0].astype(int):
                     m.addConstr((M[3*L+jj,year-4]==1)>>(c_8[ii,year-2]==1), name = "parasitoidDisp")
+        for loc in sites:
+            for year in range(1,3)
+                m.addConstr((M[loc, year]==0)>>(d4prime[loc, year] >= c_4[loc,year]*phi*r) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
+            for year in range(3,6)
+                m.addConstr((M[L+loc, year]+M[2*L+loc,year]+c_8[loc,year])==0)>>(d4prime[loc, year] >= c_4[loc,year]*phi*r) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
 
         #apply quarantine out to calculate new density that can disperse out
         for ii in sites:
@@ -199,20 +208,15 @@ for rr in range(0,3): #iterate over efficiency scenarios
 ##      for sites3 in range(1, L*n_actions+1):
 ##          for year in range(1,5+1):
 ##          M[sites3, year].start=mgmt.iloc[sites3-1,year-1]    
-
-        m.setParam('MIPGap', 0.1)
-        m.setParam('Presolve', 2)
         m.setParam('LogFile', 'eab_parasitoid_{0}_{1}.log'.format(rr,qq)) #unique logfile
-        m.setParam('Heuristics', 1)
         m.setParam('SolutionLimit',1)# use this code to get the first solution found, then run in gurobi_cln
-        m.setParam('NodeFileStart',100) #reduce RAM usage
         m.update()
 
          #%%Solve & Print
-        m.optimize()
+        #m.optimize()
         # M2 = dict(m.getAttr('X', M)) #save management matrix
         # M3 = pandas.Series(M2)
         # M4 = M3.unstack()
         # M4.to_csv('../../output/M3_{0}_{1}_{2}.csv'.format(eff_quar_in,eff_quar_out,eff_bio), index=False,header=False)
         m.write('../../output/model_{0}_{1}_{2}.mps'.format(eff_quar_in,eff_quar_out,eff_bio)) #create .mps file for gurobi_cl
-        m.write('../../output/modelstart_{0}_{1}_{2}.sol'.format(eff_quar_in,eff_quar_out,eff_bio)) # use as initial solution in gurobi_cl
+        #m.write('../../output/modelstart_{0}_{1}_{2}.sol'.format(eff_quar_in,eff_quar_out,eff_bio)) # use as initial solution in gurobi_cl
