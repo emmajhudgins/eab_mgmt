@@ -1,0 +1,58 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red24\green55\blue106;\red251\green0\blue7;}
+{\*\expandedcolortbl;;\cssrgb\c12157\c28627\c49020;\cssrgb\c100000\c0\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+- trimming the mgmt. locations \
+\cf0 \
+\cf2 - a second (at least local) dispersal model for a parasitoid species and find the optimal solutions with respect to the spread of both the pest and a parasitoid within the pest population from the release locations \'96 this would be a really novel part.\
+\
+- automatic indicator constraints do not always perform better than writing linearizations by hand. Also, some black magic comes from presolve as it is difficult to guess what causes an increase in the number of non-zeroes.\
+-  Usually, Gurobi presolve works really well (better than CPLEX) but in our case extra non-zeroes may be a collateral of using indicator constraints \'96 the model size would be larger if linearizations were written explicitly.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf3 Not always. I\'92ve found that writing big-M constraints and declaring indicator variables explicitly and then setting the lowest feasible big-M value works better than entrusting the linearization to the solver. If you look at Gurobi presolve log \'96 you will notice that the model had 234k non-zeroes before and 521k non-zeroes plus extra SOS constraints after presolve. We do not really know how smart the solver\'92s is and what is it doing.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 In terms of equation formatting I\'92d suggest listing equations where each individual constraint is listed with a definition of a set/subset it is applied to. For example, equation 4 will split into four equations and so on. I have attached example of such equation listing I used for debugging my models. \
+\
+Another issue is possible ties which is a common issue in multi-temporal spatial problems. One way to break the ties is to add small changes to the parameter values characterizing the spatial attributes of individual site. For example if each site has the same per unit treatment cost, you could assume a very slight change in cost value due to some geographical or logistical factors and so the cost would be site-dependent and help break ties. This might help speed up the solution but could be case-specific, so you\'92d need to do some tests.\cf0 \
+\cf2 \'a0\cf0 \
+\cf2 \'a0\cf0 \
+\cf2 Solve first with small budget B1.\cf0 \
+\cf2 Save the solution.\cf0 \
+\cf2 Increase the budget limit, so B2 > B1\cf0 \
+\cf2 Load the solution for B1 budget as a parameter and fix the values of decision variables for the sites selected in the solution with budget level B1. This will force the solver to look for allocations of the incremental budget portion B2-B1 only and help reduce the solving time.\cf0 \
+\cf2 After solving for Budget= B2, remove the constraint that fixes the variables selected in budget solution B1 and re-solve the model for budget=B2 with mipstart from the recent solution B2. This should give you the optimal solution for B2.\cf0 \
+\cf2 Proceed the same way for larger budgets B3, B4,\'85. \'a0\cf0 \
+\cf2 \'a0\cf0 \
+\cf2 This can be done as a batch of solves.\
+\
+Another idea is to use quad precision \'96 this should helps  with numerical issues, especially in problems with binary variables as I see some tolerance violation warnings.\
+\cf0 \
+\cf2 My recommendation is to initialize with the optimal solutions from different scenario settings with the parameter combinations that are relatively close to you current run.\cf0 \
+\cf2 You\'92d need to use mipstart=1 gurobi option \'96 read about how to initialize in gurobi manual.\cf0 \
+\cf2 \
+MIPGap =0.01\cf0 \
+\cf2 Mipstart=1\cf0 \
+\cf2 RINS=100\cf0 \
+\cf2 Mipfocus=2\cf0 \
+\cf2 Method=2\cf0 \
+\cf2 Threads =maximum number of threads on your machine\cf0 \
+\cf2 \
+Do not use high heuristics values \
+Nodefielstart may slow down the problem. \
+\
+You could also try reducing the size of the problem. I see that your data has spatial locations (eg map cells) \'96 can you shrink the area to the locations where actions (and changes in decision variables) are likely to be taken and drop the cells which are unlikely to be surveyed or managed? \
+\'a0\cf0 \
+\cf2 Also, you may need to check the domain of constraint equations. For example, some constraints may one need to be applied to the subset of area (e.g., due to geographical limitations or within a particular time window).\cf0 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf0 -maybe only doing biocontrol in places already invaded at t=1
+\fs24 \cf2 \
+}

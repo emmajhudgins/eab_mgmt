@@ -139,7 +139,7 @@ for (q_out in qz)
             pp_bio[i,time]<-(vecP[i]*(V_i[prez[i,1]]+1)*(1-qbio))/141519
           }
           
-          mgmt[[time]]<-vector()
+          #mgmt[[time]]<-vector()
           ce_site<-rank(pp_bio[,time],ties.method="random")
           cost_site<-c(rep(50000,1799))
           if (length(mgmt[[time-4]][which(mgmt[[time-4]]>2*L[spp])])>0){
@@ -157,7 +157,8 @@ for (q_out in qz)
           while(is.infinite(tt)==F&cost2<=B*frac_site& sum(ce_site[which(ce_site>=tt)], na.rm=T)!=0 & tt<1799)
           {
             if (which(ce_site==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]-(2*1799),mgmt[[time]]-(3*1799),mgmt[[time]]+1799,mgmt[[time]]+(2*1799),mgmt[[time]]+(3*1799))==F)
-            {mgmt[[time]]<-c(mgmt[[time]],which(ce_site==tt)+2*1799)
+            {
+              #mgmt[[time]]<-c(mgmt[[time]],which(ce_site==tt)+2*1799)
             cost=cost+cost_site[which(ce_site==tt)]}
             tt=min(ce_site[which(ce_site>tt)],na.rm=T)
             if (length(tt)>0){
@@ -193,7 +194,8 @@ for (q_out in qz)
           while(is.infinite(tt)==F& cost4<=B*frac_spread & sum(ce_spread[which(ce_spread>=tt)], na.rm=T)!=0)
           {
             if(which(ce_spread==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]-(2*1799),mgmt[[time]]-(3*1799),mgmt[[time]]+1799,mgmt[[time]]+(2*1799),mgmt[[time]]+(3*1799))==F)
-            {mgmt[[time]]<-c(mgmt[[time]],which(ce_spread==tt))
+            {
+              #mgmt[[time]]<-c(mgmt[[time]],which(ce_spread==tt))
             cost3=cost3+(646863/309)}
             tt=min(ce_spread[which(ce_spread>tt)],na.rm=T)
             cost4=cost3+(646863/309)

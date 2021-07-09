@@ -80,7 +80,7 @@ for rr in range(0,3): #iterate over efficiency scenarios
         c_5 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_5")
         c_6 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_6")
         c_7 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_7")
-        c_8 = m.addVars(sites,range(1,4), vtype=GRB.BINARY, name="c_8")
+        c_8 = m.addVars(sites,range(1,5), vtype=GRB.BINARY, name="c_8")
 
         #Set objective - minimize exposed street ash volume over all timesteps
         m.setObjective(quicksum(d[loc, year]*(HostVol.iloc[prez.iloc[loc-1]-1,19]+0.000001) for loc in sites for year in range(1+1,len(time)+2)), GRB.MINIMIZE)
@@ -104,31 +104,24 @@ for rr in range(0,3): #iterate over efficiency scenarios
         m.addConstrs(((d[loc,1]==vecptime.iloc[loc-1,0]) for loc in sites2), name="initial_den")
 
         #Management
-        for loc in sites:
-            for year in time:
-                #Lower threshold
-                m.addConstr(c_4[loc,year]>=(dprime[loc,year]-phi)/(1000/phi), name="LT") #if density is below detection threshold, set to zero
-                m.addConstr((c_4[loc,year]==0)>>(d2prime[loc,year]==0), name="LT2")
-                m.addConstr((c_4[loc,year]==1)>>(d2prime[loc,year]==dprime[loc,year]), name="LT3") #otherwise, keep it at d
+        #Lower threshold
+        m.addConstrs((c_4[loc,year]>=(dprime[loc,year]-phi)/(1000/phi) for loc in sites for year in time), name="LT") #if density is below detection threshold, set to zero
+        m.addConstrs(((d2prime[loc,year]>=dprime[loc,year]-(1000/phi)*(1-c_4[loc,year])) for loc in sites for year in time), name="LT3") #otherwise, keep it at d
 
-                #Dispersal 
-                #indicators for when quarantining in, out, or both, maxmimum density=no quarantines
-                m.addConstr((M[2*L+loc,year]==0)>>(d_out[loc,year] == d2prime[loc,year]), name="noquar_2out") #if quarantine out action not chosen, dispersal out is equivalent to total possible dispersal out
-                m.addConstr((d[ii,1]>=phi)>>(M[3*L+ii,year]==0),name = "biocontrol3") # can only do biocontrol at places initially invaded
-
-        for loc in sites2:
-            for year in time:
-                #Growth
-                m.addConstr((c_5[loc,year]==1)>>(d4prime[loc, year] == d3prime[loc, year]*r), name="growth") #allow populations to grow if theyre over phi
-                m.addConstr((d4prime[loc, year] >= d3prime[loc, year]), name="growth")
-                m.addConstr((c_5[loc,year]>=(d3prime[loc,year]-phi)/(3000/phi)), name="growth")#allow populations to grow if theyre over phi
-                ## Cap d4 prime after growth by 1 - convert to starting density at next timestep
-                m.addConstr(((c_6[loc,year]+c_7[loc,year] == 1)), name="max_d1") #density is either above or below maximum density (1000)
-                m.addConstr((c_6[loc,year]==1)>>(d[loc, year+1] == d4prime[loc, year]), name="max_d2") #if it's below, don't set to 1000
-                m.addConstr((c_7[loc,year]==1)>>(d[loc, year+1] == 1000), name="max_d3") #if it is above 1000, reduce back to 1000
-                m.addConstr((c_6[loc,year]<=1+((1000-d4prime[loc,year])/(3000/phi))), name="max_d4")
-                m.addConstr((c_7[loc,year]>=(d4prime[loc,year]-1000)/(3000/phi)), name="max_d5")
-                m.addConstr((c_6[loc,year]>=-c_7[loc,year]+((d4prime[loc,year])/(3000/phi))), name="max_d6")
+        #Dispersal 
+        #indicators for when quarantining in, out, or both, maxmimum density=no quarantines
+        m.addConstrs(((d_out[loc,year] >= d2prime[loc,year]-(1000/phi)*M[2*L+loc,year]) for loc in sites for year in time), name="noquar_2out") #if quarantine out action not chosen, dispersal out is equivalent to total possible dispersal out
+       #Growth
+        m.addConstrs(((d4prime[loc, year] >= d3prime[loc, year]*r+(3000/phi)*(1-c_5[loc,year])) for loc in sites2 for year in time), name="growth") #allow populations to grow if theyre over phi
+        m.addConstrs(((d4prime[loc, year] >= d3prime[loc, year]) for loc in sites2 for year in time), name="growth")
+        m.addConstrs(((c_5[loc,year]>=(d3prime[loc,year]-phi)/(3000/phi)) for loc in sites2 for year in time), name="growth")#allow populations to grow if theyre over phi
+        ## Cap d4 prime after growth by 1 - convert to starting density at next timestep
+        m.addConstrs((((c_6[loc,year]+c_7[loc,year] == 1)) for loc in sites2 for year in time), name="max_d1") #density is either above or below maximum density (1000)
+        m.addConstrs(((d[loc, year+1] >= d4prime[loc, year]-((3000/phi)*(1-c_6[loc,year]))) for loc in sites2 for year in time), name="max_d2") #if it's below, don't set to 1000
+        m.addConstrs(((d[loc, year+1] >= 1000-(1000*(1-c_7[loc,year]))) for loc in sites2 for year in time), name="max_d3") #if it is above 1000, reduce back to 1000
+        m.addConstrs(((c_6[loc,year]<=1+((1000-d4prime[loc,year])/(3000/phi))) for loc in sites2 for year in time), name="max_d4")
+        m.addConstrs(((c_7[loc,year]>=(d4prime[loc,year]-1000)/(3000/phi)) for loc in sites2 for year in time), name="max_d5")
+        m.addConstrs(((c_6[loc,year]>=-c_7[loc,year]+((d4prime[loc,year])/(3000/phi))) for loc in sites2 for year in time), name="max_d6")
 
 
         m.addConstrs(((d[source,year]==1000) for year in range(1, len(time)+2)), name="source_den") #pest density has to be at maximum in source cell
@@ -144,35 +137,27 @@ for rr in range(0,3): #iterate over efficiency scenarios
         #apply biocontrol to reduce density prior to dispersal
         # in first 2 timesteps, no impact, in timesteps 3-4, only local release impacts density
         #c_8 determines which sites the parasitoid has adequate density in
-        for ii in sites:
-            for year in range(3,5):
-                m.addConstr((c_8[ii,year-2]==1)>>(dprime[ii,year] == (1-eff_vec[3*L+ii-1])*d[ii,year]), name = "biocontrol")
-                m.addConstr((M[3*L+ii,year-2]==1)>>(c_8[ii,year-2]==1), name = "biocontrol2")
-                m.addConstr(c_8[ii,year-2]<=M[3*L+ii,year-2], name="orstatement")
-                m.addConstr((c_8[ii,year-2]==0)>>(dprime[ii,year] == d[ii,year]), name = "nobiocontrol)" )
-                m.addConstr((M[L+loc, year]+M[2*L+loc,year]+c_8[loc,year])==0)>>(d4prime[loc, year] >= c_4[loc,year]*phi*r) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
 
-m.addConstrs((M[3*L+ii,year]==0),name = "biocontrol4" for ii in sites for year in range(4,6)) # biocontrol only makes a difference in first 3 timesteps
+        m.addConstrs((d4prime[loc, year] >= c_4[loc,year]*phi*r-(3000/phi) *((M[L+loc, year]+M[2*L+loc,year]+c_8[loc,year-2])) for loc in sites for year in range(3,6)) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
+
+        m.addConstrs(((M[3*L+ii,year]==0) for ii in sites for year in range(4,6)), name = "biocontrol4") # biocontrol only makes a difference in first 3 timesteps
+        m.addConstrs(((M[3*L+ii,year]==0) for ii in [value for value in range(0,1799) if numpy.array(vecptime)[value,1] > 27.916] for year in range(1,4)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
 
         #in timestep 5, dispersal to neighbouring cells impacts density (via adj_list)
-        for ii in sites:
-            for year in range(5,6):
-                m.addConstr((c_8[ii,year-2]<=quicksum(M[3*L+ii,year-2]+M[3*L+adj_list[ii-1][0][jj],year-4] for jj in range(len(adj_list[ii-1][0])))), name="orstatement")
-                m.addConstr((c_8[ii,year-2]==0)>>(dprime[ii,year] == d[ii,year]), name = "nobiocontrol)" )
-                m.addConstr((c_8[ii,year-2]==1)>>(dprime[ii,year] == (1-eff_vec[3*L+ii-1])*d[ii,year]), name = "biocontrol")
-                m.addConstr((M[3*L+ii,year-2]==1)>>(c_8[ii,year-2]==1), name = "biocontrol2")
-                for jj in adj_list[ii-1][0].astype(int):
-                    m.addConstr((M[3*L+jj,year-4]==1)>>(c_8[ii,year-2]==1), name = "parasitoidDisp")
-        for loc in sites:
-            for year in range(1,3)
-                m.addConstr((M[loc, year]==0)>>(d4prime[loc, year] >= c_4[loc,year]*phi*r) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
-            for year in range(3,6)
-                m.addConstr((M[L+loc, year]+M[2*L+loc,year]+c_8[loc,year])==0)>>(d4prime[loc, year] >= c_4[loc,year]*phi*r) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
+        m.addConstrs(((c_8[ii,year-1]<=quicksum(M[3*L+ii,year-1]+M[3*L+adj_list[ii-1][0][jj],year-3] for jj in range(len(adj_list[ii-1][0])))) for ii in sites for year in range(4,6)), name="orstatement")
+        m.addConstrs(((dprime[ii,year] >= d[ii,year]-((1000/phi) *c_8[ii,year-2])) for ii in sites for year in range(3,6)), name = "nobiocontrol)")
+        m.addConstrs(((dprime[ii,year] >= (1-eff_vec[3*L+ii-1])*d[ii,year]-((1000/phi) *(1-c_8[ii,year-2]))) for ii in sites for year in range(3,6)), name = "biocontrol")
+        m.addConstrs(((dprime[ii,year] >= d[ii,year]-((1000/phi) *c_8[ii,year-1])) for ii in sites for year in range(2,6)), name = "nobiocontrol)")
+        m.addConstrs(((dprime[ii,year] >= (1-eff_vec[3*L+ii-1])*0.5*d[ii,year]-((1000/phi)*(1-c_8[ii,year-1]))) for ii in sites for year in range(2,6)), name = "biocontrol") # 50% impact after 1 timestep, 100% after 2
+
+        m.addConstrs(((c_8[ii,year-1]>=M[3*L+ii,year-1]) for ii in sites for year in range(2,6)), name = "biocontrol2")
+        m.addConstrs(((c_8[ii,year-1]>=M[3*L+jj,year-3]) for jj in adj_list[ii-1][0].astype(int) for year in range(4,6)), name = "parasitoidDisp")
+
+        m.addConstrs(((d4prime[loc, year] >= c_4[loc,year]*phi*r+(1-M[loc, year])) for loc in sites for year in range(1,3)), name="growth2")#if no management taken, populations can't go extinct (maintained at phi*r)
+        m.addConstrs(((d4prime[loc, year] >= c_4[loc,year]*phi*r-(phi*r)*(c_8[loc,year-2]+(1-M[loc, year]))) for loc in sites for year in range(3,6)), name="growth3")#if no management taken, populations can't go extinct (maintained at phi*r)
 
         #apply quarantine out to calculate new density that can disperse out
-        for ii in sites:
-            for year in time:
-                m.addConstr((M[2*L+ii,year]==1)>>(d_out[ii,year] == (1-eff_vec[2*L+ii-1])*d2prime[ii,year]), name = "quar_out") 
+        m.addConstrs((d_out[ii,year] >= (1-eff_vec[2*L+ii-1])*d2prime[ii,year]-(1-M[2*L+ii,year]) for ii in sites for year in time), name = "quar_out") 
 
         #quarantine in calculations require dispersal matrixes
         #dispersal transition matrices from publication (accounts for human population growth), rounding to reduce error when comparing to R output
@@ -196,27 +181,25 @@ m.addConstrs((M[3*L+ii,year]==0),name = "biocontrol4" for ii in sites for year i
             for j in range(L):
                 full_out[i][j].append(numpy.array(range(1,L+1))[tij[i,range(L),j]!=0]) # which sites are sources in influx to j
         #calculate immigration/emigration depending on quarantine_in management action status
-        for ii in sites:
-            for year in time:
-                m.addConstr((M[L+ii,year]==1)>>(d3prime[ii,year] == tij[year-1,ii-1,ii-1]*d2prime[ii,year]+(1-eff_vec[L+ii-1])*(quicksum(tij[year-1,j-1,ii-1]*d_out[j,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year])), name = "quar_in")
-                m.addConstr((M[L+ii,year]==0)>>(d3prime[ii,year] == tij[year-1,ii-1,ii-1]*d2prime[ii,year]+quicksum(tij[year-1,j-1,ii-1]*d_out[j,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]), name="noquar_in")
+        m.addConstrs(((d3prime[ii,year] >= tij[year-1,ii-1,ii-1]*d2prime[ii,year]+(1-eff_vec[L+ii-1])*(quicksum(tij[year-1,j-1,ii-1]*d_out[j,year]-(3000/phi)*(1-M[L+ii,year]) for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year])) for ii in sites for year in time), name = "quar_in")
+        m.addConstrs(((d3prime[ii,year] >= tij[year-1,ii-1,ii-1]*d2prime[ii,year]+quicksum(tij[year-1,j-1,ii-1]*d_out[j,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]-((3000/phi)*M[L+ii,year]))for ii in sites for year in time), name="noquar_in")
 
     
-        mgmt=pandas.io.parsers.read_csv("../../output/management_test_0_1_{0}_{1}_.csv".format(eff_quar_in, eff_bio))#starting condition
+        #mgmt=pandas.io.parsers.read_csv("../../output/management_test_0_1_{0}_{1}_.csv".format(eff_quar_in, eff_bio))#starting condition
 
 #       implement starting condition
 ##      for sites3 in range(1, L*n_actions+1):
 ##          for year in range(1,5+1):
 ##          M[sites3, year].start=mgmt.iloc[sites3-1,year-1]    
         m.setParam('LogFile', 'eab_parasitoid_{0}_{1}.log'.format(rr,qq)) #unique logfile
-        m.setParam('SolutionLimit',1)# use this code to get the first solution found, then run in gurobi_cln
+        m.setParam('MIPGap',0.01)# use this code to get the first solution found, then run in gurobi_cln
         m.update()
 
          #%%Solve & Print
-        #m.optimize()
-        # M2 = dict(m.getAttr('X', M)) #save management matrix
-        # M3 = pandas.Series(M2)
-        # M4 = M3.unstack()
-        # M4.to_csv('../../output/M3_{0}_{1}_{2}.csv'.format(eff_quar_in,eff_quar_out,eff_bio), index=False,header=False)
+        m.optimize()
+        M2 = dict(m.getAttr('X', M)) #save management matrix
+        M3 = pandas.Series(M2)
+        M4 = M3.unstack()
+        M4.to_csv('../../output/M_{0}_{1}_{2}.csv'.format(eff_quar_in,eff_quar_out,eff_bio), index=False,header=False)
         m.write('../../output/model_{0}_{1}_{2}.mps'.format(eff_quar_in,eff_quar_out,eff_bio)) #create .mps file for gurobi_cl
-        #m.write('../../output/modelstart_{0}_{1}_{2}.sol'.format(eff_quar_in,eff_quar_out,eff_bio)) # use as initial solution in gurobi_cl
+        m.write('../../output/modelstart_{0}_{1}_{2}.sol'.format(eff_quar_in,eff_quar_out,eff_bio)) # use as initial solution in gurobi_cl
