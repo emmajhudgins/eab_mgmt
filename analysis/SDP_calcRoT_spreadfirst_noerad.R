@@ -8,11 +8,25 @@ host.density2<-read.csv('hostden_clean_gdk.csv') # tree host density by pest spe
 prez<-read.csv('prez_clean_gdk.csv') # invasible host range (from FIA)
 prez2<-read.csv('prez2_clean_gdk.csv') # pest presences for all species
 prez2[,1]<-readRDS('../output/presences_time_eab.rds')[[1]][,5] # pest presences in 2020
+biohist<-read.csv('../../eab_mgmt/data/biocontrol_history.csv')
+FIA<-read.csv('FIAcodes_notypos_2019.csv', stringsAsFactors = FALSE)
+FIA2<-read.csv('FIA_march_2019.csv', stringsAsFactors = FALSE)
+fia<-list()
+FIA$FIA<-as.character(FIA$FIA)
+fia<-strsplit(FIA$FIA, split=", ")
+fia<-gsub("^", "FIA_", fia[[1]])
+fia<-gsub("_(\\d{3}$)", "_0\\1", fia)
+fia<-gsub("_(\\d{2}$)", "_00\\1", fia)
+fia<-fia[which(fia%in%colnames(FIA2))]
+ashvol<-rowSums(FIA2[,fia])
+
 L<-rep(0,64) # size of each pest's host range
 for (sppp in 1:64)
 {
   L[sppp]<-length(which(prez[,sppp]!=0))
 }
+ashvol<-ashvol[prez[,1]]
+write.csv(ashvol, file="../../eab_mgmt/data/ash_forestvol.csv", row.names=F)
 currpopden<-as.matrix(read.csv("currpopden_5.csv", stringsAsFactors = FALSE))
 currpopden2<-as.matrix(read.csv("future_scaled_pop2.csv"))
 twenty35<-rowMeans(cbind(currpopden[,47], currpopden2[,4]))
@@ -69,7 +83,8 @@ r0<-par[22]
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 qz<-c(0.3,0.6,0.9)
 bios<-c(0.1,0.3,0.5)
-B=963943
+B=1650000
+  #963943
 for (q_out in qz)
 {
   for (qbio in bios)
@@ -113,7 +128,7 @@ for (q_out in qz)
         if (length(which(vecP>=par[21]))==1){qq<-qq/sum(qq)}
         qq[which(qq<0.001)]=0
         
-        if (time<=floor(total_time))
+        if (time<=(floor(total_time)-2))
         {
           Pnext=(vecP[which(vecP>=par[21])])%*%(qq)
           qq2<-matrix(0,L[spp], L[spp])
@@ -126,18 +141,36 @@ for (q_out in qz)
           d3prime[,time]<-Pnext
           
         }
-        if (time>floor(total_time))
+        if (time>(floor(total_time)-2))
         {
           vecP[which(prez[,spp]==Psource)]=1
           qq3<-matrix(0,L[spp], L[spp]) # full transition matrix
           qq3[which(vecP>=par[21]),]<-qq
+          if (time %in%6:11)
+          {
           qq3<-qq3_list[[time]]
+          }
           # write.csv(qq3, file=paste("transmatM_", spp,time,frac_site, frac_spread, q_in,q_out,qbio, ".csv", sep="_"), row.names=F)
           qq2<-qq3 #transition matrix with 0 on diagonal
           diag(qq2)<-0
           pp<-sweep(qq2,2,vecP,'*')
           Pnext<-rep(0,L[spp])
+          mgmt[[time]]<-vector()
           
+          if (time<=(floor(total_time)+1))
+          {
+            mgmt[[time]]<-2*L[spp]+which(prez[,spp]%in%subset(biohist,V2==floor(Discovery/5)*5+5*(time))$V3)
+            if (time>4)
+            {
+            if (length(mgmt[[time-4]][which(mgmt[[time-4]]>2*L[spp])])>0){
+              for(xx in 1:length(mgmt[[time-4]][which(mgmt[[time-4]]>2*L[spp])]))
+              {
+                c_8[unlist(adj_list[mgmt[[time-4]][which(mgmt[[time-4]]>2*L[spp])][xx]-(2*L[spp]),]),time]<-1
+              }}
+            }
+            c_8[mgmt[[time-2]][which(mgmt[[time-2]]>2*L[spp])]-(2*L[spp]),time]<-1
+          }
+          if (time>(floor(total_time)+1)){
           shortpath_in<-apply(pp,2,which.max)
           shortpath_out<-apply(pp,1,which.max)
           for (i in 1:1799)
@@ -147,8 +180,7 @@ for (q_out in qz)
             pp_bio[i,time]<-(vecP[i]*(V_i[prez[i,1]]+1)*(1-qbio))/141519
           }
           
-          mgmt[[time]]<-vector()
-          
+
           ce_spread<-rank(c(bc_pp_in[,time],bc_pp_out[,time]), ties.method="random")
           ce_spread[c(which(bc_pp_in[,time]==0), which(bc_pp_out[,time]==0)+1799)]<-NA
           tt=min(ce_spread,na.rm=T)
@@ -206,7 +238,10 @@ for (q_out in qz)
         {
           break
         }
-         }
+        }
+          }
+          
+          
           vecP[which(c_8[,time]==1)]<-(1-qbio)*vecP[which(c_8[,time]==1)]
           
           d2prime[,time]<-vecP
@@ -262,7 +297,7 @@ for (q_out in qz)
         vecP_time[,time]<-vecP
       }
       
-      write.csv(vecP_time[,5:11], file=paste("../../eab_mgmt/output/vecptime",frac_site,frac_spread,q_in,qbio,".csv", sep="_"), row.names=F)
+      write.csv(vecP_time[,5:11], file=paste("../../eab_mgmt/output/RoT_vecptime",frac_site,frac_spread,q_in,qbio,".csv", sep="_"), row.names=F)
 
       M_big<-matrix(0,1799*5,5)
       M_big[1:1799,]<-1

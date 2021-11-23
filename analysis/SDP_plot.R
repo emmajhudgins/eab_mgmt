@@ -1,6 +1,6 @@
 rm(list=ls()) 
 n_spp=66
-
+library(sp)
 library(pdist)
 correction=FALSE
 setwd("~/Desktop/OneDrive - McGill University/Grad/scripts/")
@@ -238,7 +238,7 @@ library(maps)
 m<-SpatialPointsDataFrame(coords=cbind(data$X_coord, data$Y_coord), data=data)
 
 USA_merged<-map('usa', fill=TRUE, plot=F)
-USAsstates<-map('state', fill=F, plot=T)
+USAsstates<-map('state', fill=TRUE, plot=F, res=0)
 
 IDs <- sapply(strsplit(USA_merged$names, ":"), function(x) x[1])
 sp_map_usa <- map2SpatialPolygons(USA_merged, IDs=IDs, proj4string=CRS("+proj=longlat +datum=WGS84"))
@@ -259,10 +259,12 @@ bio<-c(0.1,0.3,0.5)
 #         qin=i
 #         qout=j
 #         qbio=k
-qin=qout=0.9
+qin=qout=0.6
 qbio=0.5
-results<-read.csv(paste0('./RoT/management_test_1_0_',qin,'_',qout,'_',qbio,'_.csv'))
-pdf(paste("eab_mgmt_rot_site", qin, qout, qbio,".pdf", sep="_"))
+frac_site=0
+frac_spread=1
+results<-read.csv(paste('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/M_',qin,"_",qbio,'.csv', sep=""))
+pdf(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/plots/eab_mgmt_site",qin, qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,4,5,6), ncol=2, byrow=TRUE), heights=c(1,1,1))
 par(mai=c(0.25,0,0.25,0))
 years<-seq(2025,2045, by=5)
@@ -273,16 +275,14 @@ points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5)
 points(cbind(data$X_coord[prez[which(results[((1799+1):(2*1799)), time]==1),1]], data$Y_coord[prez[which(results[((1799+1):(2*1799)), time]==1),1]]), pch=15, cex=0.5, col="yellow")
 points(cbind(data$X_coord[prez[which(results[((2*1799+1):(3*1799)), time]==1),1]], data$Y_coord[prez[which(results[((2*1799+1):(3*1799)), time]==1),1]]), pch=15, cex=0.5, col="orange")
 points(cbind(data$X_coord[prez[which(results[((3*1799+1):(4*1799)), time]==1),1]], data$Y_coord[prez[which(results[((3*1799+1):(4*1799)), time]==1),1]]), pch=15, cex=0.5, col="red")
-points(cbind(data$X_coord[prez[which(results[((4*1799+1):(5*1799)), time]==1),1]], data$Y_coord[prez[which(results[((4*1799+1):(5*1799)), time]==1),1]]), pch=15, cex=0.5, col="darkred")
 }
 plot.new()
 par(xpd=FALSE)
-legend('center', c("Quarantine In", "Quarantine Out", "Biocontrol","Eradicate"), col=c('yellow', 'orange', 'red', 'darkred'), pch=15, cex=2)
+legend('center', c("Quarantine In", "Quarantine Out", "Biocontrol"), col=c('yellow', 'orange', 'red'), pch=15, cex=2)
 dev.off()
 
 #results<-read.csv('pestden3_nomgmt_new.csv')
 
-results<-read.csv(paste0('pestden3_',qin,'_',qout,'_',qbio,'_new.csv'))
 #results[,4]<-results[,4]-results[,3]
 #results[,3]<-results[,3]-results[,2]
 #results[,2]<-results[,2]-results[,1]
@@ -292,13 +292,17 @@ results<-read.csv(paste0('pestden3_',qin,'_',qout,'_',qbio,'_new.csv'))
 #results[,4][which(results[,4]<0.000538)]<-0
 #results[,3][which(results[,3]<0.000538)]<-0
 #results[,2][which(results[,2]<0.000538)]<-0
-
+qin=qout=0.6
+qbio=0.5
+# frac_site=0.2
+# frac_spread=0.8
+results<-read.csv(paste('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime_',qin,"_",qbio,'.csv', sep=""), header=F)/1000
 time<-seq(1:6)
-years<-seq(2025,2050, by=5)
-pdf(paste("eab_dens", qin, qout, qbio,".pdf", sep="_"))
+years<-seq(202,2045, by=5)
+pdf(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/plots/eab_dens_rot",qin, qout, qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,4,5,6,7,7), ncol=2, byrow=TRUE), heights=c(0.3,0.3,0.3,0.1))
 par(mai=c(0.25,0,0.25,0))
-years<-seq(2025,2050, by=5)
+years<-seq(2020,2045, by=5)
  bins<-seq(5,0,length.out=50)
  bins<-10^-bins
  library(viridis)
@@ -319,13 +323,13 @@ par(xpd=T)
  mtext(side=1, "EAB propagule pressure", line=2)
 dev.off()
 
-pdf(paste("eab_exp", qin, qout, qbio,".pdf", sep="_"))
+pdf(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/plots/eab_exp",qin,qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,4,5,6,7,7), ncol=2, byrow=TRUE), heights=c(0.3,0.3,0.3,0.1))
 par(mai=c(0.25,0,0.25,0))
-years<-seq(2025,2050, by=5)
+years<-seq(2020,2045, by=5)
 bins<-seq(-5,5,length.out=50)
 bins<-10^bins
-ash<-read.csv('~/Desktop/OneDrive - McGill University/Grad/scripts/streettrees_grid.csv')
+ash<-read.csv('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/data/streettrees_grid.csv')
 for (time in 1:6)
 {
   col<-viridis(50)[findInterval(results[,time]*ash[prez[1:1799,1],20], bins)+1]
@@ -427,3 +431,18 @@ mgmt_itme<-read.csv('M3_0.9_0.9_0.1.csv', header=F)
 mgmt_itme<-round(mgmt_itme)
 d_time<-read.csv('pestden3_0.6_0.6_0.3_new.csv')
 # d_time<-read.csv('../vecptime_0.9_0.1_0.3_0.3_0.1_
+
+qin=qout=0.3
+qbio=0.1
+mgmt<-read.csv(paste('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/M_',qin,"_",qbio,'.csv', sep=""), header=F)
+results<-(read.csv(paste('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime_',qin,"_",qbio,'.csv', sep=""), header=F)/1000)[,1:5]
+no_action<-(as.matrix(results)[,2])[which(mgmt[1:1799,2]==1)]
+q_in<-(as.matrix(results[,2]))[which(mgmt[1800:(2*1799),2]==1)]
+q_out<-(as.matrix(results[,2]))[which(mgmt[(2*1799+1):(3*1799),2]==1)]
+bio<-(as.matrix(results))[which(mgmt[(3*1799+1):(4*1799),]==1)]
+df <- data.frame(values = c(no_action,q_in,q_out,bio),
+                 vars = rep(c("no_action","q_in", "q_out","bio"), times = c(length(no_action), length(q_in), length(q_out), length(bio))))
+par(mar=c(4,4,2,2))
+boxplot(values~vars, df)
+library(vioplot)
+vioplot(values~vars, df,horizontal=T)

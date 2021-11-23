@@ -13,12 +13,19 @@ import re
 
 spp = 1 #which column of pest data is EAB?
 
-B = 963.943 # yearly budget in thousands $, equivalent to APHIS 2020 budget related to EAB biocontrol + tribal response (no survey)
+B = 1650 # yearly budget in thousands $, equivalent to number of biocontrol sites allocated 2015-2020
 HostVol = pandas.io.parsers.read_csv('../../data/streettrees_grid.csv') #modelled street tree distributions (inc. for ash trees) from HUdgins et al. 2021
 prez=pandas.io.parsers.read_csv('../../data/prez_clean_gdk.csv') #current distribution of all pests (inc. EAB)
 prez=prez.iloc[:,0] #subset to EAB
 HostVol = HostVol/1e+06
 L = 1799
+
+#previous biocontrol history 
+bio_hist = pandas.io.parsers.read_csv("../../data/biocontrol_history.csv")
+bio_2010 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2010])].tolist()
+bio_2015 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2015])].tolist()
+bio_2020 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2020])].tolist()
+
 
 adj_mat= pandas.io.parsers.read_csv('../../output/adj_list.csv') #neighbour matrix for use in parasitoid dispersal
 adj_mat.astype(int)
@@ -43,6 +50,9 @@ effs_bio=[0.1,0.3,0.5] #for biocontrol
 sites2 = list(range(1,L+1))
 sites2.remove(613) # maintain source location at maximum propagule pressure
 sites = range(1,L+1)
+not_adj_bio_2020 = list(range(1,L+1))
+for x in pandas.Series([adj_list[q] for q in bio_2020][0])[0].astype(int):
+    not_adj_bio_2020.remove(x)
 eff_nothing = 0
 n_actions = 4 #includes no action
 all_comb = range(1, L * n_actions+1)
@@ -58,11 +68,17 @@ cost_bio =list(itertools.repeat(50, L))
 cost_nothing = list(itertools.repeat(0, L))
 cost_vec = pandas.Series(cost_nothing+ cost_quar_in+ cost_quar_out+ cost_bio)
 quar_bud = [0,0.2,0.4,0.6,0.8,1]
-randoms =numpy.array([random.uniform(0,0.0001) for _ in sites])
+randoms =numpy.array([random.uniform(1.01,1.1) for _ in sites])
 
 for rr in range(0,3): #iterate over efficiency scenarios
     for qq in range(0,3): 
             for bud in quar_bud:
+                                #set efficiencies
+                eff_quar_in = effs_quar[rr]
+                eff_quar_out=effs_quar[rr]
+                eff_bio = effs_bio[qq]
+                eff_vec = pandas.Series(list(itertools.repeat(eff_nothing, L))+ list(itertools.repeat(eff_quar_in, L))+list(itertools.repeat(eff_quar_out, L))+list(itertools.repeat(eff_bio, L)))
+
                 #%%Create optimization model
                 #Budget
                 # Add variables
@@ -70,24 +86,24 @@ for rr in range(0,3): #iterate over efficiency scenarios
                 d = m.addVars(sites,range(1, len(time)+2), vtype=GRB.CONTINUOUS, name="d",lb=0, ub=5000)  # density in each cell
                 M = m.addVars(all_comb, time, vtype=GRB.BINARY, name="M")# decision variables
                # B_each = m.addVars(time,vtype=GRB.CONTINUOUS, name="B", lb=0,ub=B) #budget each year
-                B_quar = m.addVars(time,vtype=GRB.CONTINUOUS, name="B_quar", lb=0,ub=B*bud) #budget each year
+                B_quar = m.addVars(time,vtype=GRB.CONTINUOUS, name="B_bio", lb=0,ub=B*bud) #budget each year
                 B_bio = m.addVars(time,vtype=GRB.CONTINUOUS, name="B_quar", lb=0,ub=B*(1-bud)) #budget each year
 
-                dprime = m.addVars(sites,range(1,7), vtype=GRB.CONTINUOUS, name="dprime", lb=0,ub=1000) #density variables before and after different model equations/constraints
+                dprime = m.addVars(sites,time, vtype=GRB.CONTINUOUS, name="dprime", lb=0,ub=1000) #density variables before and after different model equations/constraints
                 d2prime = m.addVars(sites,time, vtype=GRB.CONTINUOUS, name="d2prime", lb=0,ub=1000)
                 d3prime = m.addVars(sites,time, vtype=GRB.CONTINUOUS, name="d3prime", lb=0,ub=3000/phi) #3000/phi is a reasonable upper bound to limit size of model matrix
                 d4prime = m.addVars(sites,time, vtype=GRB.CONTINUOUS, name="d4prime",lb=0,ub=3000/phi)
                 d_out=m.addVars(sites, time, vtype=GRB.CONTINUOUS, name="d_out", lb=0,ub=1000)
 
 
-                c_4 = m.addVars(sites,range(1,7), vtype=GRB.BINARY, name="c_4") #different indicator constraints
+                c_4 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_4") #different indicator constraints
                 c_5 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_5")
                 c_6 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_6")
                 c_7 = m.addVars(sites,time, vtype=GRB.BINARY, name="c_7")
                 c_8 = m.addVars(sites,range(1,5), vtype=GRB.BINARY, name="c_8")
 
                 #Set objective - minimize exposed street ash volume over all timesteps
-                m.setObjective(quicksum(c_4[loc, year]+randoms[loc-1]  for loc in sites for year in range(1+1,len(time)+2) ), GRB.MINIMIZE)
+                m.setObjective(quicksum(c_4[loc, year]*randoms[loc-1]  for loc in sites for year in range(1+1,len(time)+1) ), GRB.MINIMIZE)
                  
 
                 #%% Add constraints 
@@ -106,13 +122,12 @@ for rr in range(0,3): #iterate over efficiency scenarios
 
                 #%% Not actual constraints but model equations
 
-                vecptime = pandas.io.parsers.read_csv("../../output/vecptime_0_1_0.3_0.3_.csv")*1000 #density ix x1000 to reduce orders of magnitude in model matrix
+                vecptime = pandas.io.parsers.read_csv("../../output/vecptime_0_1_0.3_{0}_.csv".format(eff_bio))*1000 #density ix x1000 to reduce orders of magnitude in model matrix
                 m.addConstrs(((d[loc,1]==vecptime.iloc[loc-1,0]) for loc in sites2), name="initial_den")
-                m.addConstrs(((d[loc,6]==dprime[loc,6]) for loc in sites), name="final_den")
 
                 #Management
                 #Lower threshold
-                m.addConstrs((c_4[loc,year]>=(dprime[loc,year]-phi)/(1000/phi) for loc in sites for year in range(1,7)), name="LT") #if density is below detection threshold, set to zero
+                m.addConstrs((c_4[loc,year]>=(dprime[loc,year]-phi)/(1000/phi) for loc in sites for year in time), name="LT") #if density is below detection threshold, set to zero
                 m.addConstrs(((d2prime[loc,year]>=dprime[loc,year]-(1000/phi)*(1-c_4[loc,year])) for loc in sites for year in time), name="LT3") #otherwise, keep it at d
 
                 #Dispersal 
@@ -135,12 +150,6 @@ for rr in range(0,3): #iterate over efficiency scenarios
                 m.addConstrs(((d4prime[source,year]==1000*r) for year in range(1, len(time)+1)), name="source_den")
                 m.addConstrs(((dprime[ii,year] == d[ii,year]) for ii in sites for year in range(1,4)), name = "nobiocontrol)" ) #when no biocontrol, don't reduce density
 
-                #set efficiencies
-                eff_quar_in = effs_quar[rr]
-                eff_quar_out=effs_quar[rr]
-                eff_bio = effs_bio[qq]
-                eff_vec = pandas.Series(list(itertools.repeat(eff_nothing, L))+ list(itertools.repeat(eff_quar_in, L))+list(itertools.repeat(eff_quar_out, L))+list(itertools.repeat(eff_bio, L)))
-
                 #apply biocontrol to reduce density prior to dispersal
                 # in first 2 timesteps, no impact, in timesteps 3-4, only local release impacts density
                 #c_8 determines which sites the parasitoid has adequate density in
@@ -151,7 +160,7 @@ for rr in range(0,3): #iterate over efficiency scenarios
                 m.addConstrs(((M[3*L+ii,year]==0) for ii in [value for value in range(0,1799) if numpy.array(vecptime)[value,1] > 27.916] for year in range(1,4)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
 
                 #in timestep 5, dispersal to neighbouring cells impacts density (via adj_list)
-                m.addConstrs(((c_8[ii,year-1]<=quicksum(M[3*L+ii,year-1]+M[3*L+adj_list[ii-1][0][jj],year-3] for jj in range(len(adj_list[ii-1][0])))) for ii in sites for year in range(4,6)), name="orstatement")
+                m.addConstrs(((c_8[ii,year-1]<=quicksum(M[3*L+ii,year-1]+M[3*L+adj_list[ii-1][0][jj],year-3] for jj in range(len(adj_list[ii-1][0])))) for ii in not_adj_bio_2020 for year in range(4,5)), name="orstatement")
                 m.addConstrs(((dprime[ii,year] >= d[ii,year]-((1000/phi) *c_8[ii,year-2])) for ii in sites for year in range(3,6)), name = "nobiocontrol)")
                 m.addConstrs(((dprime[ii,year] >= (1-eff_vec[3*L+ii-1])*d[ii,year]-((1000/phi) *(1-c_8[ii,year-2]))) for ii in sites for year in range(3,6)), name = "biocontrol")
                 m.addConstrs(((dprime[ii,year] >= d[ii,year]-((1000/phi) *c_8[ii,year-1])) for ii in sites for year in range(2,6)), name = "nobiocontrol)")
@@ -159,6 +168,11 @@ for rr in range(0,3): #iterate over efficiency scenarios
 
                 m.addConstrs(((c_8[ii,year-1]>=M[3*L+ii,year-1]) for ii in sites for year in range(2,6)), name = "biocontrol2")
                 m.addConstrs(((c_8[ii,year-1]>=M[3*L+jj,year-3]) for jj in adj_list[ii-1][0].astype(int) for year in range(4,6)), name = "parasitoidDisp")
+
+                m.addConstrs(((c_8[ii,1]==1) for ii in bio_2020 for year in range(1,2)), name = "biohist2")
+                m.addConstrs(((c_8[ii,3]==1) for ii in pandas.Series([adj_list[q] for q in bio_2020][0])[0].astype(int) for year in range(1,2)), name = "biohist2")
+                m.addConstrs(((c_8[ii,2]==1) for ii in pandas.Series([adj_list[q] for q in bio_2015][0])[0].astype(int) for year in range(1,2)), name = "biohist2")
+                m.addConstrs(((c_8[ii,1]==1) for ii in pandas.Series([adj_list[q] for q in bio_2010][0])[0].astype(int) for year in range(1,2)), name = "biohist2")
 
                 m.addConstrs(((d4prime[loc, year] >= c_4[loc,year]*phi*r+(1-M[loc, year])) for loc in sites for year in range(1,3)), name="growth2")#if no management taken, populations can't go extinct (maintained at phi*r)
                 m.addConstrs(((d4prime[loc, year] >= c_4[loc,year]*phi*r-(phi*r)*(c_8[loc,year-2]+(1-M[loc, year]))) for loc in sites for year in range(3,6)), name="growth3")#if no management taken, populations can't go extinct (maintained at phi*r)
@@ -168,6 +182,7 @@ for rr in range(0,3): #iterate over efficiency scenarios
 
                 #quarantine in calculations require dispersal matrixes
                 #dispersal transition matrices from publication (accounts for human population growth), rounding to reduce error when comparing to R output
+
                 Tij = pandas.io.parsers.read_csv("../../data/transmatM__1_6_0_1_0.3_0.3_0.1_.csv")
                 Tij= numpy.around(Tij, 6)
                 Tij2=pandas.io.parsers.read_csv("../../data/transmatM__1_7_0_1_0.3_0.3_0.1_.csv")
@@ -198,7 +213,7 @@ for rr in range(0,3): #iterate over efficiency scenarios
         ##      for sites3 in range(1, L*n_actions+1):
         ##          for year in range(1,5+1):
         ##          M[sites3, year].start=mgmt.iloc[sites3-1,year-1]    
-                m.setParam('LogFile', 'eab_parasitoid_{0}_{1}_{2}_area.log'.format(rr,qq, bud)) #unique logfile
+                m.setParam('LogFile', 'eab_parasitoid{0}_{1}_{2}_bud_area.log'.format(rr,qq, bud)) #unique logfile
                 m.setParam('MIPGap',0.01)# use this code to get the first solution found, then run in gurobi_cln
                 m.setParam('Method',2)# use this code to get the first solution found, then run in gurobi_cln
                 m.setParam('MIPFocus',2)# use this code to get the first solution found, then run in gurobi_cln
@@ -211,6 +226,6 @@ for rr in range(0,3): #iterate over efficiency scenarios
                 M2 = dict(m.getAttr('X', M)) #save management matrix
                 M3 = pandas.Series(M2)
                 M4 = M3.unstack()
-                M4.to_csv('../../output/M_{0}_{1}_{2}_area.csv'.format(bud,eff_quar_out,eff_bio), index=False,header=False)
-                m.write('../../output/model_{0}_{1}_{2}_area.mps'.format(bud,eff_quar_out,eff_bio)) #create .mps file for gurobi_cl
-                m.write('../../output/modelstart_{0}_{1}_{2}_area.sol'.format(bud,eff_quar_out,eff_bio)) # use as initial solution in gurobi_cl
+                M4.to_csv('../../output/M_{0}_{1}_{2}_bud_area.csv'.format(bud,eff_quar_out,eff_bio), index=False,header=False)
+             #   m.write('../../output/model_{0}_{1}_{2}_bud_area.mps'.format(bud,eff_quar_out,eff_bio)) #create .mps file for gurobi_cl
+             #   m.write('../../output/modelstart_{0}_{1}_{2}_bud_area.sol'.format(bud,eff_quar_out,eff_bio)) # use as initial solution in gurobi_cl
