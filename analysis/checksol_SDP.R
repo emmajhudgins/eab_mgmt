@@ -26,7 +26,7 @@ for (sppp in 1:64)
   L[sppp]<-length(which(prez[,sppp]!=0))
 }
 ashvol<-ashvol[prez[,1]]
-write.csv(ashvol, file="../../eab_mgmt/data/ash_forestvol.csv", row.names=F)
+#write.csv(ashvol, file="../../eab_mgmt/data/ash_forestvol.csv", row.names=F)
 currpopden<-as.matrix(read.csv("currpopden_5.csv", stringsAsFactors = FALSE))
 currpopden2<-as.matrix(read.csv("future_scaled_pop2.csv"))
 twenty35<-rowMeans(cbind(currpopden[,47], currpopden2[,4]))
@@ -84,7 +84,7 @@ budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,len
 qz<-c(0.3,0.6,0.9)
 bios<-c(0.1,0.3,0.5)
 B=1650000
-  #963943
+#963943
 
 q_in=q_out=q_in=q_out=0.3
 qbio=0.1      
@@ -101,7 +101,7 @@ vecP_time=d2prime=d3prime=d4prime=d_out=matrix(0,L[spp], total_time+8)
 mgmt_itme<-read.csv('../../eab_mgmt/output/M_0.3_0.1.csv', header=F)
 
 mgmt<-list()
-for (time in 1:12)
+for (time in 1:14)
 {
   mgmt[[time]]<-vector()
 }
@@ -136,7 +136,7 @@ for (time in 1:(total_time+8))
   if (length(which(vecP>=par[21]))==1){qq<-qq/sum(qq)}
   qq[which(qq<0.001)]=0
   
-  if (time<=(floor(total_time)-2))
+  if (time<=2)
   {
     Pnext=(vecP[which(vecP>=par[21])])%*%(qq)
     qq2<-matrix(0,L[spp], L[spp])
@@ -149,7 +149,7 @@ for (time in 1:(total_time+8))
     d3prime[,time]<-Pnext
     
   }
-  if (time>(floor(total_time)-2))
+  if (time>2)
   {
     vecP[which(prez[,spp]==Psource)]=1
     qq3<-matrix(0,L[spp], L[spp]) # full transition matrix
@@ -158,10 +158,10 @@ for (time in 1:(total_time+8))
     {
       qq3<-qq3_list[[time]]
     }
-     write.csv(qq3, file=paste("transmatM_", spp,time,frac_site, frac_spread, q_in,q_out,qbio, ".csv", sep="_"), row.names=F)
+    #  write.csv(qq3, file=paste("transmatM_", spp,time,frac_site, frac_spread, q_in,q_out,qbio, ".csv", sep="_"), row.names=F)
     qq2<-qq3 #transition matrix with 0 on diagonal
     diag(qq2)<-0
-    pp<-sweep(qq2,2,vecP,'*')
+    #pp<-sweep(qq2,2,vecP,'*')
     Pnext<-rep(0,L[spp])
     #mgmt[[time]]<-vector()
     
@@ -170,101 +170,106 @@ for (time in 1:(total_time+8))
       mgmt[[time]]<-c(mgmt[[time]],2*L[spp]+which(prez[,spp]%in%subset(biohist,V2==floor(Discovery/5)*5+5*(time))$V3))
       if (time>4)
       {
-        if (length(mgmt[[time-3]][which(mgmt[[time-3]]>2*L[spp])])>0){
-          for(xx in 1:length(mgmt[[time-3]][which(mgmt[[time-3]]>2*L[spp])]))
+        if (length(mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])])>0){
+          for(xx in 1:length(mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])]))
           {
-            c_8[unlist(adj_list[mgmt[[time-3]][which(mgmt[[time-3]]>2*L[spp])][xx]-(2*L[spp]),]),time]<-1
-          }}
+            c_8[unlist(adj_list[mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])][xx]-(2*L[spp]),]),time]<-1
+          }
+        }
       }
-      c_8[mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])]-(2*L[spp]),time]<-1
+      c_8[mgmt[[time]][which(mgmt[[time]]>2*L[spp])]-(2*L[spp]),time]<-1
     }
     if (time>(floor(total_time)+1)){
-      shortpath_in<-apply(pp,2,which.max)
-      shortpath_out<-apply(pp,1,which.max)
-      for (i in 1:1799)
-      {
-        bc_pp_out[i,time]<-sum(length(which(shortpath_out==i))*(V_i[prez[which(shortpath_out==i),1]]+1)*(1-vecP[which(shortpath_out==i)]))
-        bc_pp_in[i,time]<-sum(length(which(shortpath_in==i))*(V_i[prez[i,1]]+1)*(1-vecP[i]))
-        pp_bio[i,time]<-(vecP[i]*(V_i[prez[i,1]]+1)*(1-qbio))/141519
-      }
+      # shortpath_in<-apply(pp,2,which.max)
+      # shortpath_out<-apply(pp,1,which.max)
+      # for (i in 1:1799)
+      # {
+      #   bc_pp_out[i,time]<-sum(length(which(shortpath_out==i))*(V_i[prez[which(shortpath_out==i),1]]+1)*(1-vecP[which(shortpath_out==i)]))
+      #   bc_pp_in[i,time]<-sum(length(which(shortpath_in==i))*(V_i[prez[i,1]]+1)*(1-vecP[i]))
+      #   pp_bio[i,time]<-(vecP[i]*(V_i[prez[i,1]]+1)*(1-qbio))/141519
+      # }
       
-      
-      ce_spread<-rank(c(bc_pp_in[,time],bc_pp_out[,time]), ties.method="random")
-      ce_spread[c(which(bc_pp_in[,time]==0), which(bc_pp_out[,time]==0)+1799)]<-NA
-      tt=min(ce_spread,na.rm=T)
-      cost3=cost4=0
-      while(is.infinite(tt)==F& cost4<=B*frac_spread & sum(ce_spread[which(ce_spread>=tt)], na.rm=T)!=0)
-      {
-        if(which(ce_spread==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]+1799 )==F)
+      # 
+      # ce_spread<-rank(c(bc_pp_in[,time],bc_pp_out[,time]), ties.method="random")
+      # ce_spread[c(which(bc_pp_in[,time]==0), which(bc_pp_out[,time]==0)+1799)]<-NA
+      # tt=min(ce_spread,na.rm=T)
+      # cost3=cost4=0
+      # while(is.infinite(tt)==F& cost4<=B*frac_spread & sum(ce_spread[which(ce_spread>=tt)], na.rm=T)!=0)
+      # {
+      #   if(which(ce_spread==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]+1799 )==F)
+      #   {
+      #     #mgmt[[time]]<-c(mgmt[[time]],which(ce_spread==tt))
+      #     cost3=cost3+(646863/309)}
+      #   tt=min(ce_spread[which(ce_spread>tt)],na.rm=T)
+      #   cost4=cost3+(646863/309)
+      # }
+      # ce_site<-rank(pp_bio[,time],ties.method="random")
+      # cost_site<-c(rep(50000,1799))
+      if (length(mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])])>0){
+        for(xx in 1:length(mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])]))
         {
-          #mgmt[[time]]<-c(mgmt[[time]],which(ce_spread==tt))
-          cost3=cost3+(646863/309)}
-        tt=min(ce_spread[which(ce_spread>tt)],na.rm=T)
-        cost4=cost3+(646863/309)
-      }
-      ce_site<-rank(pp_bio[,time],ties.method="random")
-      cost_site<-c(rep(50000,1799))
-      if (length(mgmt[[time-3]][which(mgmt[[time-3]]>2*L[spp])])>0){
-        for(xx in 1:length(mgmt[[time-3]][which(mgmt[[time-3]]>2*L[spp])]))
-        {
-          c_8[unlist(adj_list[mgmt[[time-3]][which(mgmt[[time-3]]>2*L[spp])][xx]-(2*L[spp]),]),time]<-1
+          c_8[unlist(adj_list[mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])][xx]-(2*L[spp]),]),time]<-1
         }}
-      c_8[mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])]-(2*L[spp]),time]<-1
+      c_8[mgmt[[time]][which(mgmt[[time]]>2*L[spp])]-(2*L[spp]),time]<-1
       
-      ce_site[which(pp_bio[,time]==0)]<-NA
-      ce_site[which(cost_site>B*frac_site)]<-NA
-      ce_site[which(c_8[,time]==1)]<-NA
-      tt=min(ce_site,na.rm=T)
-      cost=cost2=0
-      while(is.infinite(tt)==F&cost2<=B*frac_site& sum(ce_site[which(ce_site>=tt)], na.rm=T)!=0 & tt<1799)
-      {
-        if (which(ce_site==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]-(2*1799),mgmt[[time]]-(3*1799),mgmt[[time]]+1799,mgmt[[time]]+(2*1799),mgmt[[time]]+(3*1799))==F)
-        {
-          #mgmt[[time]]<-c(mgmt[[time]],which(ce_site==tt)+2*1799)
-          cost=cost+cost_site[which(ce_site==tt)]}
-        tt=min(ce_site[which(ce_site>tt)],na.rm=T)
-        if (length(tt)>0){
-          while ((cost_site[which(ce_site==tt)]>(B-cost2) ))
-          {
-            tt=ce_site[which(ce_site>tt)][order(ce_site[which(ce_site>tt)])][2]
-            if (is.na(tt))
-            {
-              break
-            }
-            if (tt>1799)
-            {
-              break
-            }}
-        }
-        if (is.na(tt))
-        {
-          break
-        }
-        if (tt<1799)
-        {
-          cost2=cost+cost_site[which(ce_site==tt)]
-        }
-        if (tt>1799)
-        {
-          break
-        }
-      }
+      # ce_site[which(pp_bio[,time]==0)]<-NA
+      # ce_site[which(cost_site>B*frac_site)]<-NA
+      # ce_site[which(c_8[,time]==1)]<-NA
+      # tt=min(ce_site,na.rm=T)
+      # cost=cost2=0
+      # while(is.infinite(tt)==F&cost2<=B*frac_site& sum(ce_site[which(ce_site>=tt)], na.rm=T)!=0 & tt<1799)
+      # {
+      #   if (which(ce_site==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]-(2*1799),mgmt[[time]]-(3*1799),mgmt[[time]]+1799,mgmt[[time]]+(2*1799),mgmt[[time]]+(3*1799))==F)
+      #   {
+      #     #mgmt[[time]]<-c(mgmt[[time]],which(ce_site==tt)+2*1799)
+      #     cost=cost+cost_site[which(ce_site==tt)]}
+      #   tt=min(ce_site[which(ce_site>tt)],na.rm=T)
+      #   if (length(tt)>0){
+      #     while ((cost_site[which(ce_site==tt)]>(B-cost2) ))
+      #     {
+      #       tt=ce_site[which(ce_site>tt)][order(ce_site[which(ce_site>tt)])][2]
+      #       if (is.na(tt))
+      #       {
+      #         break
+      #       }
+      #       if (tt>1799)
+      #       {
+      #         break
+      #       }}
+      #   }
+      #   if (is.na(tt))
+      #   {
+      #     break
+      #   }
+      #   if (tt<1799)
+      #   {
+      #     cost2=cost+cost_site[which(ce_site==tt)]
+      #   }
+      #   if (tt>1799)
+      #   {
+      #     break
+      #   }
+      # }
     }
     
-    
-    vecP[which(c_8[,time]==1)]<-(1-qbio)*vecP[which(c_8[,time]==1)]
+    if(time==2)
+    {
+      vecP[which(c_8[,time-1]==1)]<-(1-(qbio*0.5))*vecP[which(c_8[,time-1]==1)]
+    }
+    if(time>2)
+    {
+      vecP[which(c_8[,time-1]==1 & c_8[,time-2]!=1)]<-(1-(qbio*0.5))*vecP[which(c_8[,time-1]==1 & c_8[,time-2]!=1)]
+      vecP[which(c_8[,time-2]==1)]<-(1-qbio)*vecP[which(c_8[,time-2]==1)]
+    }
     
     d2prime[,time]<-vecP
     d2prime[which(vecP<par[21]),time]<-0
     c_4[which(vecP>=par[21]),time]<-1
     d_out[,time]<-d2prime[,time]
     d_out[(subset(mgmt[[time]], mgmt[[time]]>(1799) & mgmt[[time]]<=(2*1799))-1799),time]<-d2prime[(subset(mgmt[[time]], mgmt[[time]]>(1799) & mgmt[[time]]<=(2*1799))-1799),time]*(1-q_out)
-    Pnext[which(1:1799%in%(mgmt[[time]]))]<-(((1-q_in)*((d_out[,time]%*%qq3)-d_out[,time]*diag(qq3)))+vecP*diag(qq3))[which(1:1799%in%(mgmt[[time]]))]
-    
-    Pnext[which(1:1799%in%(mgmt[[time]])==F)]<-((d_out[,time]%*%qq3)-(d_out[,time])*diag(qq3)+vecP*diag(qq3))[which(1:1799%in%(mgmt[[time]])==F)]
-    
+    Pnext[which(1:1799%in%(mgmt[[time]]))]<-(((1-q_in)*(d_out[,time]%*%qq3)-d_out[,time]*diag(qq3))+d2prime[,time]*diag(qq3))[which(1:1799%in%(mgmt[[time]]))]
+    Pnext[which(1:1799%in%(mgmt[[time]])==F)]<-((d_out[,time]%*%qq3)-(d_out[,time])*diag(qq3)+d2prime[,time]*diag(qq3))[which(1:1799%in%(mgmt[[time]])==F)]
     d3prime[,time]<-Pnext
-    
     Pnext[which(prez[,spp]==Psource)]=1
     Pfull[,time]<-c(prez[which(Pnext>=par[21]),spp], rep(0, 3372-length(which(Pnext>=par[21])))) 
     Pfull_time[,time]<-c(prez[which(Pnext>=par[21]),spp], rep(0, 3372-length(which(Pnext>=par[21])))) #threshold at 'discoverable' value
@@ -307,5 +312,30 @@ for (time in 1:(total_time+8))
   vecP_time[,time]<-vecP
 }
 
-sum(sweep(as.matrix(d4prime[,6:12]),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))
-    
+mgmt_sites<-tibble(action=character(), pp=numeric(), qin=numeric(), qbio=numeric())
+
+for (q_in in c(0.3,0.6,0.9)){
+  for (qbio in c(0.1,0.3,0.5)){
+    vecP_time<-read.csv(paste("../../eab_mgmt/output/vecptime_",q_in,"_",qbio, ".csv", sep=""), header=F)[,1:7]/1000
+    vecP_time<-cbind(rep(0,1799),rep(0,1799),rep(0,1799),rep(0,1799),rep(0,1799),vecP_time)
+    mgmt_itme<-read.csv(paste("../../eab_mgmt/output/M_",q_in,"_",qbio, ".csv", sep=""), header=F)
+    mgmt_sites<-rbind(mgmt_sites,setNames(data.frame(cbind(rep("bio", length(c(vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),1]==1),6], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),2]==1),7], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),3]==1),8], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),4]==1),9], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),5]==1),10]))), c(vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),1]==1),6], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),2]==1),7], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),3]==1),8], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),4]==1),9], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),5]==1),10]), rep(q_in, length(c(vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),1]==1),6], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),2]==1),7], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),3]==1),8], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),4]==1),9], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),5]==1),10]))), rep(qbio, length(c(vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),1]==1),6], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),2]==1),7], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),3]==1),8], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),4]==1),9], vecP_time[which(mgmt_itme[(3*1799+1):(4*1799),5]==1),10]))))) , names(mgmt_sites)))
+    mgmt_sites<-bind_rows(mgmt_sites, setNames(data.frame(cbind(rep("qin", length(c(vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),1]==1),6], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),2]==1),7], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),3]==1),8], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),4]==1),9], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),5]==1),10]))),c(vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),1]==1),6], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),2]==1),7], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),3]==1),8], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),4]==1),9], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),5]==1),10]),rep(q_in, length(c(vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),1]==1),6], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),2]==1),7], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),3]==1),8], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),4]==1),9], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),5]==1),10]))),rep(qbio, length(c(vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),1]==1),6], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),2]==1),7], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),3]==1),8], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),4]==1),9], vecP_time[which(mgmt_itme[(1*1799+1):(2*1799),5]==1),10]))))), names(mgmt_sites)))
+    mgmt_sites<-bind_rows(mgmt_sites, setNames(data.frame(cbind(rep("qout", length(c(vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),1]==1),6], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),2]==1),7], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),3]==1),8], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),4]==1),9], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),5]==1),10]))),c(vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),1]==1),6], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),2]==1),7], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),3]==1),8], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),4]==1),9], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),5]==1),10]), rep(q_in, length(c(vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),1]==1),6], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),2]==1),7], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),3]==1),8], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),4]==1),9], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),5]==1),10]))), rep(qbio, length(c(vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),1]==1),6], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),2]==1),7], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),3]==1),8], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),4]==1),9], vecP_time[which(mgmt_itme[(2*1799+1):(3*1799),5]==1),10]))))), names(mgmt_sites)))
+    mgmt_sites<-bind_rows(mgmt_sites, setNames(data.frame(cbind(rep("none", length(c(vecP_time[which(mgmt_itme[(1):(1799),1]==1),6], vecP_time[which(mgmt_itme[(1):(1799),2]==1),7], vecP_time[which(mgmt_itme[(1):(1799),3]==1),8], vecP_time[which(mgmt_itme[(1):(1799),4]==1),9], vecP_time[which(mgmt_itme[(1):(1799),5]==1),10]))),c(vecP_time[which(mgmt_itme[(1):(1799),1]==1),6], vecP_time[which(mgmt_itme[(1):(1799),2]==1),7], vecP_time[which(mgmt_itme[(1):(1799),3]==1),8], vecP_time[which(mgmt_itme[(1):(1799),4]==1),9], vecP_time[which(mgmt_itme[(1):(1799),5]==1),10]),rep(q_in, length(c(vecP_time[which(mgmt_itme[(1):(1799),1]==1),6], vecP_time[which(mgmt_itme[(1):(1799),2]==1),7], vecP_time[which(mgmt_itme[(1):(1799),3]==1),8], vecP_time[which(mgmt_itme[(1):(1799),4]==1),9], vecP_time[which(mgmt_itme[(1):(1799),5]==1),10]))), rep(qbio, length(c(vecP_time[which(mgmt_itme[(1):(1799),1]==1),6], vecP_time[which(mgmt_itme[(1):(1799),2]==1),7], vecP_time[which(mgmt_itme[(1):(1799),3]==1),8], vecP_time[which(mgmt_itme[(1):(1799),4]==1),9], vecP_time[which(mgmt_itme[(1):(1799),5]==1),10]))))), names(mgmt_sites)))
+  }}
+mgmt_sites$qin<-as.numeric(mgmt_sites$qin)
+mgmt_sites$qbio<-as.numeric(mgmt_sites$qbio)
+mgmt_sites$action<-as.factor(mgmt_sites$action)
+mgmt_sites$pp<-as.numeric(mgmt_sites$pp)
+m<-lm(log(pp+1)~action+qin+qbio, mgmt_sites)
+mult<-glht(m, linfct=mcp(action="Tukey"))
+summary(mult)
+summary<-mgmt_sites%>%group_by(action, qin)%>%summarize(mean(pp), sqrt(var(pp)/length(pp)))
+write.csv(summary, row.names=F, file="summarybyaction.csv")
+library(ggplot2)
+mgmt_sites$eff<-as.factor(mgmt_sites$qin)
+plot<-ggplot(aes(x=action, y=pp, fill=eff), data=mgmt_sites)+geom_boxplot(aes(y=pp,x=action, fill=eff))+scale_y_log10(limits=c(0.0001,1))+scale_fill_viridis(discrete=T, name="Quarantine effectiveness")+xlab('Action type')+scale_x_discrete(labels=c('Biological control', 'None', "Quarantine in", "Quarantine Out"))+ylab('Relative propagule pressure')+theme_classic()
+plot
+
+

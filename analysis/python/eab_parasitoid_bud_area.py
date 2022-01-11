@@ -67,7 +67,7 @@ cost_quar_out = list(itertools.repeat(646.863/309, L))
 cost_bio =list(itertools.repeat(50, L))
 cost_nothing = list(itertools.repeat(0, L))
 cost_vec = pandas.Series(cost_nothing+ cost_quar_in+ cost_quar_out+ cost_bio)
-quar_bud = [0,0.2,0.4,0.6,0.8,1]
+quar_bud = [0.01,0.2,0.4,0.6,0.8,0.99]
 randoms =numpy.array([random.uniform(1.01,1.1) for _ in sites])
 
 for rr in range(0,3): #iterate over efficiency scenarios
@@ -134,7 +134,8 @@ for rr in range(0,3): #iterate over efficiency scenarios
                 #indicators for when quarantining in, out, or both, maxmimum density=no quarantines
                 m.addConstrs(((d_out[loc,year] >= d2prime[loc,year]-(1000/phi)*M[2*L+loc,year]) for loc in sites for year in time), name="noquar_2out") #if quarantine out action not chosen, dispersal out is equivalent to total possible dispersal out
                #Growth
-                m.addConstrs(((d4prime[loc, year] >= d3prime[loc, year]*r+(3000/phi)*(1-c_5[loc,year])) for loc in sites2 for year in time), name="growth") #allow populations to grow if theyre over phi
+                m.addConstrs(((d4prime[loc, year] >= d3prime[loc, year]*r-(3000/phi)*(1-c_5[loc,year])) for loc in sites2 for year in time), name="growth") #allow populations to grow if theyre over phi
+                m.addConstrs(((d4prime[loc, year] <= d3prime[loc, year]*r+(3000/phi)*(1-c_5[loc,year])) for loc in sites2 for year in time), name="growth") #allow populations to grow if theyre over phi
                 m.addConstrs(((d4prime[loc, year] >= d3prime[loc, year]) for loc in sites2 for year in time), name="growth")
                 m.addConstrs(((c_5[loc,year]>=(d3prime[loc,year]-phi)/(3000/phi)) for loc in sites2 for year in time), name="growth")#allow populations to grow if theyre over phi
                 ## Cap d4 prime after growth by 1 - convert to starting density at next timestep

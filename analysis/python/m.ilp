@@ -1,0 +1,15 @@
+\ Model spread_copy
+\ LP format - for model browsing. Use MPS format to capture full model detail.
+Minimize
+ 
+Subject To
+ biocontrol[707,3]: - 0.95 d[707,3] + dprime[707,3]
+   - 1857.318241319923 c_8[707,1] - 1857.318241319923 c_8[707,2]
+   >= -1857.318241319923
+ biohist2[707.0]: c_8[707,1] = 1
+ biohist2[707.0]: c_8[707,2] = 1
+Bounds
+ -infinity <= dprime[707,3] <= 1000
+Binaries
+ c_8[707,1] c_8[707,2]
+End

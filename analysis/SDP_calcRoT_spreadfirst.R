@@ -1,6 +1,8 @@
   rm(list=ls()) 
   ## reference existing github data here instead of local files
   #Read in Data
+  n_spp=66
+  setwd('~/Desktop/OneDrive - McGill University/Grad/scripts/')
   data<-read.csv('data_minus5_july.csv', stringsAsFactors = FALSE)
   data2<-read.csv('datanorm.csv', stringsAsFactors = FALSE)
   gen<-matrix(0,3372, 78)
@@ -15,6 +17,11 @@
   fia<-list()
   FIA$FIA<-as.character(FIA$FIA)
   fia<-strsplit(FIA$FIA, split=", ")
+  for (i in 1:length(fia)){
+  fia[[i]]<-gsub("(^\\d{3}$)", "0\\1", fia[[i]])
+  fia[[i]]<-gsub("(^\\d{2}$)", "00\\1", fia[[i]])
+  }
+  #fia<-fia[which(fia%in%colnames(FIA2))]
   currpopden<-as.matrix(read.csv("currpopden_5.csv", stringsAsFactors = FALSE))
   currpopden<-as.matrix(read.csv("currpopden_5.csv", stringsAsFactors = FALSE))
   currpopden2<-as.matrix(read.csv("future_scaled_pop2.csv"))
@@ -57,7 +64,7 @@
     hostvol<-hostvol[,good]
     publand<-read.csv('publand_sdp.csv')
     harvestland<-read.csv('harvest_sdp.csv')
-    V_i<-read.csv('streettrees_grid.csv')[,20]
+    V_i<-read.csv('../../GitHub/eab_mgmt/data/streettrees_grid.csv')[,20]
     host_harv<-matrix(0,3372,75)
     for (spp in good) 
     { 
@@ -118,7 +125,8 @@
             
             #Pest Parameters
             Psource=sources[[spp]]
-            Discovery<-2009-YEAR            rem<-mfive(Discovery)
+            Discovery<-2009-YEAR            
+            rem<-mfive(Discovery)
             
             T2<-T1[prez[1:L[spp],spp],prez[1:L[spp],spp]]
            
@@ -153,7 +161,7 @@
             frac_spread=budget_scen$spread_bud[scen]
              frac_site=budget_scen$site_bud[scen]
              c_4=c_5=c_6=c_7=matrix(0,L[spp], ncol(vecP_time))
-           mgmt<-list()
+          # mgmt<-list()
             for (time in 1:(total_time+7))
             {
               
@@ -194,7 +202,7 @@
               vecP[which(prez[,spp]==Psource)]=1
               qq3<-matrix(0,L[spp], L[spp]) # full transition matrix
               qq3[which(vecP>=par[21]),]<-qq
-              qq3<-as.matrix(read.csv(paste("../transmatM_", spp,time,0,1, 0.3,0.3,0.1, ".csv", sep="_")))
+              qq3<-as.matrix(read.csv(paste("../../../GitHub/eab_mgmt/data/transmatM_", spp,time,0,1, 0.3,0.3,0.1, ".csv", sep="_")))
               # write.csv(qq3, file=paste("transmatM_", spp,time,frac_site, frac_spread, q_in,q_out,qbio, ".csv", sep="_"), row.names=F)
               qq2<-qq3 #transition matrix with 0 on diagonal
               diag(qq2)<-0
@@ -216,7 +224,7 @@
               pp_erad[which(vecP<par[21]),time]<-0
               pp_erad[which(vecP>0.001),time]<-0
               
-              mgmt[[time]]<-vector()
+            #  mgmt[[time]]<-vector()
               
               ce_spread<-rank(c(bc_pp_in[,time],bc_pp_out[,time]), ties.method="random")
               ce_spread[c(which(bc_pp_in[,time]==0), which(bc_pp_out[,time]==0)+1799)]<-NA
@@ -225,7 +233,8 @@
               while(is.infinite(tt)==F& cost4<=B*frac_spread & sum(ce_spread[which(ce_spread>=tt)], na.rm=T)!=0)
               {
                 if(which(ce_spread==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]+1799 )==F)
-                {mgmt[[time]]<-c(mgmt[[time]],which(ce_spread==tt))
+                {
+                  #mgmt[[time]]<-c(mgmt[[time]],which(ce_spread==tt))
                 cost3=cost3+(646863/309)}
                 tt=min(ce_spread[which(ce_spread>tt)],na.rm=T)
                 cost4=cost3+(646863/309)
@@ -239,7 +248,8 @@
               while(is.infinite(tt)==F&cost2<=B*frac_site& sum(ce_site[which(ce_site>=tt)], na.rm=T)!=0 & tt<3599)
               {
                 if (which(ce_site==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]-(2*1799),mgmt[[time]]-(3*1799),mgmt[[time]]+1799,mgmt[[time]]+(2*1799),mgmt[[time]]+(3*1799))==F)
-                {mgmt[[time]]<-c(mgmt[[time]],which(ce_site==tt)+2*1799)
+                {
+                  #mgmt[[time]]<-c(mgmt[[time]],which(ce_site==tt)+2*1799)
                 cost=cost+cost_site[which(ce_site==tt)]-1}
                 tt=min(ce_site[which(ce_site>tt)],na.rm=T)
                 if (length(tt)>0){
@@ -342,7 +352,7 @@ for (q_in in qz)
       frac_site=budget_scen$site_bud[scen]
       frac_spread=budget_scen$spread_bud[scen]
       d4prime<-read.csv(paste("vecptime",frac_site,frac_spread,q_in,q_in,qbio, ".csv", sep="_"))[,2:6]
-      obj<-rbind(obj, setNames(c(frac_site,frac_spread,q_in,q_in,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
+      obj<-rbind(obj, setNames(c(frac_site,frac_spread,q_in,q_in,qbio,sum(sweep(as.matrix(d_time),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
     }
   }
 }
@@ -351,8 +361,8 @@ library(viridis)
 plot(obj$obj~obj$frac_site, col=viridis(9)[as.factor(paste0(obj$q_in,obj$q_out, obj$qbio))], xlab="Site-focused budget proportion", ylab="Exposed ash street trees")
 
 
-mgmt_itme<-read.csv('../../eab_mgmt/analysis/python/M3_0.9_0.9_0.5.csv', header=F)
-d_time<-read.csv('../../eab_mgmt/analysis/python/d_0.3_0.3_0.1.csv', header=F)
+mgmt_itme<-read.csv('../../../GitHub/eab_mgmt/output/M3_0.9_0.9_0.5.csv', header=F)
+d_time<-read.csv('../../../GitHub/eab_mgmt/analysis/python/d_0.3_0.3_0.1.csv', header=F)
 
 mgmt<-list()
 for (time in 6:11)

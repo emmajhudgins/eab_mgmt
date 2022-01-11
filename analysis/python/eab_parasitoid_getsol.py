@@ -142,6 +142,9 @@ no_3= list(x for x in sites if x not in third)
 #c_8 is ==0 if sites not in biocontrol history or turned on by present-day management
 m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in no_2 for year in range(2,3)), name = "biocontrol2")
 m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in no_3 for year in range(3,4)), name = "biocontrol2")
+m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in sites for year in range(4,6)), name = "biocontrol2")
+m.addConstrs(((c_8[ii,year]==0) for ii in sites for year in range(6,7)), name = "biocontrol2")
+
 ## sites not adjacent to biological control applied in 2020 (used below)
 not_adj_bio_2020 = list(range(1,L+1))
 for x in pandas.Series([adj_list[q] for q in bio_2020][0])[0].astype(int):
@@ -198,18 +201,19 @@ tij = numpy.stack([Tij,Tij2,Tij3,Tij4,Tij5,Tij6, Tij7])
 full_out = [list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L)),list([] for x in range(L))]
 for i in range(0,7):
     for j in range(L):
-        full_out[i][j].append(numpy.array(range(1,L+1))[tij[i,range(L),j]!=0]) # which sites are sources in influx to j
+        full_out[i][j].append(numpy.array(range(L))[tij[i,range(L),j]!=0]) # which sites are sources in influx to j
 
 #calculate immigration/emigration depending on quarantine_in management action status
-m.addConstrs(((d3prime[ii,year] >= tij[year-1,ii-1,ii-1]*d2prime[ii,year]+(1-eff_vec[L+ii-1])*quicksum(tij[year-1,j-1,ii-1]*d_out[j,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]-((3000/phi)*(1-M[L+ii,year]))) for ii in sites for year in time_sub), name = "quar_in")
-m.addConstrs(((d3prime[ii,year] >= tij[year-1,ii-1,ii-1]*d2prime[ii,year]+quicksum(tij[year-1,j-1,ii-1]*d_out[j,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]-((3000/phi)*M[L+ii,year]))for ii in sites for year in time_sub), name="noquar_in")
-m.addConstrs(((d3prime[ii,year] <= tij[year-1,ii-1,ii-1]*d2prime[ii,year]+(1-eff_vec[L+ii-1])*quicksum(tij[year-1,j-1,ii-1]*d_out[j,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]+((3000/phi)*(1-M[L+ii,year]))) for ii in sites for year in time_sub), name = "quar_in")
-m.addConstrs(((d3prime[ii,year] <= tij[year-1,ii-1,ii-1]*d2prime[ii,year]+quicksum(tij[year-1,j-1,ii-1]*d_out[j,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]+((3000/phi)*M[L+ii,year]))for ii in sites for year in time_sub), name="noquar_in")
-m.addConstrs(((d3prime[ii,year] == tij[year-1,ii-1,ii-1]*d2prime[ii,year]+quicksum(tij[year-1,j-1,ii-1]for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]) for ii in sites for year in range(6,8)), name="noquar_in")
+m.addConstrs(((d3prime[ii,year] >= tij[year-1,ii-1,ii-1]*d2prime[ii,year]+(1-eff_vec[L+ii-1])*quicksum(tij[year-1,j,ii-1]*d_out[j+1,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]-((3000/phi)*(1-M[L+ii,year]))) for ii in sites for year in time_sub), name = "quar_in")
+m.addConstrs(((d3prime[ii,year] >= tij[year-1,ii-1,ii-1]*d2prime[ii,year]+quicksum(tij[year-1,j,ii-1]*d_out[j+1,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]-((3000/phi)*M[L+ii,year]))for ii in sites for year in time_sub), name="noquar_in")
+m.addConstrs(((d3prime[ii,year] <= tij[year-1,ii-1,ii-1]*d2prime[ii,year]+(1-eff_vec[L+ii-1])*quicksum(tij[year-1,j,ii-1]*d_out[j+1,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]+((3000/phi)*(1-M[L+ii,year]))) for ii in sites for year in time_sub), name = "quar_in")
+m.addConstrs(((d3prime[ii,year] <= tij[year-1,ii-1,ii-1]*d2prime[ii,year]+quicksum(tij[year-1,j,ii-1]*d_out[j+1,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]+((3000/phi)*M[L+ii,year]))for ii in sites for year in time_sub), name="noquar_in")
+m.addConstrs(((d3prime[ii,year] == tij[year-1,ii-1,ii-1]*d2prime[ii,year]+quicksum(tij[year-1,j,ii-1]*d_out[j+1,year] for j in numpy.ndarray.tolist(full_out[year-1][ii-1][0]))-tij[year-1,ii-1,ii-1]*d_out[ii,year]) for ii in sites for year in range(6,8)), name="noquar_in")
 
 #Growth (only if c_5==1)
 m.addConstrs(((d4prime[loc, year] >= d3prime[loc, year]*r-((3000/phi)*(1-c_5[loc,year]))) for loc in sites2 for year in time), name="growth") #allow populations to grow if theyre over phi
-m.addConstrs(((d4prime[loc, year] >= d3prime[loc, year]) for loc in sites2 for year in time), name="growth")
+m.addConstrs(((d4prime[loc, year] <= d3prime[loc, year]+((3000/phi)*c_5[loc,year])) for loc in sites2 for year in time), name="growth")
+m.addConstrs(((d4prime[loc, year] >= d3prime[loc, year]-((3000/phi)*c_5[loc,year])) for loc in sites2 for year in time), name="growth")
 m.addConstrs(((d4prime[loc, year] <= d3prime[loc, year]*r+((3000/phi)*(1-c_5[loc,year]))) for loc in sites2 for year in time), name="growth") #allow populations to grow if theyre over phi
 #c_5==1 if d3prime>phi
 m.addConstrs(((c_5[loc,year]>=(d3prime[loc,year]-phi)/(3000/phi)) for loc in sites2 for year in time), name="growth")#allow populations to grow if theyre over phi
@@ -220,8 +224,8 @@ m.addConstrs(((c_5[loc,year]>=(d3prime[loc,year]-phi)/(3000/phi)) for loc in sit
 m.addConstrs((((c_6[loc,year]+c_7[loc,year] == 1)) for loc in sites2 for year in time), name="max_d1") #density is either above or below maximum density (1000)
 m.addConstrs(((d[loc, year+1] >= d4prime[loc, year]-((3000/phi)*(1-c_6[loc,year]))) for loc in sites2 for year in time), name="max_d2") #if it's below, don't set to 1000
 m.addConstrs(((d[loc, year+1] <= d4prime[loc, year]) for loc in sites2 for year in time), name="max_d2") #if it's below, don't set to 1000
-m.addConstrs(((d[loc, year+1] >= 1000-(1000*(1-c_7[loc,year]))) for loc in sites2 for year in time), name="max_d3") #if it is above 1000, reduce back to 1000
-m.addConstrs(((d[loc, year+1] <= 1000+(1000*(1-c_7[loc,year]))) for loc in sites2 for year in time), name="max_d3") #if it is above 1000, reduce back to 1000
+m.addConstrs(((d[loc, year+1] >= 1000-((3000/phi)*(1-c_7[loc,year]))) for loc in sites2 for year in time), name="max_d3") #if it is above 1000, reduce back to 1000
+m.addConstrs(((d[loc, year+1] <= 1000+((3000/phi)*(1-c_7[loc,year]))) for loc in sites2 for year in time), name="max_d3") #if it is above 1000, reduce back to 1000
 m.addConstrs(((c_6[loc,year]<=1+((1000-d4prime[loc,year])/(3000/phi))) for loc in sites2 for year in time), name="max_d4")
 m.addConstrs(((c_7[loc,year]>=(d4prime[loc,year]-1000)/(3000/phi)) for loc in sites2 for year in time), name="max_d5")
 m.addConstrs(((c_6[loc,year]>=-c_7[loc,year]+((d4prime[loc,year])/(3000/phi))) for loc in sites2 for year in time), name="max_d6")
@@ -232,26 +236,28 @@ m.addConstrs(((d4prime[source,year]==1000*r) for year in range(1, len(time)+1)),
 #no impact of biocontrol in first year beyond what was already included in input data
 m.addConstrs(((dprime[ii,year] == d[ii,year]) for ii in sites for year in range(1,2)), name = "nobiocontrol)" ) #when no biocontrol, don't reduce density
 
-# in first  timesteps, only impacted by historical biocontrol, in timesteps 2-3, only local release impacts density
-#c_8 determines which sites the parasitoid has adequate density in
+#keep sites at threshold if management has not taken place
+m.addConstrs(((d4prime[loc, year] >= (c_4[loc,year]*phi*r)-((3000/phi)*(M[L+loc, year]+M[2*L+loc,year]))) for loc in sites for year in range(1,2)) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
+m.addConstrs(((d4prime[loc, year] >= (c_4[loc,year]*phi*r)-((3000/phi)*(M[L+loc, year]+M[2*L+loc,year]+c_8[loc,year-1]))) for loc in sites for year in range(2,3)) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
+m.addConstrs(((d4prime[loc, year] >= (c_4[loc,year]*phi*r)-((3000/phi)*(M[L+loc, year]+M[2*L+loc,year]+c_8[loc,year-1]+c_8[loc,year-2]))) for loc in sites for year in range(3,6)) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
+m.addConstrs(((d4prime[loc, year] >= (c_4[loc,year]*phi*r-c_8[loc,year-1])) for loc in sites for year in range(6,7)) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
+m.addConstrs(((d4prime[loc, year] >= (c_4[loc,year]*phi*r)) for loc in sites for year in range(7,8)) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
 
-m.addConstrs((d4prime[loc, year] >= (c_4[loc,year]*phi*r)-((3000/phi)*((M[L+loc, year]+M[2*L+loc,year]+c_8[loc,year]))) for loc in sites for year in range(1,5)) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
-m.addConstrs((d4prime[loc, year] >= (c_4[loc,year]*phi*r)-((3000/phi)*((M[L+loc, year]+M[2*L+loc,year]))) for loc in sites for year in range(5,6)) , name="growth")#if no management taken, populations can't go extinct (maintained at phi*r)
-
-m.addConstrs(((M[3*L+ii,year]==0) for ii in sites for year in range(5,6)), name = "biocontrol4") # biocontrol only makes a difference in first 3 timesteps
+#minimum pest density for biocontrol to be feasible 
 m.addConstrs(((M[3*L+ii,year]==0) for ii in [value for value in range(0,1799) if numpy.array(vecptime)[value,1] > 27.916] for year in range(1,6)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
 
-
-#only allow growth if density is above phi (c_4==1)
-m.addConstrs(((d4prime[loc, year] >= c_4[loc,year]*phi*r+(1-M[loc, year])) for loc in sites for year in range(1,3)), name="growth2")#if no management taken, populations can't go extinct (maintained at phi*r)
-m.addConstrs(((d4prime[loc, year] >= c_4[loc,year]*phi*r-(phi*r)*(c_8[loc,year-2]+(1-M[loc, year]))) for loc in sites for year in range(3,6)), name="growth3")#if no management taken, populations can't go extinct (maintained at phi*r)
-
-mgmt=pandas.io.parsers.read_csv("../../output/management_test_0_1_0.3_0.1_.csv".format(eff_quar_in, eff_bio), header=None)#starting condition
+mgmt=pandas.io.parsers.read_csv("../../output/M_0.3_0.1.csv", header=None)#starting condition
 
 #implement starting condition
 for sites3 in range(1, L*n_actions+1):
     for year in range(1,5+1):
         M[sites3, year].start=mgmt.iloc[sites3-1,year-1]
+# for sites3 in range(1, L+1):
+#     for year in range(1,5+1):
+#          M[sites3, year].start=1
+# for sites3 in range(L+1, L*n_actions+1):
+#     for year in range(1,5+1):
+#          M[sites3, year].start=0
 
 m.setParam('LogFile', 'eab_parasitoid_{0}_{1}.log'.format(rr,qq)) #unique logfile
 m.setParam('MIPGap',0.01)

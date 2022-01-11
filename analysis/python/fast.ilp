@@ -1,0 +1,14 @@
+\ Model spread_copy
+\ LP format - for model browsing. Use MPS format to capture full model detail.
+Minimize
+ 
+Subject To
+ parasitoidDisp[1792,4]: - M[7189,3] + c_8[1799,4] >= 0
+ biocontrol2[611,1799,4]: - M[6008,3] - M[7196,4] + c_8[1799,4] <= 0
+ R437792: M[6008,3] = 0
+ R442516: M[7189,3] = 1
+ R442545: M[7196,4] = 0
+Bounds
+Binaries
+ M[6008,3] M[7189,3] M[7196,4] c_8[1799,4]
+End

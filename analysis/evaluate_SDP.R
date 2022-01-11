@@ -11,7 +11,7 @@ for (q_in in qz)
   
   for (qbio in bios)
   {
-    for (scen in 1:11)
+    for (scen in c(1,3,5,7,9,11))
     {
       frac_site=budget_scen$site_bud[scen]
       frac_spread=budget_scen$spread_bud[scen]
@@ -22,10 +22,10 @@ for (q_in in qz)
 }
 obj<-obj[2:nrow(obj),]
 library(viridis)
-plot(obj$obj*1000~obj$frac_site, col=viridis(9)[as.factor(paste0(obj$q_in,obj$q_out, obj$qbio))], xlab="Site-focused budget proportion", ylab="Exposed ash street trees")
+plot(obj$obj~obj$frac_site, col=viridis(9)[as.factor(paste0(obj$q_in,obj$q_out, obj$qbio))], xlab="Site-focused budget proportion", ylab="Exposed ash street trees")
 
 # 
- mgmt_itme<-read.csv('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/M_0.6_0.1.csv', header=F) # examine gurobi Management scenario
+ mgmt_itme<-read.csv('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/management_test_0.4_0.6_0.3_0.1_.csv') # examine gurobi Management scenario
  #d<-read.csv('../../eab_mgmt/analysis/python/d_0.3_0.3_0.1.csv', header=F) # examine gurobi pest density output
 # 
 mgmt<-list()
