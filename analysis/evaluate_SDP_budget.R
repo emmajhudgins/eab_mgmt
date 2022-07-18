@@ -86,15 +86,36 @@ for (q_in in qz)
   q_out=q_in
   for (qbio in bios)
   {
-    d4prime<-read.csv(paste("../../eab_mgmt/output/vecptime",q_in,qbio, "fg.csv", sep="_"), header=F)[,2:8]/1000
+    d4prime<-read.csv(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime",q_in,qbio, "fg.csv", sep="_"), header=F)[,2:8]/1000
     obj<-rbind(obj, setNames(c(q_in,q_out,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
   }
 }
 obj<-obj[2:nrow(obj),]
-plot(y=obj$obj,x=obj$q_in, col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75), xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19,, ylim=c(100000,800000), main="Fast growth scenario")
+
+layout(matrix(c(1,2), ncol=2, byrow=TRUE), heights=c(1,1), widths=c(0.7,0.3))
+par(mar=c(4,4,2,0))
+par(oma=c(0,0,0,0))
+par(xpd = FALSE)
+
+
+plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0.25,0.95), ylim=c(100000,900000), main="Fast Growth Scenario", cex.main=0.75)
+library(readxl)
 dat<-read.csv('~/Downloads/postdocdat.csv')
 abline(h=dat$Exposed.Ash.Street.Trees..thousands.*1000, lty=2,col=viridis(9))
+par(mai=c(0.4,0.5,0.1,0.6))
 
+image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
+axis(2,labels=c("30%","60%", "90%"),at=c(seq(1,9,length.out=3)), cex.axis=0.5, padj=2)
+axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.5, padj=2)
+par(xpd = TRUE) #Draw outside plot area
+corners<-par("usr")
+text("50%             30%             10%",y=c(8), x=corners[2]+.65, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(5), x=corners[2]+.65, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(2), x=corners[2]+.65, cex=0.5, srt=270)
+
+mtext(side=2, "Quarantine efficiency",line=1, cex=0.5)
+corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
+text(x = corners[2]+1.25, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.5, srt = 270)
 
 obj<-data.frame(q_in=0,q_out=0,qbio=0, obj=0)
 
@@ -103,15 +124,36 @@ for (q_in in qz)
   q_out=q_in
   for (qbio in bios)
   {
-    d4prime<-read.csv(paste("../../eab_mgmt/output/vecptime",q_in,qbio, "fdfg.csv", sep="_"), header=F)[,2:8]/1000
+    d4prime<-read.csv(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime",q_in,qbio, "fdfg.csv", sep="_"), header=F)[,2:8]/1000
     obj<-rbind(obj, setNames(c(q_in,q_out,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
   }
 }
 obj<-obj[2:nrow(obj),]
-plot(y=obj$obj,x=obj$q_in, col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75), xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19,, ylim=c(100000,800000), main="Fast dispersal and growth scenario")
+
+layout(matrix(c(1,2), ncol=2, byrow=TRUE), heights=c(1,1), widths=c(0.7,0.3))
+par(mar=c(4,4,2,0))
+par(oma=c(0,0,0,0))
+par(xpd = FALSE)
+
+
+plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0.25,0.95), ylim=c(100000,900000), main="Fast Dispersal and Growth Scenario", cex.main=0.75)
+library(readxl)
 dat<-read.csv('~/Downloads/postdocdat.csv')
 abline(h=dat$Exposed.Ash.Street.Trees..thousands.*1000, lty=2,col=viridis(9))
+par(mai=c(0.4,0.5,0.1,0.6))
 
+image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
+axis(2,labels=c("30%","60%", "90%"),at=c(seq(1,9,length.out=3)), cex.axis=0.5, padj=2)
+axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.5, padj=2)
+par(xpd = TRUE) #Draw outside plot area
+corners<-par("usr")
+text("50%             30%             10%",y=c(8), x=corners[2]+.65, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(5), x=corners[2]+.65, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(2), x=corners[2]+.65, cex=0.5, srt=270)
+
+mtext(side=2, "Quarantine efficiency",line=1, cex=0.5)
+corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
+text(x = corners[2]+1.25, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.5, srt = 270)
 
 obj<-data.frame(q_in=0,q_out=0,qbio=0, obj=0)
 
@@ -120,11 +162,33 @@ for (q_in in qz)
   q_out=q_in
   for (qbio in bios)
   {
-    d4prime<-read.csv(paste("../../eab_mgmt/output/vecptime",q_in,qbio, "nothresh.csv", sep="_"), header=F)[,2:8]/1000
+    d4prime<-read.csv(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime",q_in,qbio, "nothresh.csv", sep="_"), header=F)[,2:8]/1000
     obj<-rbind(obj, setNames(c(q_in,q_out,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
   }
 }
 obj<-obj[2:nrow(obj),]
-plot(y=obj$obj,x=obj$q_in, col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75), xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19,, ylim=c(100000,800000), main="No threshold scenario")
+
+layout(matrix(c(1,2), ncol=2, byrow=TRUE), heights=c(1,1), widths=c(0.7,0.3))
+par(mar=c(4,4,2,0))
+par(oma=c(0,0,0,0))
+par(xpd = FALSE)
+
+
+plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0.25,0.95), ylim=c(100000,900000), main="No Threshold Scenario", cex.main=0.75)
+library(readxl)
 dat<-read.csv('~/Downloads/postdocdat.csv')
 abline(h=dat$Exposed.Ash.Street.Trees..thousands.*1000, lty=2,col=viridis(9))
+par(mai=c(0.4,0.5,0.1,0.6))
+
+image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
+axis(2,labels=c("30%","60%", "90%"),at=c(seq(1,9,length.out=3)), cex.axis=0.5, padj=2)
+axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.5, padj=2)
+par(xpd = TRUE) #Draw outside plot area
+corners<-par("usr")
+text("50%             30%             10%",y=c(8), x=corners[2]+.65, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(5), x=corners[2]+.65, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(2), x=corners[2]+.65, cex=0.5, srt=270)
+
+mtext(side=2, "Quarantine efficiency",line=1, cex=0.5)
+corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
+text(x = corners[2]+1.25, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.5, srt = 270)

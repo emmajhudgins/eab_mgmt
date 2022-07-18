@@ -42,7 +42,7 @@ time_sub = range(1,5+1) #25 years
 r = 1.299034706404549 # pest growth rate from published model
 phi =0.538410692229749 #pest detectability/dispersal density threshold from published model
 
-for rr in range(0,3): #iterate over efficiency scenarios
+for rr in range(2,3): #iterate over efficiency scenarios
     for qq in range(0,3): 
         #efficiencies 
         effs_quar=[0.3,0.6,0.9] #efficiency scenarios for quarantines
@@ -60,8 +60,8 @@ for rr in range(0,3): #iterate over efficiency scenarios
         range_bio = range(3*L+1, 4*L+1)
 
         #Costs
-        cost_quar_in=list(itertools.repeat(646.863/309, L)) # aphis 2020 biocontrol budget divided by eab quarantined grid cells
-        cost_quar_out = list(itertools.repeat(646.863/309, L))
+        cost_quar_in=list(itertools.repeat(15.421, L)) # aphis 2020 biocontrol budget divided by eab quarantined grid cells
+        cost_quar_out = list(itertools.repeat(15.421, L))
         cost_bio =list(itertools.repeat(50, L))
         cost_nothing = list(itertools.repeat(0, L))
         cost_vec = pandas.Series(cost_nothing+ cost_quar_in+ cost_quar_out+ cost_bio)
@@ -244,8 +244,10 @@ for rr in range(0,3): #iterate over efficiency scenarios
         #minimum pest density for biocontrol to be feasible 
         #m.addConstrs(((M[3*L+ii,year]==0) for ii in [value for value in range(1,1800) if numpy.array(vecptime)[value-1,1] < 27.916] for year in range(1,6)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
         m.addConstrs(((M[3*L+loc,year]<=(1+((d[loc,year]-27.916)/(3000/phi)))) for loc in sites for year in range(1,6)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
+        m.addConstrs(((M[2*L+loc,year]<=(1+((d[loc,year]-phi)/(3000/phi)))) for loc in sites for year in range(1,6)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
+        m.addConstrs(((M[1*L+loc,year]<=(1+((999-d[loc,year])/(3000/phi)))) for loc in sites for year in range(1,6)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
 
-        mgmt=pandas.io.parsers.read_csv("../../output/M_{0}_{1}.csv".format(eff_quar_in,eff_bio), header=None)#starting condition
+        mgmt=pandas.io.parsers.read_csv("../../output/M_{0}_{1}.csv".format(eff_quar_in, eff_bio), header=None)#starting condition
 
         #       implement starting condition
         for sites3 in range(1, L*n_actions+1):

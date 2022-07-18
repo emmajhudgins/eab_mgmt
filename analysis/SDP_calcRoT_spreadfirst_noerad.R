@@ -167,7 +167,7 @@ for (q_out in qz)
             {
               bc_pp_out[i,time]<-sum((V_i[prez[which(shortpath_out==i),1]]+1)*(1-vecP[which(shortpath_out==i)]))
               bc_pp_in[i,time]<-sum(length(which(shortpath_in==i))*(V_i[prez[i,1]]+1)*(1-vecP[i]))
-              pp_bio[i,time]<-(vecP[i]*(V_i[prez[i,1]]+1)*(1-qbio))/141519
+              pp_bio[i,time]<-(vecP[i]*(V_i[prez[i,1]]+1)*(1-qbio))/50000
             }
 
 
@@ -180,9 +180,9 @@ for (q_out in qz)
               if(which(ce_spread==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]+1799 )==F)
               {
               mgmt[[time]]<-c(mgmt[[time]],which(ce_spread==tt))
-              cost3=cost3+(646863/309)}
+              cost3=cost3+(15421)}
               tt=min(ce_spread[which(ce_spread>tt)],na.rm=T)
-              cost4=cost3+(646863/309)
+              cost4=cost3+(15421)
             }
             ce_site<-rank(pp_bio[,time],ties.method="random")
             cost_site<-c(rep(50000,1799))

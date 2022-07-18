@@ -229,9 +229,9 @@ for (q_out in qz)
               if(which(ce_spread==tt)%in%c(mgmt[[time]], mgmt[[time]]-1799,mgmt[[time]]+1799 )==F)
               {
               mgmt[[time]]<-c(mgmt[[time]],which(ce_spread==tt))
-              cost3=cost3+(646863/309)}
+              cost3=cost3+(15421)}
               tt=min(ce_spread[which(ce_spread>tt)],na.rm=T)
-              cost4=cost3+(646863/309)
+              cost4=cost3+(15421)
             }
             
           if(time==2)

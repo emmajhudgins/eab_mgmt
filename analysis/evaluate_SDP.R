@@ -1,5 +1,6 @@
 require(here)
-setwd(paste0(here(), "/../eab_mgmt/output/"))
+setwd(here())
+setwd("../output/")
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 obj<-data.frame(frac_site=0,frac_spread=0,q_in=0,qbio=0, obj=0)
 V_i<-read.csv('../data/streettrees_grid.csv')[,20]
@@ -15,7 +16,7 @@ for (q_in in qz)
     {
       frac_site=budget_scen$site_bud[scen]
       frac_spread=budget_scen$spread_bud[scen]
-      d4prime<-read.csv(paste("../../eab_mgmt/output/RoT_vecptime",frac_site,frac_spread,q_in,qbio, ".csv", sep="_"))[,2:6]
+      d4prime<-read.csv(paste("../../eab_mgmt/output/RoT_vecptime",frac_site,frac_spread,q_in,qbio, ".csv", sep="_"))
       obj<-rbind(obj, setNames(c(frac_site,frac_spread,q_in,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
     }
   }
@@ -25,7 +26,7 @@ library(viridis)
 plot(obj$obj~obj$frac_site, col=viridis(9)[as.factor(paste0(obj$q_in,obj$q_out, obj$qbio))], xlab="Site-focused budget proportion", ylab="Exposed ash street trees")
 
 # 
- mgmt_itme<-read.csv('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/management_test_0.4_0.6_0.3_0.1_.csv') # examine gurobi Management scenario
+ mgmt_itme<-read.csv('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/M_0.9_0.5.csv') # examine gurobi Management scenario
  #d<-read.csv('../../eab_mgmt/analysis/python/d_0.3_0.3_0.1.csv', header=F) # examine gurobi pest density output
 # 
 mgmt<-list()
@@ -36,7 +37,7 @@ for (time in 6:11)
 qin<-unlist(apply(mgmt_itme[((1799+1):(2*1799)),],2, function(x){length(which(x==1))}))#
 qout<-unlist(apply(mgmt_itme[((2*1799+1):(3*1799)),],2, function(x){length(which(x==1))}))
 bio<-unlist(apply(mgmt_itme[((3*1799+1):(4*1799)),],2, function(x){length(which(x==1))}))
-cost_each<-matrix(c(unlist(lapply(qin,function(x){(x)*(646863/309)})), unlist(lapply(qout,function(x){(x)*(646863/309)})),unlist(lapply(bio,function(x){(x)*(50000)}))),nrow=3,ncol=5,byrow=T)
+cost_each<-matrix(c(unlist(lapply(qin,function(x){(x)*(15421)})), unlist(lapply(qout,function(x){(x)*(15421)})),unlist(lapply(bio,function(x){(x)*(50000)}))),nrow=3,ncol=5,byrow=T)
 cost_each<-t(cost_each)
 colnames(cost_each)<-c("Quar_in", "Quar_out", "Biocontrol")
 row.names(cost_each)<-seq(2025, 2045, by=5)
@@ -46,3 +47,4 @@ colnames(cost_each)[4:5]<-c("spread_frac", "site_frac")
 colMeans(cost_each)
 mean(cost_each[,1]/cost_each[,2])
 cost_each
+colMeans(cost_each[,1:3]/rowSums(cost_each[,1:3]))
