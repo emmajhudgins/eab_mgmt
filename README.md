@@ -1,3 +1,5 @@
+<img src="https://github.com/emmajhudgins/eab_mgmt/blob/main/results_preview.png" alt="results preview" width="400" align="right"/>
+
 _repo to accompany_
 # Optimal Emerald Ash Borer (*Agrilus planipennis*) control across the United States
 Emma J. Hudgins, Jeffrey O. Hanson, Christian MacQuarrie, Denys Yemshanov, Eve McDonald-Madden, Chris Baker, Matthew Holden, Iadine Chadès, & Joseph R. Bennett
