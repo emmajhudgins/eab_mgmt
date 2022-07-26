@@ -1,5 +1,5 @@
 _repo to accompany_
-# Optimal Emerald Ash Borer (Agrilus planipennis) control across the United States
+# Optimal Emerald Ash Borer (*Agrilus planipennis*) control across the United States
 Emma J. Hudgins, Jeffrey O. Hanson, Christian MacQuarrie, Denys Yemshanov, Eve McDonald-Madden, Chris Baker, Matthew Holden, Iadine Chadès, & Joseph R. Bennett
 
 Substantial conceptual contributions by Martin Péron, past PhD student of Iadine Chadès.
@@ -33,6 +33,23 @@ We found that the best management strategy always included a combination of site
 
 These findings support a multipronged EAB management approach, where regional context is considered, and quarantine regions are refined rather than abandoned. Quarantines targeting inflow of propagules are high priority for preventing new jumps to areas like Seattle, while quarantines focussing on outflow dominate the core of the invasion. Quarantines  get replaced with biocontrol in more efficient scenarios, and Eradications are rare and are only recommended when biocontrol is inefficient.
 
-** File organization structure **
+**File organization structure**
 
-The analysis section is split into R and Python (3) components. The python scripts require the gurobipy library, which interfaces with GUROBI 9.1.0 software (free for academic use, [!www.gurobi.com])
+The analysis section is split into R and Python (3) components. The python scripts require the gurobipy library, which interfaces with GUROBI 9.1.0 software (free for academic use, www.gurobi.com). All R components were build in R 4.1.0.
+
+R Scripts
+1. 1-biocontrol_history.R - this script uses parasitoid release and recapture data from APHIS' MapBioControl database (see www.mapbiocontrol.org for data inquiries) to examine recapture patterns across space and time for the four parasitoid species for EAB, which are then used to indicate which sites had a history of biocontrol release at a level that could impact EAB density in line with biocontrol efficiency scenarios (10,000 released and 100 recovered parasitoids).
+2. SDP_calcRoT_spreadfirst_noerad.R - calculates rule of thumb scenarios across different budget allocations to quarantines vs. biologican control (in 20% increments) and different levels of efficiency of each action. Saves management action locations over time and resulting EAB propagule pressure for plotting and comparison with optimizations. Spread-focused management (quarantines) is allocated first in this script.
+3. SDP_calcRoT_spreadsecon_noerad.R - calculates rule of thumb scenarios across different budget allocations to quarantines vs. biologican control (in 20% increments) and different levels of efficiency of each action. Saves management action locations over time and resulting EAB propagule pressure for plotting and comparison with optimizations. Site-focused management (biological control) is allocated first in this script.
+4. evaluate_SDP.R - this script checks the value of the objective function for both optimized runs and rule-of-thumb scenarios and examines the proportion of different actions taken 
+5. evaluate_SDP_budget.R - this script checks the value of the objective function for both optimized runs, budget-allocation, and sensitivity analysis and plots the comparison between objective values.
+6. pp_compare.R - this script performs the ANOVA and Tukey tests between the propagule pressure in cells allocated to different action types across optimization scenarios.
+7. SDP_plot.R - this script plots the spatial pattern in propagule pressure, exposed ash street trees, and management actions for both optimizations and rule of thumb scenarios, as well as more comparisons between optimality and rules of thumb.
+
+
+Python Scripts
+1. eab_parasitoid.py - basic optimization across efficiency scenarios
+2. eab_parasitoid_bud.py - fixed percentage budget allocation optimizations (20% increments)
+3. eab_parasitoid_fastdisp_fastgrowth.py - sensitivity analysis to faster parasitoid dispersal and growth
+4. eab_parasitoid_fastdisp.py - sensitivity analysis to faster parasitoid dispersal
+5. eab_parasitoid_nothresh.py - sensitivity analysis with removal of requirement to impose biological control in high-EAB density sites.
