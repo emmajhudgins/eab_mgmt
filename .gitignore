@@ -36,6 +36,9 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
+# Private parasitoid data
+/data/Extract*
+
 # R Environment Variables
 .Renviron
 .DS_Store

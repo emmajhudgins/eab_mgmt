@@ -1,4 +1,5 @@
 require(here)
+library(ggplot2)
 setwd(paste0(here(), "/../output/"))
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 obj<-data.frame(frac_site=0,frac_spread=0,q_in=0,qbio=0, time1=0,time2=0,time3=0,time4=0, time5=0 )
@@ -52,7 +53,7 @@ obj<-obj[2:nrow(obj),]
 plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75), xlab="Site-focused budget proportion", ylab="Exposed ash street trees", pch=19, xlim=c(-0.05,1.05), ylim=c(100000,1400000))
 library(readxl)
 dat<-read.csv('~/Downloads/postdocdat.csv')
-abline(h=dat$Exposed.Ash.Street.Trees..thousands.*1000, lty=2,col=viridis(9))
+points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
 
 mgmt_itme<-read.csv('../../eab_mgmt/output/M_0.6_0.1.csv', header=F) # examine gurobi Management scenario
 #d<-read.csv('../../eab_mgmt/analysis/python/d_0.3_0.3_0.1.csv', header=F) # examine gurobi pest density output
@@ -98,24 +99,26 @@ par(oma=c(0,0,0,0))
 par(xpd = FALSE)
 
 
-plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0.25,0.95), ylim=c(100000,900000), main="Fast Growth Scenario", cex.main=0.75)
+plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0,0.95), ylim=c(0,900000), main="Fast Growth Scenario", cex.main=0.75, axes=F)
+axis(1,labels=c("0","30%", "60%", '90%'), at=c(0,0.3,0.6,0.9), outer=F)
+axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000'), at=c(0,200000,400000,600000,800000, 1000000), outer=F)
 library(readxl)
 dat<-read.csv('~/Downloads/postdocdat.csv')
-abline(h=dat$Exposed.Ash.Street.Trees..thousands.*1000, lty=2,col=viridis(9))
+points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$Quarantine.efficiency+0.05, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 
 image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
-axis(2,labels=c("30%","60%", "90%"),at=c(seq(1,9,length.out=3)), cex.axis=0.5, padj=2)
+axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9), cex.axis=0.5, padj=2)
 axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.5, padj=2)
 par(xpd = TRUE) #Draw outside plot area
 corners<-par("usr")
-text("50%             30%             10%",y=c(8), x=corners[2]+.65, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(5), x=corners[2]+.65, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(2), x=corners[2]+.65, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(8), x=corners[2]+.2, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(5), x=corners[2]+.2, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(2), x=corners[2]+.2, cex=0.5, srt=270)
 
-mtext(side=2, "Quarantine efficiency",line=1, cex=0.5)
+mtext(side=2, "Quarantine efficiency",line=1, cex=0.75)
 corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
-text(x = corners[2]+1.25, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.5, srt = 270)
+text(x = corners[2]+0.4, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
 
 obj<-data.frame(q_in=0,q_out=0,qbio=0, obj=0)
 
@@ -136,24 +139,26 @@ par(oma=c(0,0,0,0))
 par(xpd = FALSE)
 
 
-plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0.25,0.95), ylim=c(100000,900000), main="Fast Dispersal and Growth Scenario", cex.main=0.75)
+plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0,0.95), ylim=c(0,900000), main="Fast Dispersal and Growth Scenario", cex.main=0.75, axes=F)
+axis(1,labels=c("0","30%", "60%", '90%'), at=c(0,0.3,0.6,0.9), outer=F)
+axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000'), at=c(0,200000,400000,600000,800000, 1000000), outer=F)
 library(readxl)
 dat<-read.csv('~/Downloads/postdocdat.csv')
-abline(h=dat$Exposed.Ash.Street.Trees..thousands.*1000, lty=2,col=viridis(9))
+points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$Quarantine.efficiency+0.05, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 
 image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
-axis(2,labels=c("30%","60%", "90%"),at=c(seq(1,9,length.out=3)), cex.axis=0.5, padj=2)
+axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9), cex.axis=0.5, padj=2)
 axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.5, padj=2)
 par(xpd = TRUE) #Draw outside plot area
 corners<-par("usr")
-text("50%             30%             10%",y=c(8), x=corners[2]+.65, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(5), x=corners[2]+.65, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(2), x=corners[2]+.65, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(8), x=corners[2]+.2, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(5), x=corners[2]+.2, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(2), x=corners[2]+.2, cex=0.5, srt=270)
 
-mtext(side=2, "Quarantine efficiency",line=1, cex=0.5)
+mtext(side=2, "Quarantine efficiency",line=1, cex=0.75)
 corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
-text(x = corners[2]+1.25, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.5, srt = 270)
+text(x = corners[2]+0.4, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
 
 obj<-data.frame(q_in=0,q_out=0,qbio=0, obj=0)
 
@@ -174,21 +179,23 @@ par(oma=c(0,0,0,0))
 par(xpd = FALSE)
 
 
-plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0.25,0.95), ylim=c(100000,900000), main="No Threshold Scenario", cex.main=0.75)
+plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0,0.95), ylim=c(0,900000), main="No Threshold Scenario", cex.main=0.75, axes=F)
+axis(1,labels=c("0","30%", "60%", '90%'), at=c(0,0.3,0.6,0.9), outer=F)
+axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000'), at=c(0,200000,400000,600000,800000, 1000000), outer=F)
 library(readxl)
 dat<-read.csv('~/Downloads/postdocdat.csv')
-abline(h=dat$Exposed.Ash.Street.Trees..thousands.*1000, lty=2,col=viridis(9))
+points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$Quarantine.efficiency+0.05, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 
 image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
-axis(2,labels=c("30%","60%", "90%"),at=c(seq(1,9,length.out=3)), cex.axis=0.5, padj=2)
+axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9), cex.axis=0.5, padj=2)
 axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.5, padj=2)
 par(xpd = TRUE) #Draw outside plot area
 corners<-par("usr")
-text("50%             30%             10%",y=c(8), x=corners[2]+.65, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(5), x=corners[2]+.65, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(2), x=corners[2]+.65, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(8), x=corners[2]+.2, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(5), x=corners[2]+.2, cex=0.5, srt=270)
+text("50%             30%             10%",y=c(2), x=corners[2]+.2, cex=0.5, srt=270)
 
-mtext(side=2, "Quarantine efficiency",line=1, cex=0.5)
+mtext(side=2, "Quarantine efficiency",line=1, cex=0.75)
 corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
-text(x = corners[2]+1.25, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.5, srt = 270)
+text(x = corners[2]+0.4, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)

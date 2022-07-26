@@ -1,6 +1,7 @@
 rm(list=ls()) 
 ## reference existing github data here instead of local files
 #Read in Data
+library(dplyr)
 setwd('../../UStreedamage/data/')
 data<-read.csv('countydatanorm_march.csv', stringsAsFactors = FALSE) # spatial data
 data2<-read.csv('spdat_clean_gdk.csv', stringsAsFactors = FALSE) # species data, see Hudgins et al. corrigendum for information on why ALB (spp=3) cannot be accurately fit
@@ -329,13 +330,14 @@ mgmt_sites$qbio<-as.numeric(mgmt_sites$qbio)
 mgmt_sites$action<-as.factor(mgmt_sites$action)
 mgmt_sites$pp<-as.numeric(mgmt_sites$pp)
 m<-lm(log(pp+1)~action+qin+qbio, mgmt_sites)
+library(multcomp)
 mult<-glht(m, linfct=mcp(action="Tukey"))
 summary(mult)
 summary<-mgmt_sites%>%group_by(action, qin)%>%summarize(mean(pp), sqrt(var(pp)/length(pp)))
 write.csv(summary, row.names=F, file="summarybyaction.csv")
 library(ggplot2)
 mgmt_sites$eff<-as.factor(mgmt_sites$qin)
-plot<-ggplot(aes(x=action, y=pp, fill=eff), data=mgmt_sites)+geom_boxplot(aes(y=pp,x=action, fill=eff))+scale_y_log10(limits=c(0.0001,1))+scale_fill_viridis(discrete=T, name="Quarantine effectiveness")+xlab('Action type')+scale_x_discrete(labels=c('Biological control', 'None', "Quarantine in", "Quarantine Out"))+ylab('Relative propagule pressure')+theme_classic()
+plot<-ggplot(aes(x=action, y=pp, fill=eff), data=mgmt_sites)+geom_boxplot(aes(y=pp,x=action, fill=eff))+scale_y_log10(limits=c(0.0001,1), breaks=c(0.0001,0.001,0.01,0.1,1), labels=c("0.0001", "0.001", "0.01", "0.1",1))+scale_fill_viridis(discrete=T, name="Quarantine effectiveness",labels=c('30%', '60%','90%'))+xlab('Action type')+scale_x_discrete(labels=c('Biological control', 'None', "Quarantine in", "Quarantine Out"))+ylab('Relative propagule pressure')+theme_classic()
 plot
 
 
