@@ -1,9 +1,10 @@
 rm(list=ls()) 
 n_spp=66
 library(sp)
-library(pdist)
 library(gpplot2)
 library(here)
+library(viridis)
+
 setwd(paste0(here(),'../data/'))
 
 #Read in Data
@@ -87,7 +88,7 @@ IDsS <- sapply(strsplit(USAsstates$names, ":"), function(x) x[1])
 sp_map_states <- map2SpatialPolygons(USAsstates, IDs=IDsS, proj4string=CRS("+proj=longlat +datum=WGS84"))
 transform_states<-spTransform(sp_map_states, CRS("+proj=eqdc +lat_0=39 +lon_0=-96 +lat_1=33 +lat_2=45 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"))
 
-quar_bound<-readShapeLines('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/plots/quarantine_boundary.shp')
+quar_bound<-readShapeLines('../plots/quarantine_boundary.shp')
 proj4string(quar_bound)<-"+proj=longlat +datum=WGS84"
 quar_bound<-spTransform(quar_bound,"+proj=eqdc +lat_0=39 +lon_0=-96 +lat_1=33 +lat_2=45 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs")
 
@@ -100,9 +101,9 @@ qin=qout=0.3
 qbio=0.1
 frac_site=0.2
 frac_spread=0.8
-results<-read.csv(paste0('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/M_',qin,'_',qbio,'.csv'), header=F)
+results<-read.csv(paste0('../output/M_',qin,'_',qbio,'.csv'), header=F)
 
-pdf(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/plots/eab_mgmt_site",qin, qbio,".pdf", sep="_"))
+pdf(paste("../plots/eab_mgmt_site",qin, qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,4,5,6,7,7,7), ncol=3, byrow=T), heights=c(0.5,0.5,0.4))
 par(mai=c(0.25,0,0.25,0))
 years<-seq(2025,2045, by=5)
@@ -118,7 +119,7 @@ for (time in c(1,3,5))
   points(cbind(data$X_coord[prez[which(results[((3*1799+1):(4*1799)), time]==1),1]], data$Y_coord[prez[which(results[((3*1799+1):(4*1799)), time]==1),1]]), pch=15, cex=0.5, col="red")
 
   }
-results<-read.csv(paste0('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/management_test_0.2_0.8_',qin,'_',qbio,'_.csv'))
+results<-read.csv(paste0('../output/management_test_0.2_0.8_',qin,'_',qbio,'_.csv'))
 for (time in c(1,3,5))
 {
   plot(transform_usa, lwd=0.5, main=years[time], col="white")
@@ -135,25 +136,14 @@ par(xpd=FALSE)
 legend('center', c("Quarantine In", "Quarantine Out", "Biocontrol", "Previous Quarantine Boundary"), col=c('yellow', 'orange', 'red', "deeppink4"), pch=15, cex=2)
 dev.off()
 
-#results<-read.csv('pestden3_nomgmt_new.csv')
-
-#results[,4]<-results[,4]-results[,3]
-#results[,3]<-results[,3]-results[,2]
-#results[,2]<-results[,2]-results[,1]
-#results[,2][which(results[,1]>=0.000538)]<-0
-#results[,3][which(results[,2]>=0.000538)]<-0
-#results[,4][which(results[,3]>=0.000538)]<-0
-#results[,4][which(results[,4]<0.000538)]<-0
-#results[,3][which(results[,3]<0.000538)]<-0
-#results[,2][which(results[,2]<0.000538)]<-0
 qin=qout=0.3
 qbio=0.1
 frac_site=0.2
 frac_spread=0.8
-results<-read.csv(paste('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime_0.9_0.5.csv'), header=F)/1000
+results<-read.csv(paste('../output/vecptime_0.9_0.5.csv'), header=F)/1000
 time<-seq(1:6)
 years<-seq(2020,2045, by=5)
-pdf(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/plots/RoT_eab_dens_",qin, qout, qbio,".pdf", sep="_"))
+pdf(paste("../plots/RoT_eab_dens_",qin, qout, qbio,".pdf", sep="_"))
 years<-seq(2020,2045, by=5)
 bins<-seq(5,0,length.out=50)
 bins<-10^-bins
@@ -170,7 +160,7 @@ for (time in c(2,4,6))
   #plot(transform_states, lwd=0.5, main=years[time], fill=FALSE, add=T,border='white')
   par(xpd=T)
 }
-results<-read.csv(paste0("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/RoT_vecptime_", frac_site,"_",frac_spread, "_", qin,'_',qbio,'_.csv'))
+results<-read.csv(paste0("../output/RoT_vecptime_", frac_site,"_",frac_spread, "_", qin,'_',qbio,'_.csv'))
 for (time in c(2,4,6))
 {
   col<-viridis(51)[findInterval(results[,time], bins)+1]
@@ -192,14 +182,14 @@ bins<-seq(-5,5,length.out=50)
 bins<-10^bins
 
 
-results<-read.csv(paste('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime_0.3_0.1.csv'), header=F)/1000
-pdf(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/plots/eab_exp",qin,qbio,".pdf", sep="_"))
+results<-read.csv(paste('../output/vecptime_0.3_0.1.csv'), header=F)/1000
+pdf(paste("../plots/eab_exp",qin,qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,4,5,6,7,7,7), ncol=3, byrow=T), heights=c(0.5,0.5,0.1))
 par(mai=c(0.25,0,0.25,0))
 years<-seq(2020,2045, by=5)
 bins<-seq(-5,5,length.out=50)
 bins<-10^bins
-ash<-read.csv('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/data/streettrees_grid.csv')
+ash<-read.csv('streettrees_grid.csv')
  for (time in c(2,4,6))
   {
    col<-viridis(50)[findInterval(results[,time]*ash[prez[1:1799,1],20], bins)+1]
@@ -209,7 +199,7 @@ ash<-read.csv('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/data/stree
     #plot(transform_states, lwd=0.5, main=years[time], fill=FALSE, add=T,border='white')
     par(xpd=T)
   }
-  results<-read.csv(paste0("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/RoT_vecptime_", frac_site,"_",frac_spread, "_", qin,'_',qbio,'_.csv'))
+  results<-read.csv(paste0("../output/RoT_vecptime_", frac_site,"_",frac_spread, "_", qin,'_',qbio,'_.csv'))
   for (time in c(2,4,6))
   {
     col<-viridis(50)[findInterval(results[,time]*ash[prez[1:1799,1],20], bins)+1]
@@ -225,12 +215,10 @@ image(1:50,1,matrix(1:50), col=viridis(50), axes=FALSE, ann=F)
 axis(1,labels=c("0",expression(10^{2}), expression(10^{4}),expression(10^{6})),at=c(seq(0,50,length.out=4)), cex.axis=1)
 mtext(side=1, "Exposed Street Ash", line=2)
 dev.off()
-#  }}}
-#pdf("totalash.pdf")
+
 layout(matrix(c(1,2), ncol=1, byrow=TRUE), heights=c(0.75,0.25))
 bins<-seq(0,6,length.out=50)
 bins<-10^bins
-ash<-read.csv('~/Desktop/OneDrive - McGill University/Grad/scripts/streettrees_grid.csv')
 col<-viridis(50)[findInterval(ash[prez[1:1799,1],20], bins)+1]
 par(mai=c(0,0,0,0))
 par(mar=c(0,0,0,0))
@@ -247,7 +235,7 @@ mtext(side=1, "Street Ash", line=2)
 layout(matrix(c(1,2), ncol=1, byrow=TRUE), heights=c(0.75,0.25))
 bins<-seq(0,8,length.out=50)
 bins<-10^bins
-ash<-read.csv('~/Desktop/OneDrive - McGill University/Grad/scripts/hostvol_sdp2020.csv')
+ash<-read.csv('hostvol_sdp2020.csv')
 col<-viridis(50)[findInterval(ash[prez[1:1799,1],1], bins)+1]
 par(mai=c(0,0,0,0))
 par(mar=c(0,0,0,0))
@@ -260,14 +248,14 @@ image(1:50,1,matrix(1:50), col=viridis(50), axes=FALSE, ann=F)
 axis(1,labels=c("0",expression(10^{2}), expression(10^{4}),expression(10^{6}),expression(10^{8})),at=c(seq(0,50,length.out=5)), cex.axis=1)
 mtext(side=1, "Forest Ash Volume", line=2)
 
-dat<-read.csv('~/Downloads/postdocdat.csv')
+dat<-read.csv('../output/results_table.csv')
 
 qz<-c(0.3,0.6,0.9)
 bios<-c(0.1,0.3,0.5)
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 obj<-data.frame(frac_site=0,frac_spread=0,q_in=0,q_out=0,qbio=0, obj=0)
 names(obj)
-V_i<-read.csv('../../GitHub/eab_mgmt/data/streettrees_grid.csv')[,20]
+V_i<-read.csv('streettrees_grid.csv')[,20]
 
 for (q_in in qz)
 {
@@ -285,8 +273,6 @@ q_out=q_in
   }
 
 obj<-obj[2:nrow(obj),]
-library(viridis)
-library(ggplot2)
 
 layout(matrix(c(1,2), ncol=2, byrow=TRUE), heights=c(1,1), widths=c(0.7,0.3))
 par(mar=c(4,4,2,0))
@@ -297,8 +283,6 @@ plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in
 axis(1,  at=c(0,0.2,0.4,0.6,0.8,1.0))
 axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2, cex.axis=0.5)
 
-library(readxl)
-dat<-read.csv('~/Downloads/postdocdat.csv')
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 
@@ -316,8 +300,6 @@ corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
 text(x = corners[2]+0.4, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
 
 
-
-
 qz<-c(0.3,0.6,0.9)
 bios<-c(0.1,0.3,0.5)
 obj<-data.frame(q_in=0,qbio=0, obj=0)
@@ -327,7 +309,7 @@ for (q_in in qz)
 {
     for (qbio in bios)
     {
-    d4prime<-read.csv(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime_",q_in,"_",qbio, ".csv", sep=""), header=F)[,2:8]/1000
+    d4prime<-read.csv(paste("../output/vecptime_",q_in,"_",qbio, ".csv", sep=""), header=F)[,2:8]/1000
         obj<-rbind(obj, setNames(c(q_in,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
       }
   }
@@ -343,43 +325,8 @@ axis(1,  at=c(0,0.1,0.3,0.5))
 axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2, cex.axis=0.5)
 
 points(x=c(0.1,0.3,0.5), y=c(1239440,1050990,767630),col="red", pch=24) 
-legend('topright', legend=c("30% Quarantine Efficiency","60% Quarantine Efficiency", "90% Quarantine Efficiency", "Biocontrol Only"), pch=c(19,19,19,24), col=c(viridis(27)[c(1,13,25)], "red"), cex=0.75)
-# points(y=rep(978764.3,5),x=c(0.5403754, 0.3209943, 0.0000000, 0.3491804, 0.0000000 ), col=viridis(27)[1], pch=c("1","2","3","4","5"))
+legend('topright', legend=c("30% Quarantine Efficiency","60% Quarantine Efficiency", "90% Quarantine Efficiency", "Biocontrol Only"), pch=c(19,19,19,24), col=c(viridis(27)[c(1,13,25)], "red"), cex=0.75)=rep(946951,5),x=cost_each[,6], col=viridis(27)[1], pch=8)
 
-# abline(h=946951, lty=2,col=viridis(27)[4])
-# abline(h=946951, lty=2,col=viridis(27)[7])
-# abline(h=887046.1, lty=2,col=viridis(27)[16])
-# points(y=rep(887046.1,5),x=c(0.3692045, 0.2444020, 0.2881563, 0.2918899, 0.0000000 ), col=viridis(27)[16], pch=c("1","2","3","4","5")) 
-# # abline(h=946951, lty=2,col=viridis(27)[13])
-# # abline(h=946951, lty=2,col=viridis(27)[16])
-# abline(h=, lty=2,col=viridis(27)[27])
-# points(y=rep(797804,5),x=c(5.403754e-01, 3.209943e-01, 2.425140e-07, 3.491806e-01, 1.734203e-07), col=viridis(27)[27], pch=c("1","2","3","4","5"))
-
-# abline(h=946951, lty=2,col=viridis(27)[22])
-# abline(h=946951, lty=2,col=viridis(27)[25])
-
-#points(y=rep(946951,5),x=cost_each[,6], col=viridis(27)[1], pch=8)
-#legend('bottomright', legend=c("Site first", "Spread First", "Optimality"), pch=c(19,23,8), col=viridis(1))
-#legend('bottomright', legend=c("Rule of Thumb", "Optimality"), pch=c(19,NA), lty=c(NA,2), col=viridis(27)[13], cex=0.5)
-mgmt_itme<-read.csv('M3_0.9_0.9_0.1.csv', header=F)
-mgmt_itme<-round(mgmt_itme)
-d_time<-read.csv('pestden3_0.6_0.6_0.3_new.csv')
-# d_time<-read.csv('../vecptime_0.9_0.1_0.3_0.3_0.1_
-
-qin=qout=0.3
-qbio=0.1
-mgmt<-read.csv(paste('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/M_',qin,"_",qbio,'.csv', sep=""), header=F)
-results<-(read.csv(paste('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime_',qin,"_",qbio,'.csv', sep=""), header=F)/1000)[,1:6]
-no_action<-(as.matrix(results)[,2])[which(mgmt[1:1799,2]==1)]
-q_in<-(as.matrix(results[,2]))[which(mgmt[1800:(2*1799),2]==1)]
-q_out<-(as.matrix(results[,2]))[which(mgmt[(2*1799+1):(3*1799),2]==1)]
-bio<-(as.matrix(results))[which(mgmt[(3*1799+1):(4*1799),]==1)]
-df <- data.frame(values = c(no_action,q_in,q_out,bio),
-                 vars = rep(c("no_action","q_in", "q_out","bio"), times = c(length(no_action), length(q_in), length(q_out), length(bio))))
-par(mar=c(4,4,2,2))
-boxplot(values~vars, df)
-library(vioplot)
-vioplot(values~vars, df,horizontal=T)
 
 
 qz<-c(0.3,0.6,0.9)
@@ -391,7 +338,7 @@ for (q_in in qz)
 {
   for (qbio in bios)
   {
-    d4prime<-read.csv(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime_",q_in,"_",qbio, "_fdfg.csv", sep=""), header=F)[,2:8]/1000
+    d4prime<-read.csv(paste("../output/vecptime_",q_in,"_",qbio, "_fdfg.csv", sep=""), header=F)[,2:8]/1000
     obj<-rbind(obj, setNames(c(q_in,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
   }
 }
@@ -404,7 +351,7 @@ bios<-c(0.1,0.3,0.5)
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=6), spread_bud=seq(1,0,length.out=6))
 obj<-data.frame(frac_site=0,q_in=0,qbio=0, obj=0)
 names(obj)
-V_i<-read.csv('../../GitHub/eab_mgmt/data/streettrees_grid.csv')[,20]
+V_i<-read.csv('streettrees_grid.csv')[,20]
 
 for (q_in in qz)
 {
@@ -415,7 +362,7 @@ for (q_in in qz)
         frac_site=budget_scen$site_bud[scen]
         frac_spread=budget_scen$spread_bud[scen]
     
-        d4prime<-read.csv(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime",frac_spread,q_in,qbio, "bud.csv", sep="_"), header=F)[,2:8]/1000
+        d4prime<-read.csv(paste("../output/vecptime",frac_spread,q_in,qbio, "bud.csv", sep="_"), header=F)[,2:8]/1000
         obj<-rbind(obj, setNames(c(frac_site, q_in,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
       }
     }
@@ -432,8 +379,6 @@ par(xpd = FALSE)
 plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75), xlab="Biological control proportion", ylab="Exposed ash street trees",  pch=19, xlim=c(-0.05,1.05), ylim=c(0,1400000), cex.main=0.75, axes=F)
 axis(1,labels=c("0","20%", "40%","60%", '80%', "100%"), at=c(0,0.2,0.4,0.6,0.8,1.0), outer=F)
 axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000','1200000','1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000,1400000), outer=F, las=2,cex.axis=0.5)
-library(readxl)
-dat<-read.csv('~/Downloads/postdocdat.csv')
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 
@@ -459,8 +404,6 @@ par(xpd = FALSE)
 
 plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Biological control proportion", ylab="Exposed ash street trees", pch=19, xlim=c(-0.05,1.05), ylim=c(100000,1200000))
 
-library(readxl)
-dat<-read.csv('~/Downloads/postdocdat.csv')
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
@@ -487,13 +430,13 @@ bins<-seq(-5,5,length.out=50)
 bins<-10^bins
 
 
-results<-read.csv(paste('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/data/vecptime_0_1_0.3_0.1_.csv'))
-pdf(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/plots/ash",qin,qbio,".pdf", sep="_"))
+results<-read.csv(paste('../output/vecptime_0_1_0.3_0.1_.csv'))
+pdf(paste("../plots/ash",qin,qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,3), ncol=2, byrow=T),heights=c(0.8,0.2))
 par(mai=c(0.25,0,0.25,0))
 bins<-seq(-5,5,length.out=50)
 bins<-10^bins
-ash<-read.csv('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/data/streettrees_grid.csv')
+ash<-read.csv('streettrees_grid.csv')
 for (time in c(6))
 {
   col<-viridis(50)[findInterval(ash[prez[1:1799,1],20], bins)+1]
@@ -503,7 +446,7 @@ for (time in c(6))
   #plot(transform_states, lwd=0.5, main=years[time], fill=FALSE, add=T,border='white')
   par(xpd=T)
 }
-results<-read.csv("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/data/vecP_noaction.csv")
+results<-read.csv("vecP_noaction.csv")
 for (time in c(6))
 {
   col<-viridis(50)[findInterval((ifelse(rowSums(results[,1:time])>1,1,rowSums(results[,1:time])))*ash[prez[1:1799,1],20], bins)+1]

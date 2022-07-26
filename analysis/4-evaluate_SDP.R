@@ -1,6 +1,6 @@
+rm(list=ls())
 require(here)
-setwd(here())
-setwd("../output/")
+setwd(paste0(here(),"../output/"))
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 obj<-data.frame(frac_site=0,frac_spread=0,q_in=0,qbio=0, obj=0)
 V_i<-read.csv('../data/streettrees_grid.csv')[,20]
@@ -16,7 +16,7 @@ for (q_in in qz)
     {
       frac_site=budget_scen$site_bud[scen]
       frac_spread=budget_scen$spread_bud[scen]
-      d4prime<-read.csv(paste("../../eab_mgmt/output/RoT_vecptime",frac_site,frac_spread,q_in,qbio, ".csv", sep="_"))
+      d4prime<-read.csv(paste("RoT_vecptime",frac_site,frac_spread,q_in,qbio, ".csv", sep="_"))
       obj<-rbind(obj, setNames(c(frac_site,frac_spread,q_in,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
     }
   }
@@ -26,9 +26,8 @@ library(viridis)
 plot(obj$obj~obj$frac_site, col=viridis(9)[as.factor(paste0(obj$q_in,obj$q_out, obj$qbio))], xlab="Site-focused budget proportion", ylab="Exposed ash street trees")
 
 # 
- mgmt_itme<-read.csv('~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/M_0.9_0.5.csv') # examine gurobi Management scenario
- #d<-read.csv('../../eab_mgmt/analysis/python/d_0.3_0.3_0.1.csv', header=F) # examine gurobi pest density output
-# 
+ mgmt_itme<-read.csv('M_0.9_0.5.csv') # examine gurobi Management scenario, change file name to different efficiency scenaris
+
 mgmt<-list()
 for (time in 6:11)
 {

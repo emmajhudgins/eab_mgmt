@@ -16,7 +16,7 @@ for (q_in in qz)
     {
       frac_site=budget_scen$site_bud[scen]
       frac_spread=budget_scen$spread_bud[scen]
-      d4prime<-read.csv(paste("../../eab_mgmt/output/vecptime",frac_spread,q_in,qbio, "bud.csv", sep="_"))[,2:6]/1000
+      d4prime<-read.csv(paste("vecptime",frac_spread,q_in,qbio, "bud.csv", sep="_"))[,2:6]/1000
       obj<-rbind(obj, setNames(c(frac_site,frac_spread,q_in,qbio,colSums(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
     }
   }
@@ -43,7 +43,7 @@ for (q_in in qz)
       {
         frac_site=budget_scen$site_bud[scen]
         frac_spread=budget_scen$spread_bud[scen]
-        d4prime<-read.csv(paste("../../eab_mgmt/output/vecptime",frac_spread,q_in,qbio, "bud.csv", sep="_"), header=F)[,2:8]/1000
+        d4prime<-read.csv(paste("vecptime",frac_spread,q_in,qbio, "bud.csv", sep="_"), header=F)[,2:8]/1000
         obj<-rbind(obj, setNames(c(frac_site,frac_spread,q_in,q_out,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
       }
     }
@@ -52,10 +52,10 @@ for (q_in in qz)
 obj<-obj[2:nrow(obj),]
 plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75), xlab="Site-focused budget proportion", ylab="Exposed ash street trees", pch=19, xlim=c(-0.05,1.05), ylim=c(100000,1400000))
 library(readxl)
-dat<-read.csv('~/Downloads/postdocdat.csv')
+dat<-read.csv('results_table.csv')
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
 
-mgmt_itme<-read.csv('../../eab_mgmt/output/M_0.6_0.1.csv', header=F) # examine gurobi Management scenario
+mgmt_itme<-read.csv('M_0.6_0.1.csv', header=F) # examine gurobi Management scenario
 #d<-read.csv('../../eab_mgmt/analysis/python/d_0.3_0.3_0.1.csv', header=F) # examine gurobi pest density output
 # 
 mgmt<-list()
@@ -87,7 +87,7 @@ for (q_in in qz)
   q_out=q_in
   for (qbio in bios)
   {
-    d4prime<-read.csv(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime",q_in,qbio, "fg.csv", sep="_"), header=F)[,2:8]/1000
+    d4prime<-read.csv(paste("vecptime",q_in,qbio, "fg.csv", sep="_"), header=F)[,2:8]/1000
     obj<-rbind(obj, setNames(c(q_in,q_out,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
   }
 }
@@ -102,7 +102,6 @@ par(xpd = FALSE)
 plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0,0.95), ylim=c(0,900000), main="Fast Growth Scenario", cex.main=0.75, axes=F)
 axis(1,labels=c("0","30%", "60%", '90%'), at=c(0,0.3,0.6,0.9), outer=F)
 axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000'), at=c(0,200000,400000,600000,800000, 1000000), outer=F)
-library(readxl)
 dat<-read.csv('~/Downloads/postdocdat.csv')
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$Quarantine.efficiency+0.05, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
@@ -127,7 +126,7 @@ for (q_in in qz)
   q_out=q_in
   for (qbio in bios)
   {
-    d4prime<-read.csv(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime",q_in,qbio, "fdfg.csv", sep="_"), header=F)[,2:8]/1000
+    d4prime<-read.csv(paste("vecptime",q_in,qbio, "fdfg.csv", sep="_"), header=F)[,2:8]/1000
     obj<-rbind(obj, setNames(c(q_in,q_out,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
   }
 }
@@ -142,8 +141,6 @@ par(xpd = FALSE)
 plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0,0.95), ylim=c(0,900000), main="Fast Dispersal and Growth Scenario", cex.main=0.75, axes=F)
 axis(1,labels=c("0","30%", "60%", '90%'), at=c(0,0.3,0.6,0.9), outer=F)
 axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000'), at=c(0,200000,400000,600000,800000, 1000000), outer=F)
-library(readxl)
-dat<-read.csv('~/Downloads/postdocdat.csv')
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$Quarantine.efficiency+0.05, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 
@@ -167,7 +164,7 @@ for (q_in in qz)
   q_out=q_in
   for (qbio in bios)
   {
-    d4prime<-read.csv(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/vecptime",q_in,qbio, "nothresh.csv", sep="_"), header=F)[,2:8]/1000
+    d4prime<-read.csv(paste("vecptime",q_in,qbio, "nothresh.csv", sep="_"), header=F)[,2:8]/1000
     obj<-rbind(obj, setNames(c(q_in,q_out,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
   }
 }
@@ -182,8 +179,6 @@ par(xpd = FALSE)
 plot(y=obj$obj,x=(obj$q_in), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, xlim=c(0,0.95), ylim=c(0,900000), main="No Threshold Scenario", cex.main=0.75, axes=F)
 axis(1,labels=c("0","30%", "60%", '90%'), at=c(0,0.3,0.6,0.9), outer=F)
 axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000'), at=c(0,200000,400000,600000,800000, 1000000), outer=F)
-library(readxl)
-dat<-read.csv('~/Downloads/postdocdat.csv')
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$Quarantine.efficiency+0.05, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 

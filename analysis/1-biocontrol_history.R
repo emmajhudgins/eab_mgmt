@@ -4,9 +4,10 @@ require(dplyr)
 require(sp)
 require(lubridate)
 setwd(paste0(here(), '/../data/'))
+#private parasitoid release data - see mapbiocontrol.org for permissions
 release_sites<-read_sf('./Extract_Data_Jun_11__2021__10_41_46_AM/Parasitoid_Release.shp')
 recovery_sites<-read_sf('./Extract_Data_Jun_11__2021__10_41_46_AM/Recovery.shp')
-grid<-read.csv('../../UStreedamage/data/countydatanorm_march.csv')
+grid<-read.csv('countydatanorm_march.csv')
 coordinates(grid)<-~X_coord+Y_coord
 grid<-st_as_sf(grid)
 st_crs(grid)<-'+proj=eqdc +lat_0=40 +lon_0=-96 +lat_1=20 +lat_2=60 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs'
