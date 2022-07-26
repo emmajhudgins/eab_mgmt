@@ -1,12 +1,14 @@
 _repo to accompany_
 # Optimal Emerald Ash Borer (Agrilus planipennis) control across the United States
-Emma J. Hudgins, Jeffrey O. Hanson, Christian MacQuarrie, Denys Yemshanov, Richard Schuster, Eve McDonald-Madden, Chris Baker, Matthew Holden, Iadine Chadès, & Joseph R. Bennett
+Emma J. Hudgins, Jeffrey O. Hanson, Christian MacQuarrie, Denys Yemshanov, Eve McDonald-Madden, Chris Baker, Matthew Holden, Iadine Chadès, & Joseph R. Bennett
+
+Substantial conceptual contributions by Martin Péron, past PhD student of Iadine Chadès.
 
 An optimal control approach to EAB management for urban tree persistence in explicit space and time.
 
 **The larger postdoc project context:**
 
-The goal is to find rules of thumb for the optimal management of Canadian invasive forest pests, and to create an interactive open source tool to display these management optimizations.
+The goal is to find rules of thumb for the optimal management of North American invasive forest pests, and to create an interactive open source tool to display these management optimizations.
 
 **Previous work:**
 
@@ -28,11 +30,9 @@ We chose to minimize future exposed street ash (gain in propagule pressure*# urb
 **Results:** 
 
 We found that the best management strategy always included a combination of site-focussed (eradication and biological control) and spread-focussed (quarantine) management measures. Optimal strategies vastly outperformed common rules-of-thumb such as targeting the sites causing the greatest number of new establishments or receiving the highest propagule pressure for control actions. 
+
 These findings support a multipronged EAB management approach, where regional context is considered, and quarantine regions are refined rather than abandoned. Quarantines targeting inflow of propagules are high priority for preventing new jumps to areas like Seattle, while quarantines focussing on outflow dominate the core of the invasion. Quarantines  get replaced with biocontrol in more efficient scenarios, and Eradications are rare and are only recommended when biocontrol is inefficient.
 
-**Current Work** 
-- Better estimates of biocontrol cost incorporated
-- Incorporating a model for the dispersal of biocontrol agents themselves. Chris MacQuarrie has data that could potentially be used to estimate a very basic parasitoid dispersal kernel.
-- Eradication is not a viable EAB strategy due to the high detection threshold of EAB, so I will be reformulating eradication as an insecticide treatment protocol
-- incorporating a time lag such that biocontrol can only be feasible after a certain number of years of EAB infestation (potentially estimating from US county detection and MapBioControl)
-- create some budget allocation scenarios rather than allowing any % of the budget to go to biocontrol, because this would likely have more uptake by government, and could show diminishing returns of increased biocontrol investment (but keep in mind different jusidictions for each management option)
+** File organization structure **
+
+The analysis section is split into R and Python (3) components. The python scripts require the gurobipy library, which interfaces with GUROBI 9.1.0 software (free for academic use, [!www.gurobi.com])
