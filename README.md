@@ -45,7 +45,7 @@ R Scripts
 5. evaluate_SDP_budget.R - this script checks the value of the objective function for both optimized runs, budget-allocation, and sensitivity analysis and plots the comparison between objective values.
 6. pp_compare.R - this script performs the ANOVA and Tukey tests between the propagule pressure in cells allocated to different action types across optimization scenarios.
 7. SDP_plot.R - this script plots the spatial pattern in propagule pressure, exposed ash street trees, and management actions for both optimizations and rule of thumb scenarios, as well as more comparisons between optimality and rules of thumb.
-
+8. cost_estimate.R - this script calculates a rough estimate of the maximal cost savings from this approach relative to a biocontrol-only, rule-of-thumb approach using previously published ash size class distributions and cost data from Hudgins et al. (2022) and Aukema et al. (2011).
 
 Python Scripts
 1. eab_parasitoid.py - basic optimization across efficiency scenarios

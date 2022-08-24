@@ -1,7 +1,7 @@
 rm(list=ls()) 
 n_spp=66
 library(sp)
-library(gpplot2)
+library(ggplot2)
 library(here)
 library(viridis)
 
@@ -281,14 +281,14 @@ par(xpd = FALSE)
 
 plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Biological control proportion", ylab="Exposed ash street trees", pch=19, xlim=c(-0.05,1.05), ylim=c(100000,1300000), axes=F)
 axis(1,  at=c(0,0.2,0.4,0.6,0.8,1.0))
-axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2, cex.axis=0.5)
+axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2, cex.axis=0.65)
 
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 
 image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
-axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9), cex.axis=0.5, padj=2)
-axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.5, padj=2)
+axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9), cex.axis=0.75, padj=2)
+axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.75, padj=2)
 par(xpd = TRUE) #Draw outside plot area
 corners<-par("usr")
 text("50%             30%             10%",y=c(8), x=corners[2]+.2, cex=0.5, srt=270)
@@ -325,9 +325,7 @@ axis(1,  at=c(0,0.1,0.3,0.5))
 axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2, cex.axis=0.5)
 
 points(x=c(0.1,0.3,0.5), y=c(1239440,1050990,767630),col="red", pch=24) 
-legend('topright', legend=c("30% Quarantine Efficiency","60% Quarantine Efficiency", "90% Quarantine Efficiency", "Biocontrol Only"), pch=c(19,19,19,24), col=c(viridis(27)[c(1,13,25)], "red"), cex=0.75)=rep(946951,5),x=cost_each[,6], col=viridis(27)[1], pch=8)
-
-
+legend('topright', legend=c("30% Quarantine Efficiency","60% Quarantine Efficiency", "90% Quarantine Efficiency", "Biocontrol Only"), pch=c(19,19,19,24), col=c(viridis(27)[c(1,13,25)], "red"), cex=0.75)
 
 qz<-c(0.3,0.6,0.9)
 bios<-c(0.1,0.3,0.5)
@@ -377,7 +375,7 @@ par(xpd = FALSE)
 
 
 plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75), xlab="Biological control proportion", ylab="Exposed ash street trees",  pch=19, xlim=c(-0.05,1.05), ylim=c(0,1400000), cex.main=0.75, axes=F)
-axis(1,labels=c("0","20%", "40%","60%", '80%', "100%"), at=c(0,0.2,0.4,0.6,0.8,1.0), outer=F)
+axis(1,at=c(0,0.2,0.4,0.6,0.8,1.0), outer=F)
 axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000','1200000','1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000,1400000), outer=F, las=2,cex.axis=0.5)
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
