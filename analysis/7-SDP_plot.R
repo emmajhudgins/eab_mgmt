@@ -5,7 +5,7 @@ library(ggplot2)
 library(here)
 library(viridis)
 
-setwd(paste0(here(),'../data/'))
+setwd(paste0(here(),'/../data/'))
 
 #Read in Data
 data<-read.csv('data_minus5_july.csv', stringsAsFactors = FALSE)
@@ -16,9 +16,9 @@ for (sppp in 1:75)
 rr<-which(data2$YEAR>=10)
 data2<-data2[rr,]
 gen<-gen[,rr]
-FIA<-read.csv('FIAcodes_notypos.csv', stringsAsFactors = FALSE)
+FIA<-read.csv('FIAcodes_notypos_2019.csv', stringsAsFactors = FALSE)
 FIA<-FIA[rr,]
-FIA2<-read.csv('FIA_march.csv', stringsAsFactors = FALSE)
+FIA2<-read.csv('FIA_march_2019.csv', stringsAsFactors = FALSE)
 fia<-list()
 FIA$FIA<-as.character(FIA$FIA)
 fia<-strsplit(FIA$FIA, split=", ")
@@ -57,15 +57,9 @@ prez<-prez[,good]
 L<-L[good]
 data2<-data2[good,]
 gen<-gen[,good]
-host.density2<-read.csv("hostvol_notypos.csv", stringsAsFactors = FALSE)
-hostvol<-read.csv('hostvol_sdp.csv') #need to redo for 2 spp
-hostvol<-hostvol[,rr]
-hostvol<-hostvol[,good]
 fia<-fia[good]
 n_spp=length(data2[,1])
 prez2<-matrix(0,3372,64)
-L2<-rep(0,64)
-L3<-rep(0,64)
 for (sppp in 1:64)
 {prez2[,sppp]<-c(intersect(prez[which(prez[,sppp]!=0),sppp], gen[which(gen[,sppp]!=0),sppp]), rep(0,(3372-length(intersect(prez[which(prez[,sppp]!=0),sppp], gen[which(gen[,sppp]!=0),sppp])))))}
 
@@ -255,7 +249,7 @@ bios<-c(0.1,0.3,0.5)
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 obj<-data.frame(frac_site=0,frac_spread=0,q_in=0,q_out=0,qbio=0, obj=0)
 names(obj)
-V_i<-read.csv('streettrees_grid.csv')[,20]
+V_i<-read.csv('../data/streettrees_grid.csv')[,20]
 
 for (q_in in qz)
 {
@@ -266,7 +260,7 @@ q_out=q_in
       {
         frac_site=budget_scen$site_bud[scen]
         frac_spread=budget_scen$spread_bud[scen]
-        d4prime<-read.csv(paste("~/Desktop/OneDrive - McGill University/GitHub/eab_mgmt/output/RoT_vecptime",frac_site,frac_spread,q_in,qbio, ".csv", sep="_"))[,1:7]
+        d4prime<-read.csv(paste("../output/RoT_vecptime",frac_site,frac_spread,q_in,qbio, ".csv", sep="_"))[,1:7]
         obj<-rbind(obj, setNames(c(frac_site,frac_spread,q_in,q_out,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
       }
     }
@@ -281,23 +275,23 @@ par(xpd = FALSE)
 
 plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Biological control proportion", ylab="Exposed ash street trees", pch=19, xlim=c(-0.05,1.05), ylim=c(100000,1300000), axes=F)
 axis(1,  at=c(0,0.2,0.4,0.6,0.8,1.0))
-axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2, cex.axis=0.65)
+axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2, cex.axis=0.75, hadj=0.8)
 
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 
 image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
-axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9), cex.axis=0.75, padj=2)
+axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9), cex.axis=0.75, padj=1)
 axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.75, padj=2)
 par(xpd = TRUE) #Draw outside plot area
 corners<-par("usr")
-text("50%             30%             10%",y=c(8), x=corners[2]+.2, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(5), x=corners[2]+.2, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(2), x=corners[2]+.2, cex=0.5, srt=270)
+text("50%      30%     10%",y=c(7.9), x=corners[2]+.5, cex=0.75, srt=270)
+text("50%      30%     10%",y=c(4.9), x=corners[2]+.5, cex=0.75, srt=270)
+text("50%      30%     10%",y=c(1.9), x=corners[2]+.5, cex=0.75, srt=270)
 
-mtext(side=2, "Quarantine efficiency",line=1, cex=0.75)
+mtext(side=2, "Quarantine efficiency",line=1.25, cex=0.75)
 corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
-text(x = corners[2]+0.4, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
+text(x = corners[2]+0.9, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
 
 
 qz<-c(0.3,0.6,0.9)
@@ -321,8 +315,8 @@ plot(y=obj$obj,x=obj$q_in, col=alpha(viridis(27)[as.factor(paste0(obj$q_in,obj$q
 par(xpd = FALSE)
 par(mar=c(4,4,2,2))
 plot(dat$Exposed.Ash.Street.Trees..thousands.*1000~dat$Biocontrol.efficiency,col=viridis(27)[c(1,1,1,13,13,13,25,25,25,25)], pch=19, xlab="Biocontrol Efficiency", ylab="Exposed ash street trees", ylim=c(100000,1500000), axes=F) 
-axis(1,  at=c(0,0.1,0.3,0.5))
-axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2, cex.axis=0.5)
+axis(1,  at=c(0,0.1,0.3,0.5), labels=c("","10%","30%","50%"))
+axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2,  cex.axis=0.75, hadj=0.8)
 
 points(x=c(0.1,0.3,0.5), y=c(1239440,1050990,767630),col="red", pch=24) 
 legend('topright', legend=c("30% Quarantine Efficiency","60% Quarantine Efficiency", "90% Quarantine Efficiency", "Biocontrol Only"), pch=c(19,19,19,24), col=c(viridis(27)[c(1,13,25)], "red"), cex=0.75)
@@ -373,25 +367,25 @@ par(mar=c(4,4,2,0))
 par(oma=c(0,0,0,0))
 par(xpd = FALSE)
 
+plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Biological control proportion", ylab="Exposed ash street trees", pch=19, xlim=c(-0.05,1.05), ylim=c(100000,1300000), axes=F)
+axis(1,  at=c(0,0.2,0.4,0.6,0.8,1.0))
+axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2, cex.axis=0.75, hadj=0.8)
 
-plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75), xlab="Biological control proportion", ylab="Exposed ash street trees",  pch=19, xlim=c(-0.05,1.05), ylim=c(0,1400000), cex.main=0.75, axes=F)
-axis(1,at=c(0,0.2,0.4,0.6,0.8,1.0), outer=F)
-axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000','1200000','1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000,1400000), outer=F, las=2,cex.axis=0.5)
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))
 
 image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
-axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9), cex.axis=0.5, padj=2)
-axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.5, padj=2)
+axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9), cex.axis=0.75, padj=1)
+axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.75, padj=2)
 par(xpd = TRUE) #Draw outside plot area
 corners<-par("usr")
-text("50%             30%             10%",y=c(8), x=corners[2]+.2, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(5), x=corners[2]+.2, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(2), x=corners[2]+.2, cex=0.5, srt=270)
+text("50%      30%     10%",y=c(7.9), x=corners[2]+.5, cex=0.75, srt=270)
+text("50%      30%     10%",y=c(4.9), x=corners[2]+.5, cex=0.75, srt=270)
+text("50%      30%     10%",y=c(1.9), x=corners[2]+.5, cex=0.75, srt=270)
 
-mtext(side=2, "Quarantine efficiency",line=1, cex=0.75)
+mtext(side=2, "Quarantine efficiency",line=1.25, cex=0.75)
 corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
-text(x = corners[2]+0.4, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
+text(x = corners[2]+0.9, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
 
 
 
