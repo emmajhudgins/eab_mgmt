@@ -42,7 +42,7 @@ time_sub = range(1,5+1) #25 years
 r = 1.299034706404549 # pest growth rate from published model
 phi =0.538410692229749 #pest detectability/dispersal density threshold from published model
 
-for rr in range(2,3): #iterate over efficiency scenarios
+for rr in range(0s,3): #iterate over efficiency scenarios
     for qq in range(0,3): 
         #efficiencies 
         effs_quar=[0.3,0.6,0.9] #efficiency scenarios for quarantines
@@ -226,7 +226,6 @@ for rr in range(2,3): #iterate over efficiency scenarios
         m.addConstrs(((d[loc, year+1] <= 1000+((3000/phi)*(1-c_7[loc,year]))) for loc in sites2 for year in time), name="max_d3") #if it is above 1000, reduce back to 1000
         m.addConstrs(((c_6[loc,year]<=1+((1000-d4prime[loc,year])/(3000/phi))) for loc in sites2 for year in time), name="max_d4")
         m.addConstrs(((c_7[loc,year]>=(d4prime[loc,year]-1000)/(3000/phi)) for loc in sites2 for year in time), name="max_d5")
-        m.addConstrs(((c_6[loc,year]>=-c_7[loc,year]+((d4prime[loc,year])/(3000/phi))) for loc in sites2 for year in time), name="max_d6")
 
         #maintain source at maximum propagule pressure
         m.addConstrs(((d[source,year]==1000) for year in range(1, len(time)+2)), name="source_den") #pest density has to be at maximum in source cell
