@@ -1,0 +1,215 @@
+rm(list=ls()) 
+setwd("../data/")
+#Read in Data
+data<-read.csv('countydatanorm_march.csv', stringsAsFactors = FALSE) # spatial data
+data2<-read.csv('spdat_clean_gdk.csv', stringsAsFactors = FALSE) # species data, see Hudgins et al. corrigendum for information on why ALB (spp=3) cannot be accurately fit
+host.density2<-read.csv('hostden_clean_gdk.csv') # tree host density by pest species
+prez<-read.csv('prez_clean_gdk.csv') # invasible host range (from FIA)
+prez2<-read.csv('prez2_clean_gdk.csv') # pest presences for all species
+prez2[,1]<-readRDS('../output/presences_time_eab.rds')[[1]][,5] # pest presences in 2020
+biohist<-read.csv('biocontrol_history.csv')
+L<-rep(0,64) # size of each pest's host range
+V_i<-read.csv('streettrees_grid.csv')[,20]
+forecast=F
+L<-length(unique(c(which(V_i>0), prez[,1], prez2[,1])))-1
+prez[,1]<-c(unique(c(which(V_i!=0), prez[which(prez[,1]!=0),1], prez2[which(prez2[,1]!=0),1])), rep(0, 3372-L))
+#write.csv(prez, "prez_eab_street.csv",row.names=F)
+
+#human population density
+currpopden<-as.matrix(read.csv("currpopden_5.csv", stringsAsFactors = FALSE))
+currpopden2<-as.matrix(read.csv("future_scaled_pop2.csv"))
+twenty35<-rowMeans(cbind(currpopden[,47], currpopden2[,4]))
+twenty45<-rowMeans(cbind(currpopden2[,4], currpopden2[,5]))
+twenty55<-rowMeans(cbind(currpopden2[,5], currpopden2[,6]))
+currpopden<-cbind(currpopden, twenty35, currpopden2[,4], twenty45, currpopden2[,5], twenty55, currpopden2[,6])
+
+#ash street trees
+V_i<-read.csv('streettrees_grid.csv')[,20]
+v_scale<-scale(V_i, center=T)
+
+
+#Euclidean distances between sites
+Tr1<-function(x)
+{
+  sqrt((data$X_coord-data$X_coord[x])^2+(data$Y_coord-data$Y_coord[x])^2)
+}
+
+
+dists<-sapply(1:3372, Tr1)
+T1<-exp(-dists/50000)
+YEAR<-28 #assume initial invasion in in 1992
+par<-rep(0,23)
+spp=1 # EAB  
+
+# set fixed values for model parameters
+par[c(21,22,4,18,20,8)]<-as.numeric(c(0.000538410692229749, 0.299034706404549, -0.525670755351726, 15.6132848183217,-0.163552592351765, 0.323831382884772))
+par[21]<-abs(par[21])
+par[22]<-abs(par[22])+1
+par[c(1,23,24)]<-readRDS('../output/full_model.RDS')$par
+
+#Pest Parameters
+Pfull<<-matrix(0, 3372,64)
+Pfull_time<<-Pfull
+
+constpD=rep(0,64)
+constpD=matrix(rep(constpD),3372,64, byrow=TRUE)
+constpD2<-matrix(rep(par[9]*data[,18]+par[10]*data[,16]+par[16]*data[,19]+par[17]*data[,20]+par[18]*data[,21]+par[23]*v_scale[,1], 64),3372,64, byrow=F)+par[19]*host.density2
+constpD<-as.numeric(constpD)+constpD2
+constpD3<-matrix(rep(par[4]*data[,19]+par[12]*data[,20]+par[3]*data[,21]+par[13]*data[,18]+par[15]*data[,16]+par[24]*v_scale[,1], 64),3372,64, byrow=F)+par[5]*host.density2
+
+#Pest Parameters
+total_time<-YEAR/5
+#Pest Parameters
+Psource=3347
+Discovery<-2020-YEAR            
+
+#immigration-emigration matrix precalculation
+T2<-T1[prez[1:L[spp],spp],prez[1:L[spp],spp]]
+rm(dists)
+adj_list<-read.csv("../output/adj_list_street.csv")
+r0<-par[22] #delta (growth rate)
+
+#iterate across budget and efficiency scenarios
+budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
+qz<-c(0.3,0.6,0.9)
+bios<-c(0.1,0.3,0.5)
+B=1650000 # total budget
+
+q_in=q_out=0.3
+qbio=0.5
+scen=1
+vecP<-rep(0,L[spp])
+for (rrr in 1:length(Psource))
+{vecP[which(prez[,spp]==Psource[rrr])]=1}
+
+bc_pp_out<-bc_pp_in<-pp_bio<-matrix(0,L,total_time+8)
+Pfull<-matrix(0, 3372, total_time+8)
+Pfull_good<-matrix(0, 3372, total_time+8)
+Pfull_time<-Pfull
+vecP_time=d2prime=d3prime=d4prime=d_out=matrix(0,L[spp], total_time+8)
+
+frac_spread=budget_scen$spread_bud[scen]
+frac_site=budget_scen$site_bud[scen]
+c_4=c_5=c_6=c_7=c_8=matrix(0,L[spp], ncol(vecP_time))
+mgmt<-list()
+for (time in 1:(total_time+8))
+{
+  vecP[which(prez[,spp]==Psource)]=1
+  d2prime[which(vecP<par[21]),time]<-0
+  d2prime[,time]<-vecP
+  d_out[,time]<-d2prime[,time]
+  c_4[which(vecP>=par[21]),time]<-1
+  
+  Pnext<-rep(0,L[spp])
+  qq<-0
+  column<-(((Discovery+5*(time-1))-1790)/5)+1
+  
+  qq<-matrix(rep(constpD[prez[which(vecP>=par[21]),spp],spp]+par[8]*currpopden[prez[which(vecP>=par[21]),spp],column], L[spp]), nrow=length(which(vecP>=par[21])), ncol=L[spp])
+  zzz<-matrix(rep(constpD3[prez[1:L[spp],spp],spp]+par[20]*currpopden[prez[1:L[spp],spp],column], L[spp]), nrow=L[spp], ncol=L[spp], byrow=TRUE)
+  qq<-(2*par[1]*exp((zzz[which(vecP>=par[21]),]+qq)))/(1+exp(zzz[which(vecP>=par[21]),]+qq))
+  qq<-T2[which(vecP>=par[21]),]^qq
+  if (length(which(vecP>=par[21]))>1){qq<-qq/rowSums(qq)}
+  if (length(which(vecP>=par[21]))==1){qq<-qq/sum(qq)}
+  qq[which(qq<0.001)]=0
+  
+  if (time<=2)
+  {
+    Pnext=(vecP[which(vecP>=par[21])])%*%(qq)
+    qq2<-matrix(0,L[spp], L[spp])
+    qq2[which(vecP>=par[21]),]<-qq
+    #write.csv(qq2, file=paste("transmatM_", spp,time, ".csv", sep=""), row.names=F)
+    Pnext[which(prez[,spp]==Psource)]=1
+    Pnext[which(Pnext<0)]<-0
+    Pfull[,time]<-c(prez[which(Pnext>=par[21]),spp], rep(0, 3372-length(which(Pnext>=par[21])))) 
+    Pfull_time[,time]<-c(prez[which(Pnext>=par[21]),spp], rep(0, 3372-length(which(Pnext>=par[21])))) #threshold at 'discoverable' value
+    d3prime[,time]<-Pnext
+    
+  }
+  if (time>2)
+  {
+    vecP[which(prez[,spp]==Psource)]=1
+    qq3<-matrix(0,L[spp], L[spp]) # full transition matrix
+    qq3[which(vecP>=par[21]),]<-qq
+    qq2<-qq3 #transition matrix with 0 on diagonal
+    diag(qq2)<-0
+    pp<-sweep(qq2,2,vecP,'*')
+    Pnext<-rep(0,L[spp])
+    mgmt[[time]]<-vector()
+    
+    if (time<=(floor(total_time)+1))
+    {
+      mgmt[[time]]<-c(mgmt[[time]],2*L[spp]+which(prez[,spp]%in%subset(biohist,V2==floor(Discovery/5)*5+5*(time))$V3))
+      if (time>4)
+      {
+        if (length(mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])])>0){
+          for(xx in 1:length(mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])]))
+          {
+            c_8[unlist(adj_list[mgmt[[time-1]][which(mgmt[[time-1]]>2*L[spp])][xx]-(2*L[spp]),]),time]<-1
+          }
+        }
+      }
+      c_8[mgmt[[time]][which(mgmt[[time]]>2*L[spp])]-(2*L[spp]),time]<-1
+    }
+    
+    if(time==2)
+    {
+      vecP[which(c_8[,time-1]==1)]<-(1-(qbio*0.5))*vecP[which(c_8[,time-1]==1)]
+    }
+    if(time>2)
+    {
+      vecP[which(c_8[,time-1]==1 & c_8[,time-2]!=1)]<-(1-(qbio*0.5))*vecP[which(c_8[,time-1]==1 & c_8[,time-2]!=1)]
+      vecP[which(c_8[,time-2]==1)]<-(1-qbio)*vecP[which(c_8[,time-2]==1)]
+    }
+    
+    d2prime[,time]<-vecP
+    d2prime[which(vecP<par[21]),time]<-0
+    c_4[which(vecP>=par[21]),time]<-1
+    d_out[,time]<-d2prime[,time]
+    d_out[(subset(mgmt[[time]], mgmt[[time]]>(L) & mgmt[[time]]<=(2*L))-L),time]<-d2prime[(subset(mgmt[[time]], mgmt[[time]]>(L) & mgmt[[time]]<=(2*L))-L),time]*(1-q_out)
+    Pnext[which(1:L%in%(mgmt[[time]]))]<-(((1-q_in)*(d_out[,time]%*%qq3)-d_out[,time]*diag(qq3))+d2prime[,time]*diag(qq3))[which(1:L%in%(mgmt[[time]]))]
+    Pnext[which(1:L%in%(mgmt[[time]])==F)]<-((d_out[,time]%*%qq3)-(d_out[,time])*diag(qq3)+d2prime[,time]*diag(qq3))[which(1:L%in%(mgmt[[time]])==F)]
+    d3prime[,time]<-Pnext
+    Pnext[which(prez[,spp]==Psource)]=1
+    Pfull[,time]<-c(prez[which(Pnext>=par[21]),spp], rep(0, 3372-length(which(Pnext>=par[21])))) 
+    Pfull_time[,time]<-c(prez[which(Pnext>=par[21]),spp], rep(0, 3372-length(which(Pnext>=par[21])))) #threshold at 'discoverable' value
+    reset_yrs<-YEAR/5
+    
+  }
+  if (time>1)
+  {
+    
+    dddd<-which(!(Pfull_time[1:length(which(Pfull_time[,time-1]!=0)),time-1]%in%Pfull_time[1:length(which(Pfull_time[,time]!=0)),time]))
+    ffff<-which(prez[1:length(which(prez[,spp]!=0)), spp]%in%Pfull_time[dddd,time-1])
+    if (time>(floor(total_time)))
+      if (any(ffff%in%c(mgmt[[time]]-L,mgmt[[time]]-2*L,mgmt[[time]]-3*L,mgmt[[time]])) )
+      {
+        {ffff<-ffff[-which(ffff%in%c(mgmt[[time]]-L,mgmt[[time]]-2*L,mgmt[[time]]-3*L,mgmt[[time]]))]}}
+    
+    Pnext[ffff]<-par[21]
+    Pfull[,time]<-c(prez[which(Pnext>=par[21]),spp], rep(0, 3372-length(which(Pnext>=par[21])))) 
+    Pfull_time[,time]<-c(prez[which(Pnext>=par[21]),spp], rep(0, 3372-length(which(Pnext>=par[21])))) #threshold at 'discoverable' value
+  }
+  if (time==floor(YEAR/5))
+  {
+    dddd<-which(prez[1:length(which(prez[,spp]!=0)),spp]%in%prez2[1:length(which(prez2[,spp]!=0)),spp])
+    cccc<-which(!(prez[1:length(which(prez[,spp]!=0)),spp]%in%prez2[1:length(which(prez2[,spp]!=0)),spp]))
+    eeee<-which(Pnext[dddd]<par[21])
+    Pnext[dddd[eeee]]<-par[21] #testing out setting to true presences
+    Pnext[cccc]<-0 #remove this when not doing sdp
+    Pfull_time[,time]<-c(prez[which(Pnext>=par[21]),spp], rep(0, 3372-length(which(Pnext>=par[21])))) 
+  }
+  
+  Pnext[which(prez[,spp]==Psource)]=1
+  Pnext[which(Pnext>=par[21])]=Pnext[which(Pnext>=par[21])]*r0
+  d4prime[,time]<-Pnext
+  c_5[which(d3prime[,time]>=par[21]),time]=1
+  c_6[which(d4prime[,time]<1),time]=1
+  c_7[which(d4prime[,time]>=1),time]=1
+  Pnext[which(Pnext>=1)]<-1
+  
+  vecP=Pnext
+  vecP_time[,time]<-vecP
+}
+
+#save propagule pressure matrix
+write.csv(vecP_time[,5:12], file=paste("../output/vecPtime_noaction.csv", sep="_"), row.names=F)

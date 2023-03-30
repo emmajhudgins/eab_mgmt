@@ -2,13 +2,10 @@
 
 _repo to accompany_
 # Optimal Emerald Ash Borer (*Agrilus planipennis*) control across the United States
-Emma J. Hudgins, Jeffrey O. Hanson, Christian MacQuarrie, Denys Yemshanov, Eve McDonald-Madden, Chris Baker, Matthew Holden, Iadine Chadès, & Joseph R. Bennett
-
-Substantial conceptual contributions by Martin Péron, past PhD student of Iadine Chadès.
 
 An optimal control approach to EAB management for urban tree persistence in explicit space and time.
 
-**The larger postdoc project context:**
+**The larger project context:**
 
 The goal is to find rules of thumb for the optimal management of North American invasive forest pests, and to create an interactive open source tool to display these management optimizations.
 
@@ -23,11 +20,15 @@ Given that the overwhelming majority of forecasted damages were due to EAB, comb
 
 **Methods:**
 
-we reformulated the pest dispersal model as an optimal control framework. Quarantines could limit propagule pressure entering or leaving cells, and biocontrol and eradication could decrease population sizes in each cell.
+We reformulated the pest dispersal model as an optimal control framework. Quarantines could limit propagule pressure entering or leaving cells, and biocontrol and eradication could decrease population sizes in each cell.
+
 Contrary to past frameworks, this approach accounts for the interactivity of management implications across timesteps. 
+
 We group potential strategies into site and spread focussed, either tackling flow of propagules or local population sizes. 
-We tested our optimization model against rules of thumb that used different proportions of site and spread-focussed measures
-We chose to minimize future exposed street ash (gain in propagule pressure*# urban trees)
+
+We tested our optimization model against rules of thumb that used different proportions of site and spread-focussed measures.
+
+We chose to minimize future exposed street ash (EAB propagule pressure* number of urban trees)
 
 **Results:** 
 
@@ -37,9 +38,10 @@ These findings support a multipronged EAB management approach, where regional co
 
 **File organization structure**
 
-The analysis section is split into R and Python (3) components. The python scripts require the gurobipy library, which interfaces with GUROBI 9.1.0 software (free for academic use, www.gurobi.com). All R components were build in R 4.1.0.
+The analysis section is split into R and Python (3) components. The python scripts require the gurobipy library, which interfaces with GUROBI 9.1.0 software (free for academic use, www.gurobi.com). All R components were built in R 4.1.0.
 
-R Scripts
+### R Scripts
+0. 0-forecasted_presences_eab.R - this script updates a model of EAB spread to allow establishment anywhere there is urban ash, and to fit urban ash density-specific spread terms(https://doi.org/10.1111/1365-2664.14141), producing forecasts of EAB spread to 2050 in the absence of management and a dispersal kernel for use in optimizations.
 1. 1-biocontrol_history.R - this script uses parasitoid release and recapture data from APHIS' MapBioControl database (see www.mapbiocontrol.org for data inquiries) to examine recapture patterns across space and time for the four parasitoid species for EAB, which are then used to indicate which sites had a history of biocontrol release at a level that could impact EAB density in line with biocontrol efficiency scenarios (10,000 released and 100 recovered parasitoids).
 2. SDP_calcRoT_spreadfirst_noerad.R - calculates rule of thumb scenarios across different budget allocations to quarantines vs. biologican control (in 20% increments) and different levels of efficiency of each action. Saves management action locations over time and resulting EAB propagule pressure for plotting and comparison with optimizations. Spread-focused management (quarantines) is allocated first in this script.
 3. SDP_calcRoT_spreadsecon_noerad.R - calculates rule of thumb scenarios across different budget allocations to quarantines vs. biologican control (in 20% increments) and different levels of efficiency of each action. Saves management action locations over time and resulting EAB propagule pressure for plotting and comparison with optimizations. Site-focused management (biological control) is allocated first in this script.
@@ -49,9 +51,10 @@ R Scripts
 7. SDP_plot.R - this script plots the spatial pattern in propagule pressure, exposed ash street trees, and management actions for both optimizations and rule of thumb scenarios, as well as more comparisons between optimality and rules of thumb.
 8. cost_estimate.R - this script calculates a rough estimate of the maximal cost savings from this approach relative to a biocontrol-only, rule-of-thumb approach using previously published ash size class distributions and cost data from Hudgins et al. (2022) and Aukema et al. (2011).
 
-Python Scripts
-1. eab_parasitoid.py - basic optimization across efficiency scenarios
-2. eab_parasitoid_bud.py - fixed percentage budget allocation optimizations (20% increments)
-3. eab_parasitoid_fastdisp_fastgrowth.py - sensitivity analysis to faster parasitoid dispersal and growth
-4. eab_parasitoid_fastdisp.py - sensitivity analysis to faster parasitoid dispersal
-5. eab_parasitoid_nothresh.py - sensitivity analysis with removal of requirement to impose biological control in high-EAB density sites.
+### Python Scripts
+1. eab_parasitoid_street.py - basic optimization across efficiency scenarios
+2. eab_parasitoid_street_bud.py - fixed percentage budget allocation optimizations (20% increments)
+3. eab_parasitoid_street_fastdisp_fastgrowth.py - sensitivity analysis to faster parasitoid dispersal and growth (produces \*_fdfg\* files)
+4. eab_parasitoid_street_fastdisp.py - sensitivity analysis to faster parasitoid dispersal
+5. eab_parasitoid_street_nothresh.py - sensitivity analysis with removal of requirement to impose biological control in high-EAB density sites.
+6. eab_parasitoid_street_extend.py - sensitivity analysis to extending the solving time by another 8 hours, loading the solve from script 1 as an initial solution.

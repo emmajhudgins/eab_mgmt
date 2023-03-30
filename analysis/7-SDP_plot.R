@@ -2,66 +2,31 @@ rm(list=ls())
 n_spp=66
 library(sp)
 library(ggplot2)
-library(here)
 library(viridis)
 
-setwd(paste0(here(),'/../data/'))
+setwd('../data/')
 
 #Read in Data
 data<-read.csv('data_minus5_july.csv', stringsAsFactors = FALSE)
 data2<-read.csv('datanorm.csv', stringsAsFactors = FALSE)
-gen<-matrix(0,3372, 78)
-for (sppp in 1:75)
-{gen[,sppp]<-c(which(data[,paste(data2$COLUMN_NAM[sppp])]>0), rep(0,(3372-length(which(data[,paste(data2$COLUMN_NAM[sppp])]>0)))))}
-rr<-which(data2$YEAR>=10)
-data2<-data2[rr,]
-gen<-gen[,rr]
-FIA<-read.csv('FIAcodes_notypos_2019.csv', stringsAsFactors = FALSE)
-FIA<-FIA[rr,]
-FIA2<-read.csv('FIA_march_2019.csv', stringsAsFactors = FALSE)
-fia<-list()
-FIA$FIA<-as.character(FIA$FIA)
-fia<-strsplit(FIA$FIA, split=", ")
-for (i in 1:66)
-{
-  fia[[i]]<-gsub("^", "FIA_", fia[[i]])
-  fia[[i]]<-gsub("_(\\d{3}$)", "_0\\1", fia[[i]])
-  fia[[i]]<-gsub("_(\\d{2}$)", "_00\\1", fia[[i]])
-}
+prez2<-prez<-matrix(0,3372, 64)
+prez2[,1]<-c(which(data[,paste(data2$COLUMN_NAM[1])]>0), rep(0,(3372-length(which(data[,paste(data2$COLUMN_NAM[1])]>0))))) #determine where species are present
+host.density2<-read.csv('hostden_clean_gdk.csv') # tree host density by pest species
+new_eab<-read.csv('eab_each_2020.csv')
+L<-rep(0,64) # size of each pest's host range
+ic=F
+V_i<-read.csv('streettrees_grid.csv')[,20]
+forecast=F
+prez<-read.csv('prez_clean_gdk.csv')
+L<-length(unique(c(which(V_i>0), prez[,1], prez2[,1])))-1
+prez[,1]<-c(unique(c(which(V_i!=0), prez[which(prez[,1]!=0),1], prez2[which(prez2[,1]!=0),1])), rep(0, 3372-L))
+
 currpopden<-as.matrix(read.csv("currpopden_5.csv", stringsAsFactors = FALSE))
 currpopden2<-as.matrix(read.csv("future_scaled_pop2.csv"))
 twenty05<-rowMeans(cbind(currpopden[,47], currpopden2[,1]))
 twenty15<-rowMeans(cbind(currpopden2[,1], currpopden2[,2]))
 twenty25<-rowMeans(cbind(currpopden2[,2], currpopden2[,3]))
 currpopden<-cbind(currpopden, twenty05, currpopden2[,1], twenty15, currpopden2[,2], twenty25, currpopden2[,3])
-sources<-as.list(read.csv('Psources_notypos.csv')[,1])
-L<-rep(0,n_spp)
-prez<-matrix(0,3372,n_spp)
-for (spp in 1:n_spp) 
-{ 
-  cols<-paste(fia[[spp]])
-  pres<-rep(0, 3372)
-  for (q in 1:length(cols))
-  {
-    if (cols[q] %in% colnames(FIA2))
-    {
-      nn<-which(FIA2[,cols[q]]!=0)
-      pres[nn]=pres[nn]+1
-    }
-  }
-  prez[,spp]<-c(which(pres!=0),rep(0, length(which(pres==0))))
-  L[spp]<-length(which(pres!=0))
-}
-good<-which(L!=0)
-prez<-prez[,good]
-L<-L[good]
-data2<-data2[good,]
-gen<-gen[,good]
-fia<-fia[good]
-n_spp=length(data2[,1])
-prez2<-matrix(0,3372,64)
-for (sppp in 1:64)
-{prez2[,sppp]<-c(intersect(prez[which(prez[,sppp]!=0),sppp], gen[which(gen[,sppp]!=0),sppp]), rep(0,(3372-length(intersect(prez[which(prez[,sppp]!=0),sppp], gen[which(gen[,sppp]!=0),sppp])))))}
 
 # # Create two panels side by side
 par(mar=c(2,0,0,4))
@@ -97,7 +62,7 @@ frac_site=0.2
 frac_spread=0.8
 results<-read.csv(paste0('../output/M_',qin,'_',qbio,'.csv'), header=F)
 
-pdf(paste("../plots/eab_mgmt_site",qin, qbio,".pdf", sep="_"))
+pdf(paste("../plots/eab_mgmt_site_street",qin, qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,4,5,6,7,7,7), ncol=3, byrow=T), heights=c(0.5,0.5,0.4))
 par(mai=c(0.25,0,0.25,0))
 years<-seq(2025,2045, by=5)
@@ -108,9 +73,9 @@ for (time in c(1,3,5))
   plot(transform_usa, lwd=0.5, main=years[time], col=alpha("grey",0), add=T)
   
   lines(quar_bound, col=alpha("deeppink4",1), lwd=2)
-  points(cbind(data$X_coord[prez[which(results[((1799+1):(2*1799)), time]==1),1]], data$Y_coord[prez[which(results[((1799+1):(2*1799)), time]==1),1]]), pch=15, cex=0.5, col="yellow")
-  points(cbind(data$X_coord[prez[which(results[((2*1799+1):(3*1799)), time]==1),1]], data$Y_coord[prez[which(results[((2*1799+1):(3*1799)), time]==1),1]]), pch=15, cex=0.5, col="orange")
-  points(cbind(data$X_coord[prez[which(results[((3*1799+1):(4*1799)), time]==1),1]], data$Y_coord[prez[which(results[((3*1799+1):(4*1799)), time]==1),1]]), pch=15, cex=0.5, col="red")
+  points(cbind(data$X_coord[prez[which(results[((L+1):(2*L)), time]==1),1]], data$Y_coord[prez[which(results[((L+1):(2*L)), time]==1),1]]), pch=15, cex=0.5, col="yellow")
+  points(cbind(data$X_coord[prez[which(results[((2*L+1):(3*L)), time]==1),1]], data$Y_coord[prez[which(results[((2*L+1):(3*L)), time]==1),1]]), pch=15, cex=0.5, col="orange")
+  points(cbind(data$X_coord[prez[which(results[((3*L+1):(4*L)), time]==1),1]], data$Y_coord[prez[which(results[((3*L+1):(4*L)), time]==1),1]]), pch=15, cex=0.5, col="red")
 
   }
 results<-read.csv(paste0('../output/management_test_0.2_0.8_',qin,'_',qbio,'_.csv'))
@@ -120,9 +85,9 @@ for (time in c(1,3,5))
   points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5, col="grey")
   lines(quar_bound, col=alpha("deeppink4",1), lwd=2)
   plot(transform_usa, lwd=0.5, main=years[time], col=alpha("grey",0), add=T)
-  points(cbind(data$X_coord[prez[which(results[((1799+1):(2*1799)), time]==1),1]], data$Y_coord[prez[which(results[((1799+1):(2*1799)), time]==1),1]]), pch=15, cex=0.5, col="yellow")
-  points(cbind(data$X_coord[prez[which(results[((2*1799+1):(3*1799)), time]==1),1]], data$Y_coord[prez[which(results[((2*1799+1):(3*1799)), time]==1),1]]), pch=15, cex=0.5, col="orange")
-  points(cbind(data$X_coord[prez[which(results[((3*1799+1):(4*1799)), time]==1),1]], data$Y_coord[prez[which(results[((3*1799+1):(4*1799)), time]==1),1]]), pch=15, cex=0.5, col="red")
+  points(cbind(data$X_coord[prez[which(results[((L+1):(2*L)), time]==1),1]], data$Y_coord[prez[which(results[((L+1):(2*L)), time]==1),1]]), pch=15, cex=0.5, col="yellow")
+  points(cbind(data$X_coord[prez[which(results[((2*L+1):(3*L)), time]==1),1]], data$Y_coord[prez[which(results[((2*L+1):(3*L)), time]==1),1]]), pch=15, cex=0.5, col="orange")
+  points(cbind(data$X_coord[prez[which(results[((3*L+1):(4*L)), time]==1),1]], data$Y_coord[prez[which(results[((3*L+1):(4*L)), time]==1),1]]), pch=15, cex=0.5, col="red")
 
   }
 plot.new()
@@ -134,7 +99,7 @@ qin=qout=0.3
 qbio=0.1
 frac_site=0.2
 frac_spread=0.8
-results<-read.csv(paste('../output/vecptime_0.9_0.5.csv'), header=F)/1000
+results<-read.csv(paste('../output/vecptime_0.3_0.1.csv'), header=F)/1000
 time<-seq(1:6)
 years<-seq(2020,2045, by=5)
 pdf(paste("../plots/RoT_eab_dens_",qin, qout, qbio,".pdf", sep="_"))
@@ -176,7 +141,7 @@ bins<-seq(-5,5,length.out=50)
 bins<-10^bins
 
 
-results<-read.csv(paste('../output/vecptime_0.3_0.1.csv'), header=F)/1000
+results<-read.csv(paste('vecptime_0.3_0.1.csv'), header=F)/1000
 pdf(paste("../plots/eab_exp",qin,qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,4,5,6,7,7,7), ncol=3, byrow=T), heights=c(0.5,0.5,0.1))
 par(mai=c(0.25,0,0.25,0))
@@ -186,7 +151,7 @@ bins<-10^bins
 ash<-read.csv('streettrees_grid.csv')
  for (time in c(2,4,6))
   {
-   col<-viridis(50)[findInterval(results[,time]*ash[prez[1:1799,1],20], bins)+1]
+   col<-viridis(50)[findInterval(results[,time]*ash[prez[1:L,1],20], bins)+1]
    plot(transform_usa, lwd=0.5, main=years[time], col="grey")
     points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5)
     points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5, col=col)
@@ -196,7 +161,7 @@ ash<-read.csv('streettrees_grid.csv')
   results<-read.csv(paste0("../output/RoT_vecptime_", frac_site,"_",frac_spread, "_", qin,'_',qbio,'_.csv'))
   for (time in c(2,4,6))
   {
-    col<-viridis(50)[findInterval(results[,time]*ash[prez[1:1799,1],20], bins)+1]
+    col<-viridis(50)[findInterval(results[,time]*ash[prez[1:L,1],20], bins)+1]
     plot(transform_usa, lwd=0.5, main=years[time], col="grey")
     points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5)
     points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5, col=col)
@@ -213,7 +178,7 @@ dev.off()
 layout(matrix(c(1,2), ncol=1, byrow=TRUE), heights=c(0.75,0.25))
 bins<-seq(0,6,length.out=50)
 bins<-10^bins
-col<-viridis(50)[findInterval(ash[prez[1:1799,1],20], bins)+1]
+col<-viridis(50)[findInterval(ash[prez[1:L,1],20], bins)+1]
 par(mai=c(0,0,0,0))
 par(mar=c(0,0,0,0))
 par(oma=c(0,0,0,0))
@@ -230,7 +195,7 @@ layout(matrix(c(1,2), ncol=1, byrow=TRUE), heights=c(0.75,0.25))
 bins<-seq(0,8,length.out=50)
 bins<-10^bins
 ash<-read.csv('hostvol_sdp2020.csv')
-col<-viridis(50)[findInterval(ash[prez[1:1799,1],1], bins)+1]
+col<-viridis(50)[findInterval(ash[prez[1:L,1],1], bins)+1]
 par(mai=c(0,0,0,0))
 par(mar=c(0,0,0,0))
 par(oma=c(0,0,0,0))
@@ -242,14 +207,14 @@ image(1:50,1,matrix(1:50), col=viridis(50), axes=FALSE, ann=F)
 axis(1,labels=c("0",expression(10^{2}), expression(10^{4}),expression(10^{6}),expression(10^{8})),at=c(seq(0,50,length.out=5)), cex.axis=1)
 mtext(side=1, "Forest Ash Volume", line=2)
 
-dat<-read.csv('../output/results_table.csv')
+dat<-read.csv('../output/postdocdat_street.csv')
 
 qz<-c(0.3,0.6,0.9)
 bios<-c(0.1,0.3,0.5)
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
 obj<-data.frame(frac_site=0,frac_spread=0,q_in=0,q_out=0,qbio=0, obj=0)
 names(obj)
-V_i<-read.csv('../data/streettrees_grid.csv')[,20]
+V_i<-read.csv('streettrees_grid.csv')[,20]
 
 for (q_in in qz)
 {
@@ -260,7 +225,7 @@ q_out=q_in
       {
         frac_site=budget_scen$site_bud[scen]
         frac_spread=budget_scen$spread_bud[scen]
-        d4prime<-read.csv(paste("../output/RoT_vecptime",frac_site,frac_spread,q_in,qbio, ".csv", sep="_"))[,1:7]
+        d4prime<-read.csv(paste("../output/RoT_vecptime",frac_site,frac_spread,q_in,qbio, ".csv", sep="_"))[,2:8]
         obj<-rbind(obj, setNames(c(frac_site,frac_spread,q_in,q_out,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
       }
     }
@@ -268,7 +233,7 @@ q_out=q_in
 
 obj<-obj[2:nrow(obj),]
 
-layout(matrix(c(1,2), ncol=2, byrow=TRUE), heights=c(1,1), widths=c(0.7,0.3))
+layout(matrix(c(1,2), ncol=2, byrow=TRUE), heights=c(1,1), widths=c(0.8,0.3))
 par(mar=c(4,4,2,0))
 par(oma=c(0,0,0,0))
 par(xpd = FALSE)
@@ -285,57 +250,25 @@ axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9
 axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.75, padj=2)
 par(xpd = TRUE) #Draw outside plot area
 corners<-par("usr")
-text("50%      30%     10%",y=c(7.9), x=corners[2]+.5, cex=0.75, srt=270)
-text("50%      30%     10%",y=c(4.9), x=corners[2]+.5, cex=0.75, srt=270)
-text("50%      30%     10%",y=c(1.9), x=corners[2]+.5, cex=0.75, srt=270)
+text("50%      30%     10%",y=c(7.9), x=corners[2]+.2, cex=0.75, srt=270)
+text("50%      30%     10%",y=c(4.9), x=corners[2]+.2, cex=0.75, srt=270)
+text("50%      30%     10%",y=c(1.9), x=corners[2]+.2, cex=0.75, srt=270)
 
 mtext(side=2, "Quarantine efficiency",line=1.25, cex=0.75)
 corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
-text(x = corners[2]+0.9, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
+text(x = corners[2]+0.3, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
 
 
-qz<-c(0.3,0.6,0.9)
-bios<-c(0.1,0.3,0.5)
-obj<-data.frame(q_in=0,qbio=0, obj=0)
-names(obj)
-
-for (q_in in qz)
-{
-    for (qbio in bios)
-    {
-    d4prime<-read.csv(paste("../output/vecptime_",q_in,"_",qbio, ".csv", sep=""), header=F)[,2:8]/1000
-        obj<-rbind(obj, setNames(c(q_in,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
-      }
-  }
 layout(1,1)
-obj<-obj[2:nrow(obj),]
-library(viridis)
-library(ggplot2)
-plot(y=obj$obj,x=obj$q_in, col=alpha(viridis(27)[as.factor(paste0(obj$q_in,obj$qbio))],0.75), xlab="Quarantine efficiency", ylab="Exposed ash street trees", pch=19, ylim=c(100000,1200000))
 par(xpd = FALSE)
 par(mar=c(4,4,2,2))
 plot(dat$Exposed.Ash.Street.Trees..thousands.*1000~dat$Biocontrol.efficiency,col=viridis(27)[c(1,1,1,13,13,13,25,25,25,25)], pch=19, xlab="Biocontrol Efficiency", ylab="Exposed ash street trees", ylim=c(100000,1500000), axes=F) 
 axis(1,  at=c(0,0.1,0.3,0.5), labels=c("","10%","30%","50%"))
-axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2,  cex.axis=0.75, hadj=0.8)
+axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000'), at=c(0,200000,400000,600000,800000, 1000000,1200000), outer=F, las=2,  cex.axis=0.75, hadj=0.8)
 
-points(x=c(0.1,0.3,0.5), y=c(1239440,1050990,767630),col="red", pch=24) 
+points(x=c(0.1,0.3,0.5), y=c(dat$only.biocontrol[1:3]*1000),col="red", pch=24) 
 legend('topright', legend=c("30% Quarantine Efficiency","60% Quarantine Efficiency", "90% Quarantine Efficiency", "Biocontrol Only"), pch=c(19,19,19,24), col=c(viridis(27)[c(1,13,25)], "red"), cex=0.75)
 
-qz<-c(0.3,0.6,0.9)
-bios<-c(0.1,0.3,0.5)
-obj<-data.frame(q_in=0,qbio=0, obj=0)
-names(obj)
-
-for (q_in in qz)
-{
-  for (qbio in bios)
-  {
-    d4prime<-read.csv(paste("../output/vecptime_",q_in,"_",qbio, "_fdfg.csv", sep=""), header=F)[,2:8]/1000
-    obj<-rbind(obj, setNames(c(q_in,qbio,sum(sweep(as.matrix(d4prime),MARGIN=1,as.vector(V_i[prez[,1]]+1),"*"))),names(obj)))
-  }
-}
-
-obj<-obj[2:nrow(obj),]
 
 
 qz<-c(0.3,0.6,0.9)
@@ -379,50 +312,15 @@ axis(2,labels=c("30%","30%","30%","60%","60%","60%", "90%","90%","90%"),at=c(1:9
 axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.75, padj=2)
 par(xpd = TRUE) #Draw outside plot area
 corners<-par("usr")
-text("50%      30%     10%",y=c(7.9), x=corners[2]+.5, cex=0.75, srt=270)
-text("50%      30%     10%",y=c(4.9), x=corners[2]+.5, cex=0.75, srt=270)
-text("50%      30%     10%",y=c(1.9), x=corners[2]+.5, cex=0.75, srt=270)
+text("50%      30%     10%",y=c(7.9), x=corners[2]+.2, cex=0.75, srt=270)
+text("50%      30%     10%",y=c(4.9), x=corners[2]+.2, cex=0.75, srt=270)
+text("50%      30%     10%",y=c(1.9), x=corners[2]+.2, cex=0.75, srt=270)
 
 mtext(side=2, "Quarantine efficiency",line=1.25, cex=0.75)
 corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
-text(x = corners[2]+0.9, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
+text(x = corners[2]+0.3, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.7, srt = 270)
 
-
-
-layout(matrix(c(1,2), ncol=2, byrow=TRUE), heights=c(1,1), widths=c(0.7,0.3))
-par(mar=c(4,4,2,0))
-par(oma=c(0,0,0,0))
-par(xpd = FALSE)
-
-plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Biological control proportion", ylab="Exposed ash street trees", pch=19, xlim=c(-0.05,1.05), ylim=c(100000,1200000))
-
-points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
-par(mai=c(0.4,0.5,0.1,0.6))
-image(1,1:9,t(matrix(1:9)), col=viridis(9), axes=FALSE, ann=F)
-axis(2,labels=c("30%","60%", "90%"),at=c(seq(1,9,length.out=3)), cex.axis=0.5, padj=2)
-axis(4,at=c(1:9), labels=rep("", 9),cex.axis=0.5, padj=2)
-par(xpd = TRUE) #Draw outside plot area
-corners<-par("usr")
-text("50%             30%             10%",y=c(8), x=corners[2]+.65, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(5), x=corners[2]+.65, cex=0.5, srt=270)
-text("50%             30%             10%",y=c(2), x=corners[2]+.65, cex=0.5, srt=270)
-
-mtext(side=2, "Quarantine efficiency",line=1, cex=0.5)
-corners = par("usr") #Gets the four corners of plot area (x1, x2, y1, y2)
-text(x = corners[2]+1.25, y = mean(corners[3:4]),"Biological Control efficiency",cex=0.5, srt = 270)
-
-
-
-plot(dat$Exposed.Ash.Street.Trees..thousands.*1000~dat$Biocontrol.efficiency,col=viridis(27)[c(1,1,1,13,13,13,25,25,25,25)], pch=19, xlab="Biocontrol Efficiency", ylab="Exposed Ash Trees", ylim=c(100000,1500000)) 
-points(x=c(0.1,0.3,0.5), y=c(1233200,1035330, 729520),col="red", pch=23) 
-legend('topright', legend=c("All Management", "Biocontrol Only"), pch=c(19,23), col=c(viridis(27)[c(13)], "red"), cex=0.75)
-
-
-bins<-seq(-5,5,length.out=50)
-bins<-10^bins
-
-
-results<-read.csv(paste('../output/vecptime_0_1_0.3_0.1_.csv'))
+results<-read.csv(paste('../output/vecptime_0.3_0.1.csv'))
 pdf(paste("../plots/ash",qin,qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,3), ncol=2, byrow=T),heights=c(0.8,0.2))
 par(mai=c(0.25,0,0.25,0))
@@ -431,17 +329,17 @@ bins<-10^bins
 ash<-read.csv('streettrees_grid.csv')
 for (time in c(6))
 {
-  col<-viridis(50)[findInterval(ash[prez[1:1799,1],20], bins)+1]
+  col<-viridis(50)[findInterval(ash[prez[1:L,1],20], bins)+1]
   plot(transform_usa, lwd=0.5, main="Total", col="grey")
   points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5)
   points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5, col=col)
   #plot(transform_states, lwd=0.5, main=years[time], fill=FALSE, add=T,border='white')
   par(xpd=T)
 }
-results<-read.csv("vecP_noaction.csv")
+results<-read.csv("../output/vecPtime_noaction.csv")
 for (time in c(6))
 {
-  col<-viridis(50)[findInterval((ifelse(rowSums(results[,1:time])>1,1,rowSums(results[,1:time])))*ash[prez[1:1799,1],20], bins)+1]
+  col<-viridis(50)[findInterval((ifelse(rowSums(results[,1:time])>1,1,rowSums(results[,1:time])))*ash[prez[1:L,1],20], bins)+1]
   plot(transform_usa, lwd=0.5, main="Exposed by 2045",col="grey")
   points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5)
   points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5, col=col)

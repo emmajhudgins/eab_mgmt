@@ -7,16 +7,15 @@ data2<-read.csv('spdat_clean_gdk.csv', stringsAsFactors = FALSE) # species data,
 host.density2<-read.csv('hostden_clean_gdk.csv') # tree host density by pest species
 prez<-read.csv('prez_clean_gdk.csv') # invasible host range (from FIA)
 prez2<-read.csv('prez2_clean_gdk.csv') # pest presences for all species
-prez2[,1]<-readRDS('presences_time_eab.rds')[[1]][,5] # pest presences in 2020
+prez2[,1]<-readRDS('../output/presences_time_eab.rds')[[1]][,5] # pest presences in 2020
 biohist<-read.csv('biocontrol_history.csv')
-
-
-#pest presences across space
 L<-rep(0,64) # size of each pest's host range
-for (sppp in 1:64)
-{
-  L[sppp]<-length(which(prez[,sppp]!=0))
-}
+ic=F
+V_i<-read.csv('streettrees_grid.csv')[,20]
+forecast=F
+L<-length(unique(c(which(V_i>0), prez[,1], prez2[,1])))-1
+prez[,1]<-c(unique(c(which(V_i!=0), prez[which(prez[,1]!=0),1], prez2[which(prez2[,1]!=0),1])), rep(0, 3372-L))
+write.csv(prez, "prez_eab_street.csv",row.names=F)
 
 #human population density
 currpopden<-as.matrix(read.csv("currpopden_5.csv", stringsAsFactors = FALSE))
@@ -28,6 +27,7 @@ currpopden<-cbind(currpopden, twenty35, currpopden2[,4], twenty45, currpopden2[,
 
 #ash street trees
 V_i<-read.csv('streettrees_grid.csv')[,20]
+v_scale<-scale(V_i, center=T)
 
 
 #Euclidean distances between sites
@@ -46,8 +46,10 @@ par<-rep(0,23)
 spp=1 # EAB  
 
 # set fixed values for model parameters
-par[c(1,21,22,4,18,20,8)]<-as.numeric(c(2.675,c(0.000538410692229749, 0.299034706404549, -0.525670755351726, 15.6132848183217,-0.163552592351765, 0.323831382884772)))
+par[c(21,22,4,18,20,8)]<-as.numeric(c(0.000538410692229749, 0.299034706404549, -0.525670755351726, 15.6132848183217,-0.163552592351765, 0.323831382884772))
+par[21]<-abs(par[21])
 par[22]<-abs(par[22])+1
+par[c(1,23,24)]<-readRDS('../output/full_model.RDS')$par
 
 
 #Pest Parameters
@@ -56,23 +58,24 @@ total_time<-YEAR/5
 #dispersal parameters
 constpD=rep(0,64)
 constpD=matrix(rep(constpD),3372,64, byrow=TRUE)
-constpD2<-matrix(rep(par[9]*data[,18]+par[10]*data[,16]+par[16]*data[,19]+par[17]*data[,20]+par[18]*data[,21]),3372,64)+par[19]*host.density2
+constpD2<-matrix(rep(par[9]*data[,18]+par[10]*data[,16]+par[16]*data[,19]+par[17]*data[,20]+par[18]*data[,21]+par[23]*v_scale[,1], 64),3372,64, byrow=F)+par[19]*host.density2
 constpD<-as.numeric(constpD)+constpD2
-constpD3<-matrix(rep(par[4]*data[,19]+par[12]*data[,20]+par[3]*data[,21]+par[13]*data[,18]+par[15]*data[,16]),3372,64)+par[5]*host.density2
+constpD3<-matrix(rep(par[4]*data[,19]+par[12]*data[,20]+par[3]*data[,21]+par[13]*data[,18]+par[15]*data[,16]+par[24]*v_scale[,1], 64),3372,64, byrow=F)+par[5]*host.density2
 
 #Pest Parameters
-Psource=sources[[spp]]
+total_time<-YEAR/5
+Psource=3347
 Discovery<-2020-YEAR            
 
 #immigration-emigration matrix precalculation
 T2<-T1[prez[1:L[spp],spp],prez[1:L[spp],spp]]
- qq3_list<-list()
-for (time in 6:11)
-{
-  qq3_list[[time]]<-as.matrix(read.csv(paste("transmatM_", spp,time,0,1,0.3, 0.3,0.1, ".csv", sep="_")))
-}
+#  qq3_list<-list()
+# for (time in 6:11)
+# {
+#   qq3_list[[time]]<-as.matrix(read.csv(paste("transmatM_", spp,time,0,1,0.3, 0.3,0.1, ".csv", sep="_")))
+# }
 
-#create adjacency list (only need to do once)
+# create adjacency list (only need to do once)
 # adj_list<-matrix(0, L[spp], L[spp])
 # for(i in 1:L[spp])
 # {
@@ -83,11 +86,10 @@ for (time in 6:11)
 #   }
 # }
 rm(dists)
-# write.csv(adj_list, file="../../eab_mgmt/output/adj_list.csv", row.names=F)
-adj_list<-read.csv("../../eab_mgmt/output/adj_list.csv")
+# write.csv(adj_list, file="../../eab_mgmt/output/adj_list_street.csv", row.names=F)
+adj_list<-read.csv("../output/adj_list_street.csv")
 
 r0<-par[22] #delta (growth rate)
-
 
 #iterate across budget and efficiency scenarios
 budget_scen<-data.frame(site_bud=seq(0,1, length.out=11), spread_bud=seq(1,0,length.out=11))
@@ -315,35 +317,35 @@ for (q_out in qz)
         vecP_time[,time]<-vecP
       }
       #save propagule pressure matrix
-      write.csv(vecP_time[,6:12], file=paste("../output/RoT_vecptime",frac_site,frac_spread,q_in,qbio,".csv", sep="_"), row.names=F)
+      write.csv(vecP_time[,5:12], file=paste("../output/RoT_vecptime",frac_site,frac_spread,q_in,qbio,".csv", sep="_"), row.names=F)
 
-      M_big<-matrix(0,1799*5,5)
-      M_big[1:1799,]<-1
+      M_big<-matrix(0,L*5,5)
+      M_big[1:L,]<-1
       for (i in 1:5){
-        M_big[mgmt[[i+5]]+1799,i]<-1
-        M_big[which(1:1799%in%c(mgmt[[i+5]],mgmt[[i+5]]-1799,mgmt[[i+5]]-(2*1799))),i]<-0
+        M_big[mgmt[[i+5]]+L,i]<-1
+        M_big[which((1:L)%in%c(mgmt[[i+5]],mgmt[[i+5]]-L,mgmt[[i+5]]-(2*L))),i]<-0
       }
-
-       M_big[which(prez[,spp]%in%subset(biohist,V2==2020)$V3)+3*1799, 1]<-0   
+      
+      M_big[which(prez[,spp]%in%subset(biohist,V2==2020)$V3)+3*L, 1]<-0   
       adj_2015<-unique(unlist(adj_list[which(prez[,spp]%in%subset(biohist,V2==2015)$V3),][which((adj_list[which(prez[,spp]%in%subset(biohist,V2==2015)$V3),])!=0)]))
       adj_2015<-adj_2015[which(adj_2015!=0)] 
-      M_big[adj_2015+(3*1799), 1]<-0
-       adj_2020<-unique(unlist(adj_list[which(prez[,spp]%in%subset(biohist,V2==2020)$V3),][which((adj_list[which(prez[,spp]%in%subset(biohist,V2==2020)$V3),])!=0)]))
-       adj_2020<-adj_2020[which(adj_2020!=0)] 
-       M_big[adj_2020+(3*1799), 2]<-0
-       for (i in 1:1799)
-       {
-         for (j in 1:5)
-         {
-         if (sum(M_big[c(1799+i, 2*1799+i, 3*1799+i),j])==0)
-         {
-           M_big[i,j]<-1
-         }
-         }
-       }
-       #save management action matrix
-       write.csv(M_big, file=paste("../output/management_test",frac_site,frac_spread,q_in,qbio,".csv", sep="_"), row.names=F)
-
+      M_big[adj_2015+(3*L), 1]<-0
+      adj_2020<-unique(unlist(adj_list[which(prez[,spp]%in%subset(biohist,V2==2020)$V3),][which((adj_list[which(prez[,spp]%in%subset(biohist,V2==2020)$V3),])!=0)]))
+      adj_2020<-adj_2020[which(adj_2020!=0)] 
+      M_big[adj_2020+(3*L), 2]<-0
+      for (i in 1:L)
+      {
+        for (j in 1:5)
+        {
+          if (sum(M_big[c(L+i, 2*L+i, 3*L+i),j])==0)
+          {
+            M_big[i,j]<-1
+          }
+        }
+      }
+      #save management action matrix
+      write.csv(M_big, file=paste("../output/management_test",frac_site,frac_spread,q_in,qbio,".csv", sep="_"), row.names=F)
+      
     }
   }
 }
