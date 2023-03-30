@@ -37,11 +37,11 @@ vignettes/*.pdf
 *.knit.md
 
 # Private parasitoid data
-/data/Extract*
-/output/rerun
+
+data/parasitoid_data_private/
+
 # R Environment Variables
 .Renviron
 .DS_Store
 analysis/.DS_Store
-.DS_Store
-analysis/.DS_Store
+
