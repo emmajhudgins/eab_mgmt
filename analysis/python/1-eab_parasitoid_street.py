@@ -127,7 +127,7 @@ for rr in range(0,3): #iterate over efficiency scenarios
 
         # add impact of biocontrol (c_8) in focal site and in adjacent sites to focal site after a 2-timestep time lag
         m.addConstrs(((c_8[ii,year]>=M[3*L+ii,year]) for ii in sites for year in range(2,5)), name = "biocontrol2")
-        m.addConstrs(((c_8[ii,year]>=M[3*L+jj,year-2]) for jj in adj_list[ii-1][0].astype(int) for year in range(4,5)), name = "parasitoidDisp")
+        m.addConstrs(((c_8[ii,year]>=M[3*L+jj,year-2]) for ii in sites for jj in adj_list[ii-1][0].astype(int) for year in range(4,5)), name = "parasitoidDisp")
 
         # take into account historical biocontrol prior to today (because of time lags)
         start= list([x+1 for x in bio_2020])
@@ -145,7 +145,7 @@ for rr in range(0,3): #iterate over efficiency scenarios
         m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in nostart for year in range(1,2)), name = "biocontrol2")
         m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in no_2 for year in range(2,3)), name = "biocontrol2")
            # m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in no_3 for year in range(3,4)), name = "biocontrol2")
-        m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]+quicksum(M[3*L+jj,year-2] for jj in adj_list[ii-1][0].astype(int))) for ii in sites for year in range(3,6)), name = "biocontrol2")
+        m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]+quicksum(M[3*L+jj,year-2] for ii in sites for jj in adj_list[ii-1][0].astype(int))) for ii in sites for year in range(3,6)), name = "biocontrol2")
         m.addConstrs(((c_8[ii,year]==0) for ii in sites for year in range(6,7)), name = "biocontrol2")
 
 #            ## sites not adjacent to biological control applied in 2020 (used below)

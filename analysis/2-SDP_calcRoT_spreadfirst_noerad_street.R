@@ -14,7 +14,7 @@ V_i<-read.csv('streettrees_grid.csv')[,20]
 forecast=F
 L<-length(unique(c(which(V_i>0), prez[,1], prez2[,1])))-1
 prez[,1]<-c(unique(c(which(V_i!=0), prez[which(prez[,1]!=0),1], prez2[which(prez2[,1]!=0),1])), rep(0, 3372-L))
-write.csv(prez, "prez_eab_street.csv",row.names=F)
+#write.csv(prez, "prez_eab_street.csv",row.names=F)
 
 #human population density
 currpopden<-as.matrix(read.csv("currpopden_5.csv", stringsAsFactors = FALSE))
@@ -83,7 +83,7 @@ T2<-T1[prez[1:L[spp],spp],prez[1:L[spp],spp]]
 #   }
 # }
  rm(dists)
-# write.csv(adj_list, file="../../eab_mgmt/output/adj_list_street.csv", row.names=F)
+ #write.csv(adj_list, file="../../eab_mgmt/output/adj_list_street.csv", row.names=F)
 adj_list<-read.csv("../output/adj_list_street.csv")
 
 r0<-par[22] #delta (growth rate)
@@ -143,7 +143,7 @@ for (q_out in qz)
           Pnext=(vecP[which(vecP>=par[21])])%*%(qq)
           qq2<-matrix(0,L[spp], L[spp])
           qq2[which(vecP>=par[21]),]<-qq
-          #write.csv(qq2, file=paste("transmatM_", spp,time, ".csv", sep=""), row.names=F)
+          write.csv(qq2, file=paste("transmatM_", spp,time, ".csv", sep=""), row.names=F)
           Pnext[which(prez[,spp]==Psource)]=1
           Pnext[which(Pnext<0)]<-0
           Pfull[,time]<-c(prez[which(Pnext>=par[21]),spp], rep(0, 3372-length(which(Pnext>=par[21])))) 

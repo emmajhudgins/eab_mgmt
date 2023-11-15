@@ -9,4 +9,7 @@ med_st_treat<-600*(117.244/103.157)
 large_st_treat<-1200*(117.244/103.157)
 
 #weighted average cost by tree size across all communities modelled in Hudgins et al. 2022
-(sum(ashes$pred_small)/sum(ashes$pred_large+ashes$pred_small+ashes$pred_med)*small_st_treat+sum(ashes$pred_med)/sum(ashes$pred_large+ashes$pred_small+ashes$pred_med)*med_st_treat+sum(ashes$pred_large)/sum(ashes$pred_large+ashes$pred_small+ashes$pred_med)*large_st_treat)*(1230923-295152)
+(sum(ashes$pred_small)/sum(ashes$pred_large+ashes$pred_small+ashes$pred_med)*small_st_treat+sum(ashes$pred_med)/sum(ashes$pred_large+ashes$pred_small+ashes$pred_med)*med_st_treat+sum(ashes$pred_large)/sum(ashes$pred_large+ashes$pred_small+ashes$pred_med)*large_st_treat)*(	
+  1267320.3-329328.4)
+
+#$628,696,462

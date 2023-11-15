@@ -18,6 +18,7 @@ HostVol = pandas.io.parsers.read_csv('../../data/streettrees_grid.csv') #modelle
 HostVol = HostVol/1e+06 # convert to millions of trees
 prez = pandas.io.parsers.read_csv('../../data/prez_eab_street.csv')
 prez = prez.iloc[:,0] #modelled street tree count in each cell (ash trees in column 20) from Hudgins et al. 2021
+
 L = 3060
 
 #previous biocontrol history 
@@ -27,7 +28,7 @@ bio_2015 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2015])].tolist(
 bio_2020 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2020])].tolist()
 
 
-adj_mat= pandas.io.parsers.read_csv('../../output/adj_list_street.csv') #neighbour matrix for use in parasitoid dispersal
+adj_mat= pandas.io.parsers.read_csv('../../output_old/adj_list_street.csv') #neighbour matrix for use in parasitoid dispersal
 adj_mat.astype(int)
 adj_list= list([] for x in range(L))
 for i in range(L):
@@ -42,13 +43,13 @@ time_sub = range(1,5+1) #25 years
 r = 1.299034706404549 # pest growth rate from published model
 phi =0.538410692229749 #pest detectability/dispersal density threshold from published model
 
-for rr in range(0,3): #iterate over efficiency scenarios
-    for qq in range(0,3): 
+for rr in range(2,3): #iterate over efficiency scenarios
+    for qq in range(0,3):
         #efficiencies 
         effs_quar=[0.3,0.6,0.9] #efficiency scenarios for quarantines
         effs_bio=[0.1,0.3,0.5] #for biocontrol
         sites2 = list(range(1,L+1))
-        sites2.remove(source) # maintain source location at maximum propagule pressure
+        sites2.remove(2951) # maintain source location at maximum propagule pressure
         sites = range(1,L+1)
 
         eff_nothing = 0
@@ -126,7 +127,7 @@ for rr in range(0,3): #iterate over efficiency scenarios
 
         # add impact of biocontrol (c_8) in focal site and in adjacent sites to focal site after a 2-timestep time lag
         m.addConstrs(((c_8[ii,year]>=M[3*L+ii,year]) for ii in sites for year in range(2,5)), name = "biocontrol2")
-        m.addConstrs(((c_8[ii,year]>=M[3*L+jj,year-2]) for jj in adj_list[ii-1][0].astype(int) for year in range(4,5)), name = "parasitoidDisp")
+        m.addConstrs(((c_8[ii,year]>=M[3*L+jj,year-2]) for ii in sites for jj in adj_list[ii-1][0].astype(int) for year in range(4,5)), name = "parasitoidDisp")
 
         # take into account historical biocontrol prior to today (because of time lags)
         start= list([x+1 for x in bio_2020])
@@ -142,11 +143,9 @@ for rr in range(0,3): #iterate over efficiency scenarios
 
             #c_8 is ==0 if sites not in biocontrol history or turned on by present-day management
         m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in nostart for year in range(1,2)), name = "biocontrol2")
-   
         m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in no_2 for year in range(2,3)), name = "biocontrol2")
            # m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in no_3 for year in range(3,4)), name = "biocontrol2")
-        m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]+quicksum(M[3*L+jj,year-2] for jj in adj_list[ii-1][0].astype(int))) for ii in sites for year in range(3,6)), name = "biocontrol2")
-        #m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in sites for year in range(3,6)), name = "biocontrol2")
+        m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]+quicksum(M[3*L+jj,year-2] for ii in sites for jj in adj_list[ii-1][0].astype(int))) for ii in sites for year in range(3,6)), name = "biocontrol2")
         m.addConstrs(((c_8[ii,year]==0) for ii in sites for year in range(6,7)), name = "biocontrol2")
 
 #            ## sites not adjacent to biological control applied in 2020 (used below)
@@ -157,7 +156,7 @@ for rr in range(0,3): #iterate over efficiency scenarios
 
         m.addConstrs(((c_8[ii,1]==1) for ii in start), name = "biohist2")
         m.addConstrs(((c_8[ii,2]==1) for ii in second), name = "biohist2")
-        #m.addConstrs(((c_8[ii,1]==0) for ii in nostart), name = "biohist2")
+       # m.addConstrs(((c_8[ii,1]==0) for ii in nostart), name = "biohist2")
 
         #Lower density threshold - set d2prime to 0 if dprime<phi (c_4==0)
         m.addConstrs((c_4[loc,year]>=(dprime[loc,year]-phi)/(3000/phi) for loc in sites for year in time), name="LT") #if density is below detection threshold, set to zero
@@ -228,7 +227,6 @@ for rr in range(0,3): #iterate over efficiency scenarios
         m.addConstrs(((d[loc, year+1] <= 1000+((3000/phi)*(1-c_7[loc,year]))) for loc in sites2 for year in time), name="max_d3") #if it is above 1000, reduce back to 1000
         m.addConstrs(((c_6[loc,year]<=1+((1000-d4prime[loc,year])/(3000/phi))) for loc in sites2 for year in time), name="max_d4")
         m.addConstrs(((c_7[loc,year]>=(d4prime[loc,year]-1000)/(3000/phi)) for loc in sites2 for year in time), name="max_d5")
-        m.addConstrs(((c_6[loc,year]>=-c_7[loc,year]+((d4prime[loc,year])/(3000/phi))) for loc in sites2 for year in time), name="max_d6")
 
         #maintain source at maximum propagule pressure
         m.addConstrs(((d[source,year]==1000) for year in range(1, len(time)+2)), name="source_den") #pest density has to be at maximum in source cell
@@ -245,24 +243,29 @@ for rr in range(0,3): #iterate over efficiency scenarios
 
         #minimum pest density for biocontrol to be feasible 
         #m.addConstrs(((M[3*L+ii,year]==0) for ii in [value for value in range(1,1800) if numpy.array(vecptime)[value-1,1] < 27.916] for year in range(1,6)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
+        #m.addConstrs(((M[3*L+loc,year]<=(1+((d[loc,year]-27.916)/(3000/phi)))) for loc in sites for year in range(1,6)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
+        #to save time, set quarantines out to zero from sites with density below phi, and quarantines in o zero to sites with near maximal propagule pressure
         m.addConstrs(((M[2*L+loc,year]<=(1+((d[loc,year]-phi)/(3000/phi)))) for loc in sites for year in range(1,6)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
         m.addConstrs(((M[1*L+loc,year]<=(1+((999-d[loc,year])/(3000/phi)))) for loc in sites for year in range(1,6)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
 
-        mgmt=pandas.io.parsers.read_csv("../../output/management_test_1_0_{0}_{1}_.csv".format(eff_quar_in, eff_bio))#starting condition
-
+        mgmt=pandas.io.parsers.read_csv("../../output/M_{0}_{1}.csv".format(eff_quar_in, eff_bio), header=None)#starting condition
+        mgmt=round(mgmt,1)
+       
         #       implement starting condition
         for sites3 in range(1, L*n_actions+1):
             for year in range(1,5+1):
                     M[sites3, year].start=mgmt.iloc[sites3-1,year-1]  
+        #m.addConstrs((M[loc,year]==mgmt.iloc[loc-1,year-1] for loc in range(1, L*n_actions+1) for year in range(1,5+1)), name="debug") #debug from warm start 
 
         m.setParam('LogFile', 'eab_parasitoid_{0}_{1}.log'.format(rr,qq)) #unique logfile
         m.setParam('MIPGap',0.01)
+        m.setParam('Heuristics',1)
         m.setParam('MIPFocus',1)
         m.setParam('RINS',100)
         m.setParam('TimeLimit',28800)
         m.setParam('NodeFileStart', 10000)
-        m.setParam('Threads', 4)
-        m.setParam('Heuristics',1)
+        m.setParam('Threads', 8)
+
         m.update()
 
          #%%Solve & Print
@@ -271,7 +274,7 @@ for rr in range(0,3): #iterate over efficiency scenarios
         M3 = pandas.Series(M2)
         M4 = M3.unstack()
         M4.to_csv('../../output/M_{0}_{1}_nothresh.csv'.format(eff_quar_out,eff_bio), index=False,header=None)
-        # m.write('../../output/model_{0}_{1}.mps'.format(eff_quar_out,eff_bio)) #create .mps file for gurobi_cl
+        #m.write('../../output/model_{0}_{1}.mps'.format(eff_quar_out,eff_bio)) #create .mps file for gurobi_cl
        # m.write('../../output/modelstart_{0}_{1}.sol'.format(eff_quar_out,eff_bio)) # use as initial solution in gurobi_cl
         M2 = dict(m.getAttr('X', d)) #save management matrix
         M3 = pandas.Series(M2)

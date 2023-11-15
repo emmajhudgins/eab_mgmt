@@ -29,7 +29,7 @@ bio_2015 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2015])].tolist(
 bio_2020 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2020])].tolist()
 
 
-adj_mat= pandas.io.parsers.read_csv('../../output/adj_list_street.csv') #neighbour matrix for use in parasitoid dispersal
+adj_mat= pandas.io.parsers.read_csv('../../output_old/adj_list_street.csv') #neighbour matrix for use in parasitoid dispersal
 adj_mat.astype(int)
 adj_list= list([] for x in range(L))
 for i in range(L):
@@ -45,7 +45,7 @@ r = 1.299034706404549 # pest growth rate from published model
 phi =0.538410692229749 #pest detectability/dispersal density threshold from published model
 
 for rr in range(0,1): #iterate over efficiency scenarios
-    for qq in range(2,3): 
+    for qq in range(0,1): 
         #efficiencies 
         effs_quar=[0.3,0.6,0.9] #efficiency scenarios for quarantines
         effs_bio=[0.1,0.3,0.5] #for biocontrol
@@ -128,7 +128,7 @@ for rr in range(0,1): #iterate over efficiency scenarios
 
         # add impact of biocontrol (c_8) in focal site and in adjacent sites to focal site after a 2-timestep time lag
         m.addConstrs(((c_8[ii,year]>=M[3*L+ii,year]) for ii in sites for year in range(1,5)), name = "biocontrol2")
-        m.addConstrs(((c_8[ii,year]>=M[3*L+jj,year-1]) for jj in adj_list[ii-1][0].astype(int) for year in range(2,5)), name = "parasitoidDisp")
+        m.addConstrs(((c_8[ii,year]>=M[3*L+jj,year-1]) for ii in sites for jj in adj_list[ii-1][0].astype(int) for year in range(2,5)), name = "parasitoidDisp")
 
         # take into account historical biocontrol prior to today (because of time lags)
         start= list()
@@ -146,7 +146,7 @@ for rr in range(0,1): #iterate over efficiency scenarios
         #m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in no_2 for year in range(2,3)), name = "biocontrol2")
            # m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in no_3 for year in range(3,4)), name = "biocontrol2")
         m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]) for ii in nostart for year in range(1,2)), name = "biocontrol2")
-        m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]+quicksum(M[3*L+jj,year-1] for jj in adj_list[ii-1][0].astype(int))) for ii in sites for year in range(2,6)), name = "biocontrol2")
+        m.addConstrs(((c_8[ii,year]<=M[3*L+ii,year]+quicksum(M[3*L+jj,year-1] for ii in sites for jj in adj_list[ii-1][0].astype(int))) for ii in sites for year in range(2,6)), name = "biocontrol2")
         m.addConstrs(((c_8[ii,year]==0) for ii in sites for year in range(6,7)), name = "biocontrol2")
 
 #            ## sites not adjacent to biological control applied in 2020 (used below)
@@ -182,19 +182,19 @@ for rr in range(0,1): #iterate over efficiency scenarios
         #quarantine in calculations require dispersal matrixes
         #dispersal transition matrices from publication (accounts for human population growth), rounding to reduce error when comparing to R output
 
-        Tij = pandas.io.parsers.read_csv("../../data/transmatM__1_6_0_1_0.3_0.3_0.1_.csv")
+        Tij = pandas.io.parsers.read_csv("../../data/new/transmatM__1_6_0_1_0.3_0.3_0.1_.csv")
         Tij= numpy.around(Tij, 6)
-        Tij2=pandas.io.parsers.read_csv("../../data/transmatM__1_7_0_1_0.3_0.3_0.1_.csv")
+        Tij2=pandas.io.parsers.read_csv("../../data/new/transmatM__1_7_0_1_0.3_0.3_0.1_.csv")
         Tij2= numpy.around(Tij2, 6)
-        Tij3 = pandas.io.parsers.read_csv("../../data/transmatM__1_8_0_1_0.3_0.3_0.1_.csv")
+        Tij3 = pandas.io.parsers.read_csv("../../data/new/transmatM__1_8_0_1_0.3_0.3_0.1_.csv")
         Tij3= numpy.around(Tij3, 6)
-        Tij4=pandas.io.parsers.read_csv("../../data/transmatM__1_9_0_1_0.3_0.3_0.1_.csv")
+        Tij4=pandas.io.parsers.read_csv("../../data/new/transmatM__1_9_0_1_0.3_0.3_0.1_.csv")
         Tij4= numpy.around(Tij4, 6)
-        Tij5 = pandas.io.parsers.read_csv("../../data/transmatM__1_10_0_1_0.3_0.3_0.1_.csv")
+        Tij5 = pandas.io.parsers.read_csv("../../data/new/transmatM__1_10_0_1_0.3_0.3_0.1_.csv")
         Tij5= numpy.around(Tij5, 6)
-        Tij6=pandas.io.parsers.read_csv("../../data/transmatM__1_11_0_1_0.3_0.3_0.1_.csv")
+        Tij6=pandas.io.parsers.read_csv("../../data/new/transmatM__1_11_0_1_0.3_0.3_0.1_.csv")
         Tij6= numpy.around(Tij6, 6)
-        Tij7=pandas.io.parsers.read_csv("../../data/transmatM__1_12_0_1_0.3_0.3_0.1_.csv")
+        Tij7=pandas.io.parsers.read_csv("../../data/new/transmatM__1_12_0_1_0.3_0.3_0.1_.csv")
         Tij7= numpy.around(Tij7, 6)
 
         #shorten list of possible immigration/emigration sites to reduce problem size
@@ -250,9 +250,8 @@ for rr in range(0,1): #iterate over efficiency scenarios
         m.addConstrs(((M[1*L+loc,year]<=(1+((999-d[loc,year])/(3000/phi)))) for loc in sites for year in range(1,6)), name = "biocontrol5") # biocontrol only above a minimum density (above average density of initially invaded cells)
 
         
-        mgmt=pandas.io.parsers.read_csv("../../output/M_{0}_{1}_fdfg.csv".format(eff_quar_in, eff_bio), header=None)#starting condition
-        
-        #       implement starting condition
+        mgmt=pandas.io.parsers.read_csv("../../output/management_test_0_1_{0}_{1}_.csv".format(eff_quar_in, eff_bio))#starting condition
+        #implement starting condition
         for sites3 in range(1, L*n_actions+1):
             for year in range(2,5+1):
                 M[sites3, year].start=mgmt.iloc[sites3-1,year-1]
@@ -267,7 +266,7 @@ for rr in range(0,1): #iterate over efficiency scenarios
         m.setParam('Heuristics',1)
         m.update()
 
-        m.read('fdfg_start.mst')
+        #m.read('fdfg_start.mst')
 
          #%%Solve & Print
         m.optimize()

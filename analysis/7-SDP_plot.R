@@ -56,13 +56,13 @@ time<-seq(1:5)
 quar<-c(0.3,0.6,0.9)
 bio<-c(0.1,0.3,0.5)
 
-qin=qout=0.3
-qbio=0.1
+qin=qout=0.9
+qbio=0.5
 frac_site=0.2
 frac_spread=0.8
 results<-read.csv(paste0('../output/M_',qin,'_',qbio,'.csv'), header=F)
 
-pdf(paste("../plots/eab_mgmt_site_street",qin, qbio,".pdf", sep="_"))
+pdf(paste("../plots/NEW_eab_mgmt_site_street",qin, qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,4,5,6,7,7,7), ncol=3, byrow=T), heights=c(0.5,0.5,0.4))
 par(mai=c(0.25,0,0.25,0))
 years<-seq(2025,2045, by=5)
@@ -95,6 +95,56 @@ par(xpd=FALSE)
 legend('center', c("Quarantine In", "Quarantine Out", "Biocontrol", "Previous Quarantine Boundary"), col=c('yellow', 'orange', 'red', "deeppink4"), pch=15, cex=2)
 dev.off()
 
+
+
+time<-seq(1:5)
+quar<-c(0.3,0.6,0.9)
+bio<-c(0.1,0.3,0.5)
+
+qin=qout=0.9
+qbio=0.5
+frac_site=0.2
+frac_spread=0.8
+results<-read.csv(paste0('../output/M_',qin,'_',qbio,'.csv'), header=F)
+pdf(paste("../plots/NEW_eab_mgmt_site_street_mult",qin, qbio,".pdf", sep="_"))
+layout(matrix(c(1,2,3,4,5,6,7,7,7), ncol=3, byrow=T), heights=c(0.5,0.5,0.4))
+par(mai=c(0.25,0,0.25,0))
+years<-seq(2025,2045, by=5)
+for (time in c(1,3,5))
+{
+  plot(transform_usa, lwd=0.5, main=years[time], col="white")
+  points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5, col="grey")
+  plot(transform_usa, lwd=0.5, main=years[time], col=alpha("grey",0), add=T)
+  
+  lines(quar_bound, col=alpha("deeppink4",1), lwd=2)
+  points(cbind(data$X_coord[prez[which(results[((L+1):(2*L)), time]==1),1]], data$Y_coord[prez[which(results[((L+1):(2*L)), time]==1),1]]), pch=15, cex=0.5, col="yellow")
+  points(cbind(data$X_coord[prez[which(results[((2*L+1):(3*L)), time]==1),1]], data$Y_coord[prez[which(results[((2*L+1):(3*L)), time]==1),1]]), pch=15, cex=0.5, col="orange")
+  points(cbind(data$X_coord[prez[which(results[((3*L+1):(4*L)), time]==1),1]], data$Y_coord[prez[which(results[((3*L+1):(4*L)), time]==1),1]]), pch=15, cex=0.5, col="red")
+  
+}
+results<-read.csv(paste0('../output/M_',qin,'_',qbio,'_mult.csv'), header=F)
+
+#results<-read.csv(paste0('../output/management_test_0.2_0.8_',qin,'_',qbio,'_.csv'))
+for (time in c(1,3,5))
+{
+  plot(transform_usa, lwd=0.5, main=years[time], col="white")
+  points(cbind(data$X_coord[prez[,1]], data$Y_coord[prez[,1]]), pch=15, cex=0.5, col="grey")
+  lines(quar_bound, col=alpha("deeppink4",1), lwd=2)
+  plot(transform_usa, lwd=0.5, main=years[time], col=alpha("grey",0), add=T)
+  points(cbind(data$X_coord[prez[which(results[((L+1):(2*L)), time]==1),1]], data$Y_coord[prez[which(results[((L+1):(2*L)), time]==1),1]]), pch=15, cex=0.5, col="yellow")
+  points(cbind(data$X_coord[prez[which(results[((2*L+1):(3*L)), time]==1),1]], data$Y_coord[prez[which(results[((2*L+1):(3*L)), time]==1),1]]), pch=15, cex=0.5, col="orange")
+  points(cbind(data$X_coord[prez[which(results[((3*L+1):(4*L)), time]==1),1]], data$Y_coord[prez[which(results[((3*L+1):(4*L)), time]==1),1]]), pch=15, cex=0.5, col="red")
+  points(cbind(data$X_coord[prez[which(results[((3*L+1):(4*L)), time]==1 & results[((2*L+1):(3*L)), time]==1),1]], data$Y_coord[prez[which(results[((3*L+1):(4*L)), time]==1 & results[((2*L+1):(3*L)), time]==1),1]]), pch=15, cex=0.5, col="blue")
+  points(cbind(data$X_coord[prez[which(results[((L+1):(2*L)), time]==1&results[((2*L+1):(3*L)), time]==1),1]], data$Y_coord[prez[which(results[((L+1):(2*L)), time]==1&results[((2*L+1):(3*L)), time]==1),1]]), pch=15, cex=0.5, col="purple")
+  points(cbind(data$X_coord[prez[which(results[((L+1):(2*L)), time]==1&results[((3*L+1):(4*L)), time]==1),1]], data$Y_coord[prez[which(results[((L+1):(2*L)), time]==1&results[((3*L+1):(4*L)), time]==1),1]]), pch=15, cex=0.5, col="magenta")
+  points(cbind(data$X_coord[prez[which(results[((L+1):(2*L)), time]==1&results[((3*L+1):(4*L)), time]==1& results[((2*L+1):(3*L)), time]==1),1]], data$Y_coord[prez[which(results[((L+1):(2*L)), time]==1&results[((3*L+1):(4*L)), time]==1&results[((2*L+1):(3*L)), time]==1),1]]), pch=15, cex=0.5, col="darkred")
+  
+}
+plot.new()
+par(xpd=FALSE)
+legend('center', c("Quarantine In", "Quarantine Out", "Biocontrol","Quarantine out and Biocontrol", "Quarantine in and Quarantine out", "Quarantine in and Biocontrol", "All 3 Actions","Previous Quarantine Boundary"), col=c('yellow', 'orange', 'red','blue','purple','magenta', 'darkred',"deeppink4"), pch=15, cex=1.25)
+dev.off()
+
 qin=qout=0.3
 qbio=0.1
 frac_site=0.2
@@ -102,7 +152,7 @@ frac_spread=0.8
 results<-read.csv(paste('../output/vecptime_0.3_0.1.csv'), header=F)/1000
 time<-seq(1:6)
 years<-seq(2020,2045, by=5)
-pdf(paste("../plots/RoT_eab_dens_",qin, qout, qbio,".pdf", sep="_"))
+pdf(paste("../plots/NEW_RoT_eab_dens_",qin, qout, qbio,".pdf", sep="_"))
 years<-seq(2020,2045, by=5)
 bins<-seq(5,0,length.out=50)
 bins<-10^-bins
@@ -141,8 +191,8 @@ bins<-seq(-5,5,length.out=50)
 bins<-10^bins
 
 
-results<-read.csv(paste('vecptime_0.3_0.1.csv'), header=F)/1000
-pdf(paste("../plots/eab_exp",qin,qbio,".pdf", sep="_"))
+results<-read.csv(paste('../output/vecptime_0.3_0.1.csv'), header=F)/1000
+pdf(paste("../plots/NEW_eab_exp",qin,qbio,".pdf", sep="_"))
 layout(matrix(c(1,2,3,4,5,6,7,7,7), ncol=3, byrow=T), heights=c(0.5,0.5,0.1))
 par(mai=c(0.25,0,0.25,0))
 years<-seq(2020,2045, by=5)
@@ -207,7 +257,7 @@ image(1:50,1,matrix(1:50), col=viridis(50), axes=FALSE, ann=F)
 axis(1,labels=c("0",expression(10^{2}), expression(10^{4}),expression(10^{6}),expression(10^{8})),at=c(seq(0,50,length.out=5)), cex.axis=1)
 mtext(side=1, "Forest Ash Volume", line=2)
 
-dat<-read.csv('../output/postdocdat_street.csv')
+dat<-read.csv('../output/postdocdat_street_debug.csv')
 
 qz<-c(0.3,0.6,0.9)
 bios<-c(0.1,0.3,0.5)
@@ -238,9 +288,9 @@ par(mar=c(4,4,2,0))
 par(oma=c(0,0,0,0))
 par(xpd = FALSE)
 
-plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Biological control proportion", ylab="Exposed ash street trees", pch=19, xlim=c(-0.05,1.05), ylim=c(100000,1300000), axes=F)
+plot(y=obj$obj,x=(obj$frac_site), col=alpha(viridis(9)[as.factor(paste0(obj$q_in, obj$qbio))],0.75),xlab="Biological control proportion", ylab="Exposed ash street trees", pch=19, xlim=c(-0.05,1.05), ylim=c(100000,1500000), axes=F)
 axis(1,  at=c(0,0.2,0.4,0.6,0.8,1.0))
-axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000), outer=F, las=2, cex.axis=0.75, hadj=0.8)
+axis(2, labels=c('0',"200000", "400000", '600000', '800000', '1000000', '1200000', '1400000', '1600000'), at=c(0,200000,400000,600000,800000, 1000000,1200000, 1400000,1600000), outer=F, las=2, cex.axis=0.75, hadj=0.8)
 
 points(y=dat$Exposed.Ash.Street.Trees..thousands.*1000, x=dat$bio_prop/100, lty=2,col=viridis(9), pch=5)
 par(mai=c(0.4,0.5,0.1,0.6))

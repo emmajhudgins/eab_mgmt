@@ -7,11 +7,11 @@ data2<-read.csv('spdat_clean_gdk.csv', stringsAsFactors = FALSE) # species data,
 host.density2<-read.csv('hostden_clean_gdk.csv') # tree host density by pest species
 prez<-read.csv('prez_clean_gdk.csv') # invasible host range (from FIA)
 prez2<-read.csv('prez2_clean_gdk.csv') # pest presences for all species
-prez2[,1]<-readRDS('presences_time_eab.rds')[[1]][,5] # pest presences in 2020
+prez2[,1]<-readRDS('../output/presences_time_eab.rds')[[1]][,5] # pest presences in 2020
 biohist<-read.csv('biocontrol_history.csv')
 L<-rep(0,64) # size of each pest's host range
 ic=F
-V_i<-read.csv('../../eab_mgmt/data/streettrees_grid.csv')[,20]
+V_i<-read.csv('streettrees_grid.csv')[,20]
 forecast=F
 L<-length(unique(c(which(V_i>0), prez[,1], prez2[,1])))-1
 prez[,1]<-c(unique(c(which(V_i!=0), prez[which(prez[,1]!=0),1], prez2[which(prez2[,1]!=0),1])), rep(0, 3372-L))
@@ -49,7 +49,7 @@ spp=1 # EAB
 par[c(21,22,4,18,20,8)]<-as.numeric(c(0.000538410692229749, 0.299034706404549, -0.525670755351726, 15.6132848183217,-0.163552592351765, 0.323831382884772))
 par[21]<-abs(par[21])
 par[22]<-abs(par[22])+1
-par[c(1,23,24)]<-readRDS('../../UStreedamage/data/full_model.RDS')$par
+par[c(1,23,24)]<-readRDS('full_model.RDS')$par
 
 
 #Pest Parameters
@@ -86,8 +86,8 @@ T2<-T1[prez[1:L[spp],spp],prez[1:L[spp],spp]]
 #   }
 # }
 rm(dists)
-# write.csv(adj_list, file="../../eab_mgmt/output/adj_list_street.csv", row.names=F)
-adj_list<-read.csv("../../eab_mgmt/output/adj_list_street.csv")
+# write.csv(adj_list, file="../output/adj_list_street.csv", row.names=F)
+adj_list<-read.csv("../output/adj_list_street.csv")
 
 r0<-par[22] #delta (growth rate)
 
