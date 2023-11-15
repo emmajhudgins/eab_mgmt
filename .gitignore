@@ -39,6 +39,7 @@ vignettes/*.pdf
 # Private parasitoid data
 
 data/parasitoid_data_private/
+/scrap/
 
 # R Environment Variables
 .Renviron
