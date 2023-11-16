@@ -1,10 +1,10 @@
 rm(list=ls())
-setwd("../output/debug/")
-prez<-read.csv('../../data/prez_clean_gdk.csv') # invasible host range (from FIA)
-prez2<-read.csv('../../data/prez2_clean_gdk.csv') # pest presences for all species
-prez2[,1]<-readRDS('../presences_time_eab.rds')[[1]][,5] # pest presences in 2020
+setwd("../output/")
+prez<-read.csv('../data/prez_clean_gdk.csv') # invasible host range (from FIA)
+prez2<-read.csv('../data/prez2_clean_gdk.csv') # pest presences for all species
+prez2[,1]<-readRDS('presences_time_eab.rds')[[1]][,5] # pest presences in 2020
 L<-rep(0,64) # size of each pest's host range
-V_i<-read.csv('../../data/streettrees_grid.csv')[,20]
+V_i<-read.csv('../data/streettrees_grid.csv')[,20]
 L<-length(unique(c(which(V_i>0), prez[,1], prez2[,1])))-1
 prez[,1]<-c(unique(c(which(V_i!=0), prez[which(prez[,1]!=0),1], prez2[which(prez2[,1]!=0),1])), rep(0, 3372-L))
 

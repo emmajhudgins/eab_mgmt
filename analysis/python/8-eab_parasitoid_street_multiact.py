@@ -28,7 +28,7 @@ bio_2015 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2015])].tolist(
 bio_2020 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2020])].tolist()
 
 
-adj_mat= pandas.io.parsers.read_csv('../../output_old/adj_list_street.csv') #neighbour matrix for use in parasitoid dispersal
+adj_mat= pandas.io.parsers.read_csv('../../output/adj_list_street.csv') #neighbour matrix for use in parasitoid dispersal
 adj_mat.astype(int)
 adj_list= list([] for x in range(L))
 for i in range(L):
@@ -181,19 +181,19 @@ for rr in range(0,3): #iterate over efficiency scenarios
         #quarantine in calculations require dispersal matrixes
         #dispersal transition matrices from publication (accounts for human population growth), rounding to reduce error when comparing to R output
 
-        Tij = pandas.io.parsers.read_csv("../../data/new/transmatM__1_6_0_1_0.3_0.3_0.1_.csv")
+        Tij = pandas.io.parsers.read_csv("../../data/transmatM__1_6_0_1_0.3_0.3_0.1_.csv")
         Tij= numpy.around(Tij, 6)
-        Tij2=pandas.io.parsers.read_csv("../../data/new/transmatM__1_7_0_1_0.3_0.3_0.1_.csv")
+        Tij2=pandas.io.parsers.read_csv("../../data/transmatM__1_7_0_1_0.3_0.3_0.1_.csv")
         Tij2= numpy.around(Tij2, 6)
-        Tij3 = pandas.io.parsers.read_csv("../../data/new/transmatM__1_8_0_1_0.3_0.3_0.1_.csv")
+        Tij3 = pandas.io.parsers.read_csv("../../data/transmatM__1_8_0_1_0.3_0.3_0.1_.csv")
         Tij3= numpy.around(Tij3, 6)
-        Tij4=pandas.io.parsers.read_csv("../../data/new/transmatM__1_9_0_1_0.3_0.3_0.1_.csv")
+        Tij4=pandas.io.parsers.read_csv("../../data/transmatM__1_9_0_1_0.3_0.3_0.1_.csv")
         Tij4= numpy.around(Tij4, 6)
-        Tij5 = pandas.io.parsers.read_csv("../../data/new/transmatM__1_10_0_1_0.3_0.3_0.1_.csv")
+        Tij5 = pandas.io.parsers.read_csv("../../data/transmatM__1_10_0_1_0.3_0.3_0.1_.csv")
         Tij5= numpy.around(Tij5, 6)
-        Tij6=pandas.io.parsers.read_csv("../../data/new/transmatM__1_11_0_1_0.3_0.3_0.1_.csv")
+        Tij6=pandas.io.parsers.read_csv("../../data/transmatM__1_11_0_1_0.3_0.3_0.1_.csv")
         Tij6= numpy.around(Tij6, 6)
-        Tij7=pandas.io.parsers.read_csv("../../data/new/transmatM__1_12_0_1_0.3_0.3_0.1_.csv")
+        Tij7=pandas.io.parsers.read_csv("../../data/transmatM__1_12_0_1_0.3_0.3_0.1_.csv")
         Tij7= numpy.around(Tij7, 6)
 
         #shorten list of possible immigration/emigration sites to reduce problem size

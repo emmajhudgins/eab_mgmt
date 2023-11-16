@@ -27,7 +27,7 @@ bio_2015 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2015])].tolist(
 bio_2020 = prez.index[prez.isin(bio_hist["V3"][bio_hist["V2"] == 2020])].tolist()
 
 
-adj_mat= pandas.io.parsers.read_csv('../../output_old/adj_list_street.csv') #neighbour matrix for use in parasitoid dispersal
+adj_mat= pandas.io.parsers.read_csv('../../output/adj_list_street.csv') #neighbour matrix for use in parasitoid dispersal
 adj_mat.astype(int)
 adj_list= list([] for x in range(L))
 for i in range(L):
