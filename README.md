@@ -1,7 +1,7 @@
 <img src="https://github.com/emmajhudgins/eab_mgmt/blob/main/results_preview.png" alt="results preview" width="400" align="right"/>
 
 _repo to accompany_
-# Optimal Emerald Ash Borer (*Agrilus planipennis*, EAB) control across the United States
+# Spread management priorities to limit emerald ash borer (*Agrilus planipennis*) impacts to United States street trees
 
 An optimal control approach to EAB management for urban tree persistence in explicit space and time.
 
