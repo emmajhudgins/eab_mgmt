@@ -26,7 +26,7 @@ These findings support a multipronged EAB management approach, where regional co
 
 **File organization structure**
 
-The analysis section is split into R and Python (3) components. The python scripts require the gurobipy library, which interfaces with GUROBI 9.1.0 software (free for academic use, www.gurobi.com). All R components were built in R 4.1.0.
+The analysis section is split into R and Python (3) components. The python scripts require the gurobipy library, which interfaces with GUROBI software (free for academic use, www.gurobi.com; built in v9.1.0). All R components were built in R 4.1.0.
 
 ### R Scripts
 0. 0-forecasted_presences_eab.R - this script updates a model of EAB spread to allow establishment anywhere there is urban ash, and to fit urban ash density-specific spread terms(https://doi.org/10.1111/1365-2664.14141), producing forecasts of EAB spread to 2050 in the absence of management and a dispersal kernel for use in optimizations.
